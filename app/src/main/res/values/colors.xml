@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryDark_1">#9c27b0</color>
+    <color name="purple23">#9c27b0</color>
+    <color name="primary_material_light_1">#9c27b0</color>
+    <color name="accent_material_light_1">#ffcf40</color>
+    <color name="accent_material_dark_1">#40ffff</color>
+    <color name="holo_purple">#9c27b0</color>
+    <color name="accent_material_light">#2962ff</color>
+    <color name="primary_material_light">#f44336</color>
+    <color name="background_material_light">#f21818</color>
+</resources>

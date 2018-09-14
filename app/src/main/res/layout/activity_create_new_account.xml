@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateNewAccountActivity">
+
+
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/mytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#FF5722"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Create New Account"
+        app:titleTextColor="@android:color/white"
+        tools:ignore="ResourceCycle"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <LinearLayout
+        android:id="@+id/b"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFB833"
+        android:orientation="vertical"
+        android:paddingLeft="150dp"
+        android:paddingRight="150dp"
+        android:paddingTop="300dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/white"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColorHint="@android:color/black" />
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/white"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black" />
+
+        <EditText
+            android:id="@+id/email2"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/white"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColorHint="@android:color/black" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/white"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword|textVisiblePassword"
+            android:paddingLeft="20dp"
+            android:textAllCaps="false"
+            android:textColorHint="@android:color/black" />
+
+        <Button
+            android:id="@+id/createAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff5722"
+            android:text="Create Account"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

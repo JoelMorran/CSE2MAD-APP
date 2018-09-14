@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/b"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFB833"
+    tools:context=".SignInSignUpActivity">
+
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/mytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#FF5722"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Create New Account"
+        app:titleTextColor="@android:color/white"
+        tools:ignore="ResourceCycle"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+
+
+    <Button
+        android:id="@+id/signIn"
+        android:layout_width="201dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="124dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="697dp"
+        android:background="#FF5722"
+        android:text="SIGN IN"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/signUp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/signUp"
+        android:layout_width="201dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="124dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="697dp"
+        android:background="#FF5722"
+        android:text="SIGN UP"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/signIn"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
