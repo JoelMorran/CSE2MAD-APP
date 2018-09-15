@@ -51,7 +51,7 @@
             android:textColorHint="@android:color/black" />
 
         <EditText
-            android:id="@+id/userName"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginBottom="5dp"
@@ -67,7 +67,7 @@
             android:textColorHint="@android:color/black" />
 
         <EditText
-            android:id="@+id/email2"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginBottom="5dp"
@@ -91,6 +91,7 @@
             android:hint="Password"
             android:inputType="textPassword|textVisiblePassword"
             android:paddingLeft="20dp"
+            android:password="true"
             android:textAllCaps="false"
             android:textColorHint="@android:color/black" />
 
@@ -103,6 +104,17 @@
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/populateDb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
