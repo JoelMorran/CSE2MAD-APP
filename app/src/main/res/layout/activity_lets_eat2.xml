@@ -4,6 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFB833"
     tools:context=".LetsEat2Activity">
+
+    <Button
+        android:id="@+id/LetsEat"
+        android:layout_width="600dp"
+        android:layout_height="93dp"
+        android:layout_marginBottom="397dp"
+        android:layout_marginTop="397dp"
+        android:background="#ff5722"
+        android:text="Lets Eat"
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
