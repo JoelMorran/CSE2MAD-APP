@@ -1,21 +1,30 @@
 package com.example.kobiqoi_laptop.assignment;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+
+
 
 public class TableSetupActivity extends AppCompatActivity {
+
+    private Button loadsetup;
+    private Button newsetup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table_setup);
 
-        //signIn = (Button) findViewById(R.id.signIn);
-        //signUp = (Button) findViewById(R.id.signUp);
+        loadsetup = (Button) findViewById(R.id.loadsetup);
+        newsetup = (Button) findViewById(R.id.newsetup);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
@@ -27,23 +36,23 @@ public class TableSetupActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+       loadsetup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
+                Intent myIntent = new Intent(TableSetupActivity.this, TableListActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                TableSetupActivity.this.startActivity(myIntent);
             }
         });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        newsetup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
+                Intent myIntent = new Intent(TableSetupActivity.this, CreateNewTableSetupActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                TableSetupActivity.this.startActivity(myIntent);
             }
-        });*/
+        });
 
     }
 

@@ -93,6 +93,8 @@ public class CreateNewAccountActivity extends AppCompatActivity {
                 name.getText().clear();
                 updateSpinner();
                 createlog();
+                name.setFocusable(true);
+                name.requestFocus();
 
             }
         });

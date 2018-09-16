@@ -165,6 +165,8 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
               //  CreateNewAccountActivity.this.startActivity(myIntent);
 
                 updateSpinner();
+                mEmailView.setFocusable(true);
+                mEmailView.requestFocus();
                 /*username.getText().clear();
                 email.getText().clear();
                 password.getText().clear();
