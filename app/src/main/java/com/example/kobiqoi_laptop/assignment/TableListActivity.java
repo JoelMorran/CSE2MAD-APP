@@ -1,20 +1,25 @@
 package com.example.kobiqoi_laptop.assignment;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class TableListActivity extends AppCompatActivity {
+
+    private Button hack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table_list);
 
-        //signIn = (Button) findViewById(R.id.signIn);
+        hack = (Button) findViewById(R.id.hack);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
@@ -27,16 +32,16 @@ public class TableListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+       hack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
+                Intent myIntent = new Intent(TableListActivity.this, MenuActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                TableListActivity.this.startActivity(myIntent);
             }
         });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        /*signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);

@@ -1,21 +1,33 @@
 package com.example.kobiqoi_laptop.assignment;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class DrinksMenuActivity extends AppCompatActivity {
+    private Button alcohol;
+    private Button softdrinks;
+    private Button water;
+    private Button teacoffee;
+    private Button other;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drinks_menu);
 
-        //signIn = (Button) findViewById(R.id.signIn);
-        //signUp = (Button) findViewById(R.id.signUp);
+        alcohol = (Button) findViewById(R.id.alcohol);
+        softdrinks = (Button) findViewById(R.id.softdrinks);
+        water = (Button) findViewById(R.id.water);
+        teacoffee = (Button) findViewById(R.id.teacoffee);
+        other = (Button) findViewById(R.id.other);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
@@ -27,23 +39,51 @@ public class DrinksMenuActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+        alcohol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
+                Intent myIntent = new Intent(DrinksMenuActivity.this, AlcoholMenuActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                DrinksMenuActivity.this.startActivity(myIntent);
             }
         });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        softdrinks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
+                Intent myIntent = new Intent(DrinksMenuActivity.this, SoftDrinksMenuActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                DrinksMenuActivity.this.startActivity(myIntent);
+            }
+        });
+
+        /*water.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(DrinksMenuActivity.this, .class);
+
+                DrinksMenuActivity.this.startActivity(myIntent);
             }
         });*/
+
+        teacoffee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(DrinksMenuActivity.this, TeaCoffeeActivity.class);
+
+                DrinksMenuActivity.this.startActivity(myIntent);
+            }
+        });
+
+        other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(DrinksMenuActivity.this, OtherDrinksMenuActivity.class);
+
+                DrinksMenuActivity.this.startActivity(myIntent);
+            }
+        });
+
 
     }
 

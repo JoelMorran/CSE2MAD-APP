@@ -1,21 +1,32 @@
 package com.example.kobiqoi_laptop.assignment;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
+
+    private Button drinks;
+    private Button food;
+    private Button specials;
+    private Button kids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        //signIn = (Button) findViewById(R.id.signIn);
-        //signUp = (Button) findViewById(R.id.signUp);
+        drinks = (Button) findViewById(R.id.drinks);
+        food= (Button) findViewById(R.id.food);
+        drinks = (Button) findViewById(R.id.drinks);
+        specials = (Button) findViewById(R.id.specials);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
@@ -27,23 +38,43 @@ public class MenuActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+       drinks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
+                Intent myIntent = new Intent(MenuActivity.this, DrinksMenuActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                MenuActivity.this.startActivity(myIntent);
             }
         });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
+                Intent myIntent = new Intent(MenuActivity.this, FoodMenuActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                MenuActivity.this.startActivity(myIntent);
             }
-        });*/
+        });
+
+        specials.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(MenuActivity.this, SpecialsMenuActivity.class);
+
+                MenuActivity.this.startActivity(myIntent);
+            }
+        });
+
+        kids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(MenuActivity.this, KidsMenuActivity.class);
+
+                MenuActivity.this.startActivity(myIntent);
+            }
+        });
+
+
 
     }
 
