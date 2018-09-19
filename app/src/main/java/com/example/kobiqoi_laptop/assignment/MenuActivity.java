@@ -24,7 +24,7 @@ public class MenuActivity extends AppCompatActivity {
 
         drinks = (Button) findViewById(R.id.drinks);
         food= (Button) findViewById(R.id.food);
-        drinks = (Button) findViewById(R.id.drinks);
+        kids = (Button) findViewById(R.id.kids);
         specials = (Button) findViewById(R.id.specials);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);

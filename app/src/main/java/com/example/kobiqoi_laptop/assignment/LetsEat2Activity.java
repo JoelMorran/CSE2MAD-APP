@@ -1,42 +1,48 @@
 package com.example.kobiqoi_laptop.assignment;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class LetsEat2Activity extends AppCompatActivity {
+
+    private Button LetsEat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lets_eat2);
 
-        //signIn = (Button) findViewById(R.id.signIn);
+        LetsEat = (Button) findViewById(R.id.LetsEat);
         //signUp = (Button) findViewById(R.id.signUp);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
-        setSupportActionBar(myToolbar);
+       // Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
+        //setSupportActionBar(myToolbar);
 
         // Get a support ActionBar corresponding to this toolbar
         // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
 
         // Enable the Up button
         //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
-        getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
+        //getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+       LetsEat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                Intent myIntent = new Intent(LetsEat2Activity.this, MenuActivity.class);
+
+                LetsEat2Activity.this.startActivity(myIntent);
             }
         });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        /*signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
@@ -47,7 +53,7 @@ public class LetsEat2Activity extends AppCompatActivity {
 
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
@@ -86,5 +92,5 @@ public class LetsEat2Activity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
+    }*/
 }

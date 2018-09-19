@@ -39,9 +39,14 @@ public class DrinksMenuActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
+
+
         alcohol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 Intent myIntent = new Intent(DrinksMenuActivity.this, AlcoholMenuActivity.class);
 
                 DrinksMenuActivity.this.startActivity(myIntent);

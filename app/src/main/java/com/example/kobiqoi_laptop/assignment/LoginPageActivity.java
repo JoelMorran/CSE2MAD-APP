@@ -138,6 +138,7 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
                 //DBHandler db = new DBHandler(getApplicationContext());
                 // Reading all students
                 Log.d("Reading: ", "Reading all accounts..");
+                boolean isFound = false;
 
                 for (Account cn : accounts) {
                     String log = "Id: "+cn.getID()+" ,Name: " + cn.getName() + " ,Username: " + cn.getUsername()
@@ -148,16 +149,18 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
                     {
                         Intent myIntent = new Intent(LoginPageActivity.this, TableSetupActivity.class);
                         LoginPageActivity.this.startActivity(myIntent);
+                        isFound = true;
+                        break;
                     }
-                    else
-                    {
-                        Context context = getApplicationContext();
-                        CharSequence text = "Login Failed!";
-                        int duration = Toast.LENGTH_SHORT;
+                }
 
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                    }
+                if(isFound == false) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Login Failed!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
 
 

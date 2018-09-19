@@ -35,7 +35,7 @@ public class TableListActivity extends AppCompatActivity {
        hack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(TableListActivity.this, MenuActivity.class);
+                Intent myIntent = new Intent(TableListActivity.this, LetsEat2Activity.class);
 
                 TableListActivity.this.startActivity(myIntent);
             }
