@@ -1,5 +1,6 @@
 package com.example.kobiqoi_laptop.assignment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,13 +10,20 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +38,12 @@ import java.util.ArrayList;
 
 public class AlcoholMenuActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 private ListView listV;
+private TextView name;
+    private TextView price;
+    private TextView description;
+    private ListAdapter adapter;
+    private SimpleAdapter adapter2;
+    private ArrayList<JSONObject> listItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +86,11 @@ private ListView listV;
         });*/
        new RetrieveMenuTask().execute("http://homepage.cs.latrobe.edu.au/jamorran/menu.json");
         listV=(ListView)findViewById(R.id.listv);
+        name=(TextView)findViewById(R.id.name);
+        price=(TextView)findViewById(R.id.price);
+        description=(TextView)findViewById(R.id.description);
+
+
       // JSONArray jsonArray; //=getJSonData("jsondata.json");
 
        // ArrayList<JSONObject> listItems;     //getArrayListFromJSONArray(jsonArray);*/
@@ -100,66 +119,16 @@ private ListView listV;
         intent.putExtra("position", position);
         // Or / And
         intent.putExtra("id", id);
+
+       /* adapter2 = new SimpleAdapter(getApplicationContext(), R.layout.list_layout2,R.id.name,listItems);
+        name.setv(adapter2);
+        price.setAdapter(adapter2);
+        description.setAdapter(adapter2);*/
+
         startActivity(intent);
+
+
     }
-
-
-    /*private JSONArray getJSonData(String fileName){
-
-        JSONArray jsonArray=null;
-
-        try {
-
-            InputStream is = getResources().getAssets().open(fileName);
-
-            int size = is.available();
-
-            byte[] data = new byte[size];
-
-            is.read(data);
-
-            is.close();
-
-            String json = new String(data, "UTF-8");
-
-            jsonArray=new JSONArray(json);
-
-        }catch (IOException e){
-
-            e.printStackTrace();
-
-        }catch (JSONException je){
-
-            je.printStackTrace();
-
-        }
-
-        return jsonArray;
-
-    }*/
-
-    /*private ArrayList<JSONObject> getArrayListFromJSONArray(JSONArray jsonArray){
-
-        ArrayList<JSONObject> aList=new ArrayList<JSONObject>();
-
-        try {
-
-            if (jsonArray != null) {
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-
-                    aList.add(jsonArray.getJSONObject(i));
-
-                }
-
-            }
-
-        }catch (JSONException je){je.printStackTrace();}
-
-        return  aList;
-
-    }*/
-
 
 
     @Override
@@ -207,8 +176,8 @@ private ListView listV;
         private Exception exception;
         private Bitmap img;
         // private JSONArray arr;
-        private ListAdapter adapter;
-        private ArrayList<JSONObject> listItems;
+       // private ListAdapter adapter;
+        //private ArrayList<JSONObject> listItems;
         @Override
         protected Integer doInBackground(String... urlStrs) {
             try {
@@ -226,7 +195,7 @@ private ListView listV;
                     buffer.append(line);
                 }
                 JSONObject jsonObj = new JSONObject(buffer.toString());
-                JSONArray arr = jsonObj.getJSONArray("menu");
+                JSONArray arr = jsonObj.getJSONArray("mains");
                 arr.getJSONObject(0).get("img_src").toString();
 
 
@@ -264,6 +233,120 @@ private ListView listV;
             return  aList;
 
         }
+/*
+        private int vg;
+        private Context context;
+
+        private View getView(int position, View convertView, ViewGroup parent) {
+
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View itemView = inflater.inflate(vg, parent, false);
+
+            ImageView img=(ImageView) itemView.findViewById(R.id.img);
+
+            TextView name=(TextView)itemView.findViewById(R.id.name);
+
+            TextView price=(TextView)itemView.findViewById(R.id.price);
+
+            //TextView amount=(TextView)itemView.findViewById(R.id.amount);
+
+            //TextView details=(TextView)itemView.findViewById(R.id.details);
+
+            TextView description=(TextView)itemView.findViewById(R.id.description);
+
+            //TextView addnote=(TextView)itemView.findViewById(R.id.addnote);
+
+            //TextView addnote2=(TextView)itemView.findViewById(R.id.addnote2);
+
+            //TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
+
+            try {
+
+                //img.setImageBitmap(listItems.get(position).get("img_src").toString());
+
+                /*if(listItems.get(position).getString("glutenfree").equals("true")) {
+                    //list.get(position).getString("glutenfree").equals("true");
+                    txtName.setText("GF");
+                }
+                else
+                {
+                    txtName.setText("Not GF");
+                }*/
+                //txtName.setText(list.get(position).getString("glutenfree"));
+
+               /* name.setText(listItems.get(position).getString("name"));
+
+                price.setText(listItems.get(position).getString("price"));
+
+                description.setText(listItems.get(position).getString("description"));
+
+
+
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+
+            }
+
+
+
+            return itemView;
+
+        }*/
+
+
+       /* private void tt(int position) {
+           // LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+
+            ImageView img = (ImageView) itemView.findViewById(R.id.img);
+
+            TextView name = (TextView) itemView.findViewById(R.id.name);
+
+            TextView price = (TextView) itemView.findViewById(R.id.price);
+
+            //TextView amount=(TextView)itemView.findViewById(R.id.amount);
+
+            //TextView details=(TextView)itemView.findViewById(R.id.details);
+
+            TextView description = (TextView) itemView.findViewById(R.id.description);
+
+            //TextView addnote=(TextView)itemView.findViewById(R.id.addnote);
+
+            //TextView addnote2=(TextView)itemView.findViewById(R.id.addnote2);
+
+            //TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
+
+            try {
+
+                //img.setImageBitmap(listItems.get(position).get("img_src").toString());
+
+                /*if(listItems.get(position).getString("glutenfree").equals("true")) {
+                    //list.get(position).getString("glutenfree").equals("true");
+                    txtName.setText("GF");
+                }
+                else
+                {
+                    txtName.setText("Not GF");
+                }*/
+                //txtName.setText(list.get(position).getString("glutenfree"));
+
+                /*name.setText(listItems.get(position).getString("name"));
+
+                price.setText(listItems.get(position).getString("price"));
+
+                description.setText(listItems.get(position).getString("description"));
+
+
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+
+            }
+        }*/
+
         private void getBitmapFromURL(String src) {
             try {
                 java.net.URL url = new java.net.URL(src);

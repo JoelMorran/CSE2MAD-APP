@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ListAdapter extends ArrayAdapter<JSONObject> {
+public class ListAdapter2 extends ArrayAdapter<JSONObject> {
 
     int vg;
 
@@ -20,7 +20,7 @@ public class ListAdapter extends ArrayAdapter<JSONObject> {
 
     Context context;
 
-    public ListAdapter(Context context, int vg, int id, ArrayList<JSONObject> list){
+    public ListAdapter2(Context context, int vg, int id, ArrayList<JSONObject> list){
 
         super(context,vg, id,list);
 
@@ -38,27 +38,27 @@ public class ListAdapter extends ArrayAdapter<JSONObject> {
 
         View itemView = inflater.inflate(vg, parent, false);
 
-        TextView txtId=(TextView)itemView.findViewById(R.id.txtid);
+        TextView name=(TextView)itemView.findViewById(R.id.name);
 
-        TextView txtName=(TextView)itemView.findViewById(R.id.txtname);
+        TextView price=(TextView)itemView.findViewById(R.id.price);
 
-        TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
+        TextView description=(TextView)itemView.findViewById(R.id.description);
 
         try {
 
-            txtId.setText(list.get(position).getString("name"));
+            name.setText(list.get(position).getString("name"));
 
-            if(list.get(position).getString("glutenfree").equals("true")) {
+            /*if(list.get(position).getString("glutenfree").equals("true")) {
                 //list.get(position).getString("glutenfree").equals("true");
                 txtName.setText("GF");
             }
             else
             {
                 txtName.setText("Not GF");
-            }
-            //txtName.setText(list.get(position).getString("glutenfree"));
+            }*/
+            price.setText(list.get(position).getString("price"));
 
-            txtSex.setText(list.get(position).getString("price"));
+            description.setText(list.get(position).getString("description"));
 
 
 
@@ -75,4 +75,5 @@ public class ListAdapter extends ArrayAdapter<JSONObject> {
     }
 
 }
+
 

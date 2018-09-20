@@ -90,7 +90,7 @@ class RetrieveMenuTask2 extends AsyncTask<String, Void, Integer> {
         }
     }
     protected void onPostExecute(Integer res) {
-// modify the UI Thread
+    // modify the UI Thread
         //item1Button.setImageBitmap(img);
       //ListAdapter adapter=new ListAdapter(AlcoholMenuActivity.this, R.layout.list_layout,R.id.txtid,listItems);
         adapter=new ListAdapter(null, R.layout.list_layout,R.id.txtid,listItems);
