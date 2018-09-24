@@ -33,21 +33,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 public class AlcoholMenuActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-private ListView listV;
-private TextView name;
+
+    private ListView listV;
+    private TextView name;
     private TextView price;
     private TextView description;
     private ListAdapter adapter;
-    private SimpleAdapter adapter2;
+    //private SimpleAdapter adapter2;
     private ArrayList<JSONObject> listItems;
+    private JSONArray sendarr;
+    private JSONObject jsonObj;
+    //private Bitmap img;
+
+    private String name2;
+    private String price2;
+    private String description2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alcohol_menu);
+        new RetrieveMenuTask().execute("http://homepage.cs.latrobe.edu.au/jamorran/menu.json");
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 
@@ -84,7 +95,7 @@ private TextView name;
                 SignInSignUpActivity.this.startActivity(myIntent);
             }
         });*/
-       new RetrieveMenuTask().execute("http://homepage.cs.latrobe.edu.au/jamorran/menu.json");
+
         listV=(ListView)findViewById(R.id.listv);
         name=(TextView)findViewById(R.id.name);
         price=(TextView)findViewById(R.id.price);
@@ -110,20 +121,86 @@ private TextView name;
 
 
 
+    private Exception exception;
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+
         Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
         // Then you start a new Activity via Intent
         //v.get
         Intent intent = new Intent();
         intent.setClass(this, ItemActivity.class);
-        intent.putExtra("position", position);
+        //intent.putExtra("position", position);
         // Or / And
-        intent.putExtra("id", id);
+        //intent.putExtra("id", id);
 
-       /* adapter2 = new SimpleAdapter(getApplicationContext(), R.layout.list_layout2,R.id.name,listItems);
-        name.setv(adapter2);
-        price.setAdapter(adapter2);
-        description.setAdapter(adapter2);*/
+        //JSONArray arr = jsonObj.getJSONArray("mains");
+        String id3 = String.valueOf(id);
+        int id2 = Integer.parseInt(id3);
+
+        try
+        {
+            sendarr = jsonObj.getJSONArray("alcohol");
+            String name3 = sendarr.getJSONObject(id2).get("name").toString();
+            intent.putExtra("name", name3);
+
+            String price3 = sendarr.getJSONObject(id2).get("price").toString();
+            intent.putExtra("price", price3);
+
+            String glutenfree3 = sendarr.getJSONObject(id2).get("glutenfree").toString();
+            intent.putExtra("glutenfree", glutenfree3);
+
+            String description3 = sendarr.getJSONObject(id2).get("description").toString();
+            intent.putExtra("description", description3);
+
+
+            //String img3 = sendarr.getJSONObject(0).get("img_src").toString();
+            // getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
+            //intent.putExtra("img_src", img3);
+
+        }
+        catch (Exception e)
+        {
+            this.exception = e;
+        // return new Integer(-1);
+        }
+
+      /*
+        String urls = "http://homepage.cs.latrobe.edu.au/jamorran/menu.json";
+        String[] a = new String[10];
+        a[0] = urls;
+
+        try {
+                // get the menu
+            java.net.URL url = new java.net.URL(a[0]);
+            HttpURLConnection connection = (HttpURLConnection) url
+                    .openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream stream = connection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+            StringBuffer buffer = new StringBuffer();
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line);
+            }
+            JSONObject jsonObj = new JSONObject(buffer.toString());
+            JSONArray arr = jsonObj.getJSONArray("mains");
+           // sendarr = jsonObj.getJSONArray("mains");
+            arr.getJSONObject(id2).get("img_src").toString();
+
+
+
+            //listItems=getArrayListFromJSONArray(arr);
+
+
+            //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString());
+
+          //return new Integer(0);
+        } catch (Exception e) {
+            this.exception = e;
+           // return new Integer(-1);
+       }*/
+
 
         startActivity(intent);
 
@@ -172,6 +249,20 @@ private TextView name;
         return true;
     }
 
+    /*private void getBitmapFromURL(String src) {
+        try {
+            java.net.URL url = new java.net.URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url
+                    .openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            img = BitmapFactory.decodeStream(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
     class RetrieveMenuTask extends AsyncTask<String, Void, Integer> {
         private Exception exception;
         private Bitmap img;
@@ -194,8 +285,9 @@ private TextView name;
                 while ((line = reader.readLine()) != null) {
                     buffer.append(line);
                 }
-                JSONObject jsonObj = new JSONObject(buffer.toString());
+                 jsonObj = new JSONObject(buffer.toString());
                 JSONArray arr = jsonObj.getJSONArray("mains");
+                sendarr = jsonObj.getJSONArray("mains");
                 arr.getJSONObject(0).get("img_src").toString();
 
 
@@ -203,7 +295,7 @@ private TextView name;
                 listItems=getArrayListFromJSONArray(arr);
 
 
-                //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString());
+                getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString());
 
                 return new Integer(0);
             } catch (Exception e) {
@@ -233,119 +325,7 @@ private TextView name;
             return  aList;
 
         }
-/*
-        private int vg;
-        private Context context;
 
-        private View getView(int position, View convertView, ViewGroup parent) {
-
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View itemView = inflater.inflate(vg, parent, false);
-
-            ImageView img=(ImageView) itemView.findViewById(R.id.img);
-
-            TextView name=(TextView)itemView.findViewById(R.id.name);
-
-            TextView price=(TextView)itemView.findViewById(R.id.price);
-
-            //TextView amount=(TextView)itemView.findViewById(R.id.amount);
-
-            //TextView details=(TextView)itemView.findViewById(R.id.details);
-
-            TextView description=(TextView)itemView.findViewById(R.id.description);
-
-            //TextView addnote=(TextView)itemView.findViewById(R.id.addnote);
-
-            //TextView addnote2=(TextView)itemView.findViewById(R.id.addnote2);
-
-            //TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
-
-            try {
-
-                //img.setImageBitmap(listItems.get(position).get("img_src").toString());
-
-                /*if(listItems.get(position).getString("glutenfree").equals("true")) {
-                    //list.get(position).getString("glutenfree").equals("true");
-                    txtName.setText("GF");
-                }
-                else
-                {
-                    txtName.setText("Not GF");
-                }*/
-                //txtName.setText(list.get(position).getString("glutenfree"));
-
-               /* name.setText(listItems.get(position).getString("name"));
-
-                price.setText(listItems.get(position).getString("price"));
-
-                description.setText(listItems.get(position).getString("description"));
-
-
-
-            } catch (JSONException e) {
-
-                e.printStackTrace();
-
-            }
-
-
-
-            return itemView;
-
-        }*/
-
-
-       /* private void tt(int position) {
-           // LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
-
-            ImageView img = (ImageView) itemView.findViewById(R.id.img);
-
-            TextView name = (TextView) itemView.findViewById(R.id.name);
-
-            TextView price = (TextView) itemView.findViewById(R.id.price);
-
-            //TextView amount=(TextView)itemView.findViewById(R.id.amount);
-
-            //TextView details=(TextView)itemView.findViewById(R.id.details);
-
-            TextView description = (TextView) itemView.findViewById(R.id.description);
-
-            //TextView addnote=(TextView)itemView.findViewById(R.id.addnote);
-
-            //TextView addnote2=(TextView)itemView.findViewById(R.id.addnote2);
-
-            //TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
-
-            try {
-
-                //img.setImageBitmap(listItems.get(position).get("img_src").toString());
-
-                /*if(listItems.get(position).getString("glutenfree").equals("true")) {
-                    //list.get(position).getString("glutenfree").equals("true");
-                    txtName.setText("GF");
-                }
-                else
-                {
-                    txtName.setText("Not GF");
-                }*/
-                //txtName.setText(list.get(position).getString("glutenfree"));
-
-                /*name.setText(listItems.get(position).getString("name"));
-
-                price.setText(listItems.get(position).getString("price"));
-
-                description.setText(listItems.get(position).getString("description"));
-
-
-            } catch (JSONException e) {
-
-                e.printStackTrace();
-
-            }
-        }*/
 
         private void getBitmapFromURL(String src) {
             try {
@@ -360,6 +340,7 @@ private TextView name;
                 e.printStackTrace();
             }
         }
+
         protected void onPostExecute(Integer res) {
 // modify the UI Thread
             //item1Button.setImageBitmap(img);

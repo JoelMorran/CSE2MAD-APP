@@ -38,6 +38,8 @@ public class TableListActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(TableListActivity.this, LetsEat2Activity.class);
 
                 TableListActivity.this.startActivity(myIntent);
+                startLockTask();
+                //setLockTaskPackages();
             }
         });
 
@@ -92,4 +94,21 @@ public class TableListActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    /*@Override
+    public void onBackPressed() {
+       /* if (!shouldAllowBack()) {
+            doSomething();
+        } else {
+            super.onBackPressed();
+        }*/
+
+       /* if (onSupportNavigateUp() == true) {
+            super.onBackPressed();
+        } else
+        {
+
+        }
+
+    }*/
 }
