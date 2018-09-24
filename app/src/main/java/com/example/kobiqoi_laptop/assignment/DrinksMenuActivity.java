@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+
+
 public class DrinksMenuActivity extends AppCompatActivity {
     private Button alcohol;
     private Button softdrinks;
@@ -48,6 +50,7 @@ public class DrinksMenuActivity extends AppCompatActivity {
 
 
                 Intent myIntent = new Intent(DrinksMenuActivity.this, AlcoholMenuActivity.class);
+
 
                 DrinksMenuActivity.this.startActivity(myIntent);
             }

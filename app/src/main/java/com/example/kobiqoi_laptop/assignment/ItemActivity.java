@@ -2,12 +2,15 @@ package com.example.kobiqoi_laptop.assignment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +25,9 @@ public class ItemActivity extends AppCompatActivity {
     private TextView glutenfree;
     private TextView description;
    // private ImageView img;
-   // private Bitmap img3;
+    private Bitmap img3;
+    private ImageButton item1Button;
+    private String II;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class ItemActivity extends AppCompatActivity {
         TextView glutenfree = (TextView)findViewById(R.id.gf);
         TextView description = (TextView)findViewById(R.id.description);
         //ImageView img = (ImageView) findViewById(R.id.img);
+        ImageButton item1Button = (ImageButton)findViewById(R.id.item1Button);
 
         Bundle extras = getIntent().getExtras();
 
@@ -63,7 +69,8 @@ public class ItemActivity extends AppCompatActivity {
 
            //Bitmap imgs = ;
             //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString());
-          //  String II = extras.getString("img_src");
+            String II = extras.getString("img_src");
+            new RetriveImg().execute("http://foodology.ca/wp-content/uploads/2011/03/BP-pizza.jpg");
             //getBitmapFromURL(II);
 
             //img.setImageBitmap(img3);
@@ -148,8 +155,34 @@ public class ItemActivity extends AppCompatActivity {
                 onBackPressed();
                 return true;
             }
-/*
-    private void getBitmapFromURL(String src) {
+
+    public class RetriveImg extends AsyncTask<String, Void, Integer> {
+        private Exception exception;
+        private Bitmap img;
+        @Override
+        protected Integer doInBackground(String... urlStrs) {
+            try {
+                java.net.URL url = new java.net.URL(urlStrs[0]);
+                HttpURLConnection connection = (HttpURLConnection) url
+                        .openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                img = BitmapFactory.decodeStream(input);
+                int a = 0;
+                return new Integer(0);
+            } catch (Exception e) {
+                this.exception = e;
+                return new Integer(-1);
+            }
+        }
+        protected void onPostExecute(Integer res) {
+// modify the UI Thread
+            item1Button.setImageBitmap(img);
+        }
+    }
+
+    /*private void getBitmapFromURL(String src) {
         try {
             java.net.URL url = new java.net.URL(src);
             HttpURLConnection connection = (HttpURLConnection) url
@@ -161,6 +194,11 @@ public class ItemActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    protected void onPostExecute(Integer res) {
+// modify the UI Thread
+        item1Button.setImageBitmap(img3);
     }*/
 
 

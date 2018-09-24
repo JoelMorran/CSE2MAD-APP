@@ -1,6 +1,6 @@
 package com.example.kobiqoi_laptop.assignment;
 
-import android.content.Context;
+/*import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,6 +35,35 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;*/
+
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 public class AlcoholMenuActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -58,7 +87,9 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alcohol_menu);
-        new RetrieveMenuTask().execute("http://homepage.cs.latrobe.edu.au/jamorran/menu.json");
+       new RetrieveMenuTask().execute("http://homepage.cs.latrobe.edu.au/jamorran/menu.json");
+
+        //new RetrieveMenuTask().execute("https://latrobeuni-my.sharepoint.com/:u:/g/personal/jamorran_students_ltu_edu_au/EQ4RGmqz4kJKhFqCok6iHhIBrv-K6Vgwgd6PMLPMs0mjHA?e=v9gyDM");
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 
@@ -121,6 +152,7 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
 
 
 
+
     private Exception exception;
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 
@@ -153,9 +185,9 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
             intent.putExtra("description", description3);
 
 
-            //String img3 = sendarr.getJSONObject(0).get("img_src").toString();
-            // getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
-            //intent.putExtra("img_src", img3);
+            String img3 = sendarr.getJSONObject(0).get("img_src").toString();
+            //getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
+            intent.putExtra("img_src", img3);
 
         }
         catch (Exception e)
@@ -295,7 +327,7 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
                 listItems=getArrayListFromJSONArray(arr);
 
 
-                getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString());
+                //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString()); LAAAAAAAAAAAGGGGGGGGGGGGGGGGGAGGGGGGGGGGGGGGGGGGGGGGGGGGGaGGGGAGAGAGAGAGAGAGAGAGAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGGGGGGGGAGAGAGAGAGGA
 
                 return new Integer(0);
             } catch (Exception e) {

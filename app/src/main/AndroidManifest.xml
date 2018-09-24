@@ -119,7 +119,10 @@
         <activity
             android:name=".ViewPastOrderActivity"
             android:theme="@style/purplenoactionbar" />
-        <activity android:name=".ItemActivity"></activity>
+        <activity android:name=".ItemActivity"
+            android:theme="@style/purplenoactionbar">
+        </activity>
+        <activity android:name=".RetriveImg2"></activity>
     </application>
 
 </manifest>
