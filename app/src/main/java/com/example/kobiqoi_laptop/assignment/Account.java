@@ -50,14 +50,14 @@ public class Account {
         return this._email;
     }
     public void setEmail(String email) {
-        this._username = email;
+        this._email = email;
     }
 
     public String getPassword() {
         return this._password;
     }
     public void setPassword(String password) {
-        this._username = password;
+        this._password = password;
     }
 
     @Override

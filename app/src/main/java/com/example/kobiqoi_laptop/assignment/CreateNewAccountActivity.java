@@ -123,7 +123,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         List<Account> accounts = db.getAllAccounts();
         ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
         spinner.setAdapter(adapter);
-        createlog();
+        //createlog();
 
     }
 

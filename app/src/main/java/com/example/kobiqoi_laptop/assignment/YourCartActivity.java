@@ -6,13 +6,20 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.List;
 
 public class YourCartActivity extends AppCompatActivity {
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
+        spinner = (Spinner) findViewById(R.id.spinner3);
+        updateSpinner();
 
         //signIn = (Button) findViewById(R.id.signIn);
         //signUp = (Button) findViewById(R.id.signUp);
@@ -87,4 +94,23 @@ public class YourCartActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    private void updateSpinner() {
+        DBHandler3 db = new DBHandler3(getApplicationContext());
+        List<Order> orders = db.getAllOrders();
+        ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, orders);
+        spinner.setAdapter(adapter);
+        //createlog();
+
+    }
+
+    private void updateSpinner2() {
+        DBHandler db = new DBHandler(getApplicationContext());
+        List<Account> accounts = db.getAllAccounts();
+        ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
+        spinner.setAdapter(adapter);
+        //createlog();
+
+    }
+
 }

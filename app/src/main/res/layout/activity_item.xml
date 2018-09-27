@@ -185,12 +185,12 @@
                     android:textAlignment="center"
                     android:textSize="30sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/addnote2"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:background="#d8d6d6"
-                    android:text="Add Note" />
+                    android:hint="Add Note" />
             </LinearLayout>
 
         </TableRow>

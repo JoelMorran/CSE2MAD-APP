@@ -38,7 +38,7 @@ public class TableListActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(TableListActivity.this, LetsEat2Activity.class);
 
                 TableListActivity.this.startActivity(myIntent);
-                startLockTask();
+                //startLockTask();
                 //setLockTaskPackages();
             }
         });

@@ -8,17 +8,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.util.List;
 
 public class ItemActivity extends AppCompatActivity {
 
@@ -34,6 +39,10 @@ public class ItemActivity extends AppCompatActivity {
     private Bitmap img;
     private ImageButton add;
     private ImageButton remove;
+    private Button addtoorder;
+    DBHandler3 db;
+    private String cost2;
+    private EditText addnote2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,9 @@ public class ItemActivity extends AppCompatActivity {
         item1Button = (ImageButton)findViewById(R.id.item1Button);
         add = (ImageButton)findViewById(R.id.add);
         remove = (ImageButton)findViewById(R.id.remove);
+        addtoorder = (Button)findViewById(R.id.addtoorder);
+        addnote2 = (EditText)findViewById(R.id.addnote2);
+
 
 
         Bundle extras = getIntent().getExtras();
@@ -138,15 +150,82 @@ public class ItemActivity extends AppCompatActivity {
                 // ItemActivity.this.startActivity(myIntent);
             }
         });
-/*
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+        //spinner = (Spinner) findViewById(R.id.spinner);
+
+        db = new DBHandler3(this);
+
+        addtoorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+
+            {
+                Bundle extras = getIntent().getExtras();
+
+                if (extras != null) {
+
+                    String name3 = extras.getString("name");
+
+                    String price3 = extras.getString("price");
+
+
+                    String glutenfree3 = extras.getString("glutenfree");
+                    if (glutenfree3.equals("true")) {
+                        glutenfree3 = "GF";
+                    } else {
+                        glutenfree3 = "NON GF";
+                    }
+                    String Extra = extras.getString("extra");
+
+
+                    String amountCheck = String.valueOf(amount.getText());
+                    int amountCheck2 = Integer.parseInt(amountCheck);
+
+                    if (amountCheck2 >= 2) {
+                        String total = String.valueOf(price3);
+                        double total2 = Double.parseDouble(total);
+
+                        String mult = String.valueOf(amount.getText());
+                        Double mult2 = Double.parseDouble(mult);
+
+                        Double cost = mult2 * total2;
+                        cost2 = Double.toString(cost);
+
+                    }
+
+                    String description2 = extras.getString("description");
+                    //description.setText(description2);
+                }
+                    // Order(String name, String extra, String amount, String note, String price, String cost, String tableid)
+                    // db = new DBHandler3(getApplicationContext());
+                   // db.addOrder(new Order(name3, description2, amount.getText().toString(), addnote2.getText().toString(),
+                     //       price3, cost2, "0"));
+
+                    db.addOrder(new Order(1,"tasdfatt", "asdf", "fa", "ttasdft","asdf", "tasdftt", "t0sadf"));
+                    //db.addOrder(new Order("ttasdft", "tasdftt", "tasdftt", "tasdftt","tasdftt", "ttasdft", "dsft0"));
+                   // db.addOrder(new Order("asdfttt", "ttsdft", "tasdftt", "ttsdaft","tsdftt", "ttsdaft", "t0"));
+                  //  db.addOrder(new Order("tdfastt", "tsdaftt", "tfdsatt", "tsadftt","ttasdft", "ttasdft", "t0"));
+                  //  db.addOrder(new Order("ttsadft", "tasdftt", "ttasdft", "tasdftt","tasdfastt", "dsftt", "t0"));
+//
+
+                   // updateSpinner();
+                    Intent myIntent = new Intent(ItemActivity.this, YourCartActivity.class);
+                    ItemActivity.this.startActivity(myIntent);
+
+
+                /*username.getText().clear();
+                email.getText().clear();
+                password.getText().clear();
+                name.getText().clear();
+                updateSpinner();
+                createlog();
+                name.setFocusable(true);
+                name.requestFocus();*/
+
+
             }
-        });*/
+        });
+
 
     }
 
@@ -235,6 +314,15 @@ public class ItemActivity extends AppCompatActivity {
 // modify the UI Thread
         item1Button.setImageBitmap(img3);
     }*/
+
+    private void updateSpinner() {
+        DBHandler3 db = new DBHandler3(getApplicationContext());
+        List<Order> orders = db.getAllOrders();
+        ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, orders);
+        //spinner.setAdapter(adapter);
+        //createlog();
+
+    }
 
 
 }
