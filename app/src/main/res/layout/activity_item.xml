@@ -16,8 +16,8 @@
         android:theme="?attr/actionBarTheme" />
 
     <TableLayout
-        android:layout_width="585dp"
-        android:layout_height="873dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingTop="64dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
@@ -35,11 +35,11 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/name"
-                android:layout_width="600dp"
+                android:layout_width="768dp"
                 android:layout_height="wrap_content"
                 android:text="Hot Dog"
                 android:textAlignment="center"
@@ -48,36 +48,57 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="91dp"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="asdasd"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="center"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/gf"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textAlignment="center"
+                    android:textSize="30sp" />
+
+                <ImageButton
+                    android:id="@+id/add"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:background="#FFB833"
+                    app:srcCompat="@drawable/ic_add_cust_48dp" />
 
                 <TextView
                     android:id="@+id/amount"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:textSize="30sp" />
+
+                <ImageButton
+                    android:id="@+id/remove"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="amount"
-                    android:textAlignment="viewStart" />
+                    android:background="#FFB833"
+                    app:srcCompat="@drawable/ic_remove_cust_48dp" />
+
             </LinearLayout>
 
         </TableRow>
@@ -96,7 +117,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Details"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/description"
@@ -104,7 +126,8 @@
                     android:layout_height="match_parent"
                     android:paddingBottom="50dp"
                     android:text="description"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
             </LinearLayout>
 
         </TableRow>
@@ -156,13 +179,15 @@
 
                 <TextView
                     android:id="@+id/addnote"
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add note or add or remove not listed items" />
+                    android:text="Add note or add or remove not listed items"
+                    android:textAlignment="center"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/addnote2"
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:background="#d8d6d6"
                     android:text="Add Note" />
