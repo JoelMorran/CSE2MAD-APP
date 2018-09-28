@@ -43,6 +43,7 @@ public class ItemActivity extends AppCompatActivity {
     DBHandler3 db;
     private String cost2;
     private EditText addnote2;
+    private ImageView imgbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class ItemActivity extends AppCompatActivity {
         remove = (ImageButton)findViewById(R.id.remove);
         addtoorder = (Button)findViewById(R.id.addtoorder);
         addnote2 = (EditText)findViewById(R.id.addnote2);
+        imgbtn = (ImageView)findViewById(R.id.imgbtn);
 
 
 
@@ -92,7 +94,7 @@ public class ItemActivity extends AppCompatActivity {
             //Bitmap imgs = ;
             //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString());
             String II = extras.getString("img_src");
-            new RetriveImg().execute("http://foodology.ca/wp-content/uploads/2011/03/BP-pizza.jpg");
+            new RetriveImg().execute(II);
             //getBitmapFromURL(II);
 
             //img.setImageBitmap(img3);
@@ -292,7 +294,7 @@ public class ItemActivity extends AppCompatActivity {
         }
         protected void onPostExecute(Integer res) {
 // modify the UI Thread
-            item1Button.setImageBitmap(img);
+            imgbtn.setImageBitmap(img);
         }
     }
 

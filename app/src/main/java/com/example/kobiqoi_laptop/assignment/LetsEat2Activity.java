@@ -108,7 +108,7 @@ public class LetsEat2Activity extends AppCompatActivity {
         //Log.d("working2", );
         if(count >= 10)
         {
-
+            super.onBackPressed();////helpsssssssssssssssssssssssssssssss
             Log.d("working", "working2");
 
         }

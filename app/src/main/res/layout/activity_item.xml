@@ -27,9 +27,9 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/imgbtn"
+                android:layout_width="768dp"
+                android:layout_height="300dp"
                 app:srcCompat="@color/accent_material_light_1" />
         </TableRow>
 

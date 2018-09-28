@@ -50,7 +50,7 @@ public class FoodMenuActivity extends AppCompatActivity {
         mains.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(FoodMenuActivity.this, FoodMenuActivity.class);
+                Intent myIntent = new Intent(FoodMenuActivity.this, MainsMenuActivity.class);
 
                 FoodMenuActivity.this.startActivity(myIntent);
             }

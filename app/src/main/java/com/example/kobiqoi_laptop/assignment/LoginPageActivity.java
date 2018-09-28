@@ -29,6 +29,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -135,9 +137,78 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
                ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
                 spinner2.setAdapter(adapter);
 
+                boolean isFoundUsername = false;
+                boolean isFoundEmail = false;
+                boolean isFoundPassword = false;
+
+                for (Account cn : accounts)
+                {
+                    if(mEmailView.getText().toString().equals(cn.getUsername()) )
+                    {
+                        isFoundUsername = true;
+                        break;
+                    }
+                }
+
+                for (Account cn : accounts)
+                {
+                    if(mEmailView.getText().toString().equals(cn.getEmail()) )
+                    {
+                        isFoundEmail = true;
+                        break;
+                    }
+                }
+
+                for (Account cn : accounts)
+                {
+                    if(mPasswordView.getText().toString().equals(cn.getPassword()) )
+                    {
+                        isFoundPassword = true;
+                        break;
+                    }
+                }
+
+                Animation shake = AnimationUtils.loadAnimation(LoginPageActivity.this, R.anim.shake);
+
+                if((isFoundUsername || isFoundEmail) && isFoundPassword)
+                {
+                    Intent myIntent = new Intent(LoginPageActivity.this, TableSetupActivity.class);
+                    LoginPageActivity.this.startActivity(myIntent);
+
+                    mEmailView.setFocusable(true);
+                    mEmailView.requestFocus();
+                }
+                else if(!isFoundUsername && !isFoundEmail){
+
+                    if(!isFoundPassword)
+                    {
+                        mEmailView.setFocusable(true);
+                        mEmailView.requestFocus();
+
+                        mEmailView.startAnimation(shake);
+                        mEmailView.setFocusable(true);
+                        mEmailView.requestFocus();
+                        mEmailView.getText().clear();
+                        mEmailView.setError("Please enter a valid name username or email");
+
+                        mPasswordView.startAnimation(shake);
+                        mPasswordView.getText().clear();
+                        mPasswordView.setError("Please enter a valid password");
+                    }
+
+                }
+                else
+                {
+                    mPasswordView.startAnimation(shake);
+                    mPasswordView.setFocusable(true);
+                    mPasswordView.requestFocus();
+                    mPasswordView.getText().clear();
+                    mPasswordView.setError("Please enter a valid password");
+                }
+
                 //DBHandler db = new DBHandler(getApplicationContext());
                 // Reading all students
-                Log.d("Reading: ", "Reading all accounts..");
+               /* Log.d("Reading: ", "Reading all accounts..");
                 boolean isFound = false;
 
                 for (Account cn : accounts) {
@@ -175,7 +246,7 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
                 password.getText().clear();
                 name.getText().clear();*/
 
-                //createlog();
+                //createlog();*/
             }
         });
 

@@ -147,7 +147,7 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
             intent.putExtra("description", description3);
 
 
-            String img3 = sendarr.getJSONObject(0).get("img_src").toString();
+            String img3 = sendarr.getJSONObject(id2).get("img_src").toString();
             //getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
             intent.putExtra("img_src", img3);
 
