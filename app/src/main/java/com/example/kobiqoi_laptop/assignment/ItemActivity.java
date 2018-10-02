@@ -197,19 +197,22 @@ public class ItemActivity extends AppCompatActivity {
 
                     String description2 = extras.getString("description");
                     //description.setText(description2);
-                }
+
                     // Order(String name, String extra, String amount, String note, String price, String cost, String tableid)
                     // db = new DBHandler3(getApplicationContext());
                    // db.addOrder(new Order(name3, description2, amount.getText().toString(), addnote2.getText().toString(),
                      //       price3, cost2, "0"));
 
-                    db.addOrder(new Order(1,"tasdfatt", "asdf", "fa", "ttasdft","asdf", "tasdftt", "t0sadf"));
+                    db.onUpgrade(db.getReadableDatabase(),1,2);
+                db.addOrder(new Order(name3, description2, amount.getText().toString(), addnote2.getText().toString(),
+                               price3, cost2, "0"));
+                    //db.addOrder(new Order("tasdfatt", "asdf", "fa", "ttasdft","asdf", "tasdftt", "t0sadf"));
                     //db.addOrder(new Order("ttasdft", "tasdftt", "tasdftt", "tasdftt","tasdftt", "ttasdft", "dsft0"));
                    // db.addOrder(new Order("asdfttt", "ttsdft", "tasdftt", "ttsdaft","tsdftt", "ttsdaft", "t0"));
                   //  db.addOrder(new Order("tdfastt", "tsdaftt", "tfdsatt", "tsadftt","ttasdft", "ttasdft", "t0"));
                   //  db.addOrder(new Order("ttsadft", "tasdftt", "ttasdft", "tasdftt","tasdfastt", "dsftt", "t0"));
 //
-
+            }
                    // updateSpinner();
                     Intent myIntent = new Intent(ItemActivity.this, YourCartActivity.class);
                     ItemActivity.this.startActivity(myIntent);

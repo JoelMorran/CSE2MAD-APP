@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -16,6 +18,8 @@ public class MenuActivity extends AppCompatActivity {
     private Button food;
     private Button specials;
     private Button kids;
+    private ImageButton helpbtn;
+    private String tableid = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,9 @@ public class MenuActivity extends AppCompatActivity {
         food= (Button) findViewById(R.id.food);
         kids = (Button) findViewById(R.id.kids);
         specials = (Button) findViewById(R.id.specials);
+        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
+
+
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
@@ -74,6 +81,16 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Log.d("","help");
+                sendBroadcast();
+            }
+        });
+
+
 
 
     }
@@ -117,5 +134,13 @@ public class MenuActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+    private void sendBroadcast() {
+        Intent intent = new Intent();
+        intent.setAction("com.example.kobiqoi_laptop.assignment");
+        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("tableid", "Table " + tableid + " needs assistance \n"  );
+        Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
+        sendBroadcast(intent);
     }
 }

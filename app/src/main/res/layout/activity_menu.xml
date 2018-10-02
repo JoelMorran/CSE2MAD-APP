@@ -11,11 +11,12 @@
         android:id="@+id/mytoolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="#ff5722"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -60,5 +61,17 @@
             android:text="Kids"
             android:textAllCaps="false"
             android:textColor="@android:color/white" />
+
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/helpbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff5722"
+        android:src="@drawable/ic_record_voice_over_white_48dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+        <!--app:srcCompat="@drawable/ic_record_voice_over_white_48dp"-->
+
+
 </android.support.constraint.ConstraintLayout>

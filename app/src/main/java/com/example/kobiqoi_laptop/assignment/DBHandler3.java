@@ -31,8 +31,8 @@ public class DBHandler3 extends SQLiteOpenHelper {
         public void onCreate(SQLiteDatabase db) {
             String CREATE_ORDERS_TABLE = "CREATE TABLE " + TABLE_ORDERS + "("
                     + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                    + KEY_EXTRA + " TEXT," + KEY_AMOUNT + " TEXT," + KEY_NOTE + " TEXT," + KEY_PRICE + "TEXT,"
-                    + KEY_COST + "TEXT," + KEY_TABLEID + "TEXT" + ")";
+                    + KEY_EXTRA + " TEXT," + KEY_AMOUNT + " TEXT," + KEY_NOTE + " TEXT," + KEY_PRICE + " TEXT,"
+                    + KEY_COST + " TEXT," + KEY_TABLEID + " TEXT" + ");";
             db.execSQL(CREATE_ORDERS_TABLE);
         }
 
@@ -59,7 +59,7 @@ public class DBHandler3 extends SQLiteOpenHelper {
             values.put(KEY_COST, order.getCost()); // Contact Password
             values.put(KEY_TABLEID, order.getTableid()); // Contact Password
             // Inserting Row
-            db.insert(TABLE_ORDERS, null, values);
+            long result = db.insertOrThrow(TABLE_ORDERS, null, values);
             //2nd argument is String containing nullColumnHack
             db.close(); // Closing database connection
         }
