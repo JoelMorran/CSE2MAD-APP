@@ -6,13 +6,24 @@
 
         <!-- "Mark Favorite", should appear as action button if possible -->
     <item
-        android:id="@+id/action_back"
-        android:icon="@drawable/ic_launcher_background"
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_content_paste_black_48dp"
+        android:title="@string/buttontest"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_cart"
+        android:icon="@drawable/ic_shopping_cart_black_48dp"
+        android:title="@string/buttontest"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_menu"
+        android:icon="@drawable/ic_restaurant_menu_black_48dp"
         android:title="@string/buttontest"
         app:showAsAction="always" />
 
     <!-- Settings, should always be in the overflow -->
-        <item android:id="@+id/action_settings"
+     <!--   <item android:id="@+id/action_settings"
             android:title="@string/settings"
             app:showAsAction="never"/>
 
@@ -20,7 +31,7 @@
         android:title="action_search"
         android:icon="@drawable/ic_launcher_foreground"
         app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView" />
+        app:actionViewClass="android.support.v7.widget.SearchView" />-->
 
 
 

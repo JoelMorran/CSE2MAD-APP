@@ -13,9 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,12 +46,17 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
     private String name2;
     private String price2;
     private String description2;
+    private ImageButton helpbtn;
+    private String tableid = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alcohol_menu);
         new RetrieveMenuTask().execute("http://homepage.cs.latrobe.edu.au/jamorran/menu.json");
+
+
+        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
 
         //new RetrieveMenuTask().execute("https://latrobeuni-my.sharepoint.com/:u:/g/personal/jamorran_students_ltu_edu_au/EQ4RGmqz4kJKhFqCok6iHhIBrv-K6Vgwgd6PMLPMs0mjHA?e=v9gyDM");
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -109,6 +116,15 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
 
 
         listV.setOnItemClickListener(this);
+
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Log.d("","help");
+                sendBroadcast();
+            }
+        });
 
     }
 
@@ -205,18 +221,37 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_history:
                 // User chose the "Settings" item, show the app settings UI...
+                //sendBroadcast();
+                Intent myIntent = new Intent(this, OrderHistoryActivity.class);
+
+                this.startActivity(myIntent);
+
                 return true;
 
-            case R.id.action_back:
+            case R.id.action_cart:
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
+                // sendBroadcast();
+                Intent myIntent2 = new Intent(this, YourCartActivity.class);
+
+                this.startActivity(myIntent2);
+                return true;
+
+            case R.id.action_menu:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                // sendBroadcast();
+                Intent myIntent3 = new Intent(this, MenuActivity.class);
+
+                this.startActivity(myIntent3);
                 return true;
 
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
+                //sendBroadcast();
                 return super.onOptionsItemSelected(item);
 
         }
@@ -227,9 +262,9 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menubuttons, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        /*MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView =
-                (SearchView) searchItem.getActionView();
+                (SearchView) searchItem.getActionView();*/
 
         // Configure the search info and add any event listeners...
 
@@ -343,6 +378,15 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
             listV.setAdapter(adapter);
 
         }
+    }
+
+    private void sendBroadcast() {
+        Intent intent = new Intent();
+        intent.setAction("com.example.kobiqoi_laptop.assignment");
+        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("tableid", "Table " + tableid + " needs assistance \n"  );
+        Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
+        sendBroadcast(intent);
     }
 
 }

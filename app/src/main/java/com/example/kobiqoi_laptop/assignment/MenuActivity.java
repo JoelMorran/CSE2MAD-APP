@@ -30,6 +30,8 @@ public class MenuActivity extends AppCompatActivity {
         food= (Button) findViewById(R.id.food);
         kids = (Button) findViewById(R.id.kids);
         specials = (Button) findViewById(R.id.specials);
+
+
         helpbtn = (ImageButton) findViewById(R.id.helpbtn);
 
 
@@ -98,18 +100,29 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_history:
                 // User chose the "Settings" item, show the app settings UI...
+                //sendBroadcast();
+                Intent myIntent = new Intent(this, OrderHistoryActivity.class);
+
+                this.startActivity(myIntent);
+
                 return true;
 
-            case R.id.action_back:
+            case R.id.action_cart:
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
+                // sendBroadcast();
+                Intent myIntent2 = new Intent(this, YourCartActivity.class);
+
+                this.startActivity(myIntent2);
                 return true;
+
 
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
+                //sendBroadcast();
                 return super.onOptionsItemSelected(item);
 
         }
@@ -120,9 +133,9 @@ public class MenuActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menubuttons, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        /*MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView =
-                (SearchView) searchItem.getActionView();
+                (SearchView) searchItem.getActionView();*/
 
         // Configure the search info and add any event listeners...
 
