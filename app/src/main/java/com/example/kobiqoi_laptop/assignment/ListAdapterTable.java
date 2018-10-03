@@ -12,15 +12,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ListAdapterTable extends ArrayAdapter<JSONObject> {
+public class ListAdapterTable extends ArrayAdapter<Table> {
 
     int vg;
 
-    ArrayList<JSONObject> list;
+    ArrayList<Table> list;
 
     Context context;
 
-    public ListAdapterTable(Context context, int vg, int id, ArrayList<JSONObject> list){
+    public ListAdapterTable(Context context, int vg, int id, ArrayList<Table> list){
 
         super(context,vg, id,list);
 
@@ -38,31 +38,19 @@ public class ListAdapterTable extends ArrayAdapter<JSONObject> {
 
         View itemView = inflater.inflate(vg, parent, false);
 
-        TextView txtId=(TextView)itemView.findViewById(R.id.txtid);
+        TextView txtname = (TextView)itemView.findViewById(R.id.txtname);
 
-        TextView txtName=(TextView)itemView.findViewById(R.id.txtname);
+        TextView txtsize=(TextView)itemView.findViewById(R.id.txtsize);
 
-        TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
+        //TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
 
         try {
 
-            txtId.setText(list.get(position).getString("name"));
+            txtname.setText("Table " + list.get(position).getTablenumber());
 
-            if(list.get(position).getString("glutenfree").equals("true")) {
-                //list.get(position).getString("glutenfree").equals("true");
-                txtName.setText("GF");
-            }
-            else
-            {
-                txtName.setText("Not GF");
-            }
-            //txtName.setText(list.get(position).getString("glutenfree"));
+            txtsize.setText("Table Size = " + list.get(position).getTablesize());
 
-            txtSex.setText(list.get(position).getString("price"));
-
-
-
-        } catch (JSONException e) {
+        } catch (Exception e) {
 
             e.printStackTrace();
 

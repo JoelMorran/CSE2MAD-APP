@@ -4,6 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CheckoutPaymentMethodActivity">
+    android:background="#FFB833"
+    tools:context=".CreateNewAccountActivity">
 
+
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/mytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#FF5722"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Create New Account"
+        app:titleTextColor="@android:color/white"
+        tools:ignore="ResourceCycle"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <LinearLayout
+        android:id="@+id/b"
+        android:layout_width="match_parent"
+        android:layout_height="740dp"
+        android:layout_marginBottom="276dp"
+        android:layout_marginTop="404dp"
+        android:background="#FFB833"
+        android:orientation="vertical"
+        android:paddingLeft="150dp"
+        android:paddingRight="150dp"
+        android:paddingTop="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/placeorder"
+        app:layout_constraintTop_toBottomOf="@+id/mytoolbar"
+        app:layout_constraintVertical_bias="0.639"
+        tools:layout_editor_absoluteX="0dp">
+
+        <RadioButton
+            android:id="@+id/paypaypal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PAY WITH PAYPAL"
+            android:textSize="36sp" />
+
+        <RadioButton
+            android:id="@+id/paycreditcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PAY WITH CREDIT CARD"
+            android:textSize="36sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PAY WITH DEBIT CARD"
+            android:textSize="36sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PAY WITH CASH"
+            android:textSize="36sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/placeorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:background="#ff5722"
+        android:text="PLACE ORDER"
+        android:textColor="@android:color/white"
+        android:textSize="46sp"
+        app:layout_constraintBottom_toTopOf="@+id/helpbtn"
+        tools:layout_editor_absoluteX="46dp" />
+
+    <ImageButton
+        android:id="@+id/helpbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff5722"
+        android:src="@drawable/ic_record_voice_over_white_48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="800dp" />
 </android.support.constraint.ConstraintLayout>

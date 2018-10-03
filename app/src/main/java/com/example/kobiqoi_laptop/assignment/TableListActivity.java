@@ -1,16 +1,29 @@
 package com.example.kobiqoi_laptop.assignment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 
-public class TableListActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class TableListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+    private ListView listV;
+
+    private ListAdapterTable adapter;
+
+    private ArrayList<Table> listItems;
+   // private JSONArray sendarr;
+   // private JSONObject jsonObj;
+
 
     private Button hack;
 
@@ -32,6 +45,8 @@ public class TableListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
+       // new RetrieveTable().execute();
+
        hack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +67,195 @@ public class TableListActivity extends AppCompatActivity {
             }
         });*/
 
+        listV=(ListView)findViewById(R.id.listv);
+
+                // JSONArray jsonArray; //=getJSonData("jsondata.json");
+
+        // ArrayList<JSONObject> listItems;     //getArrayListFromJSONArray(jsonArray);*/
+
+
+
+        // ListAdapter adapter=new ListAdapter(this,R.layout.list_layout,R.id.txtid,listItems);
+
+
+
+        //* *EDIT* *
+
+        DBHandler2 db = new DBHandler2(getApplicationContext());
+
+        listItems =  db.getAllTables();
+
+
+        adapter=new ListAdapterTable(getApplicationContext(), R.layout.list_layout_tables,R.id.txtname,listItems);
+        listV.setAdapter(adapter);
+
+        listV.setOnItemClickListener(this);
+    }
+
+    private Exception exception;
+    public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+
+        Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
+        // Then you start a new Activity via Intent
+        //v.get
+        Intent intent = new Intent();
+        intent.setClass(this, LetsEat2Activity.class);
+        //intent.putExtra("position", position);
+        // Or / And
+        //intent.putExtra("id", id);
+
+        //JSONArray arr = jsonObj.getJSONArray("mains");
+       String id3 = String.valueOf(id);
+        int id2 = Integer.parseInt(id3);
+
+        try
+        {
+            startLockTask();
+            intent.putExtra("tbnumber", listItems.get(position).getTablenumber());
+            /*sendarr = jsonObj.getJSONArray("alcohol");
+            String name3 = sendarr.getJSONObject(id2).get("name").toString();
+
+
+            String price3 = sendarr.getJSONObject(id2).get("price").toString();
+            intent.putExtra("price", price3);
+
+            String glutenfree3 = sendarr.getJSONObject(id2).get("glutenfree").toString();
+            intent.putExtra("glutenfree", glutenfree3);
+
+            String description3 = sendarr.getJSONObject(id2).get("description").toString();
+            intent.putExtra("description", description3);
+
+
+            String img3 = sendarr.getJSONObject(id2).get("img_src").toString();
+            //getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
+            intent.putExtra("img_src", img3);*/
+
+        }
+        catch (Exception e)
+        {
+            this.exception = e;
+            // return new Integer(-1);
+        }
+        startActivity(intent);
+
+
+    }
+    DBHandler2 db;
+
+    class RetrieveTable extends AsyncTask<String, Void, Integer> {
+        private Exception exception;
+        private Bitmap img;
+        // private JSONArray arr;
+        // private ListAdapter adapter;
+        //private ArrayList<JSONObject> listItems;
+        @Override
+        protected Integer doInBackground(String... urlStrs) {
+            try {
+// get the menu
+               /* java.net.URL url = new java.net.URL(urlStrs[0]);
+                HttpURLConnection connection = (HttpURLConnection) url
+                        .openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream stream = connection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+                jsonObj = new JSONObject(buffer.toString());
+                JSONArray arr = jsonObj.getJSONArray("mains");
+                sendarr = jsonObj.getJSONArray("mains");
+                // arr.getJSONObject(0).get("img_src").toString();
+                */
+                DBHandler2 db = new DBHandler2(getApplicationContext());
+
+                List<Table> tables = db.getAllTables();
+
+                //Object tablex(int id, String str);
+
+                /*ArrayList<Object> list2 = new ArrayList<Object>();
+
+                 for (Table cn : tables)
+                {
+                    list2.add(cn);
+                }*/
+
+
+                /*List<Table> tables = db.getAllTables();
+                ArrayList t  = new ArrayList(tables);
+
+                listItems = t;*/
+
+
+                /*
+                for (Account cn : accounts)
+                {
+                    if(email.getText().toString().equals(cn.getEmail()) )
+                    {
+                        isFoundEmail = true;
+                        break;
+                    }
+                }*/
+
+                //listItems=getArrayListFromJSONArray(arr);
+
+
+                //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString()); LAAAAAAAAAAAGGGGGGGGGGGGGGGGGAGGGGGGGGGGGGGGGGGGGGGGGGGGGaGGGGAGAGAGAGAGAGAGAGAGAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGGGGGGGGAGAGAGAGAGGA
+
+                return new Integer(0);
+            } catch (Exception e) {
+                this.exception = e;
+                return new Integer(-1);
+            }
+        }
+
+        /*private ArrayList<JSONObject> getArrayListFromJSONArray(JSONArray jsonArray){
+
+            ArrayList<JSONObject> aList=new ArrayList<JSONObject>();
+
+            try {
+
+                if (jsonArray != null) {
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        aList.add(jsonArray.getJSONObject(i));
+
+                    }
+
+                }
+
+            }catch (JSONException je){je.printStackTrace();}
+
+            return  aList;
+
+        }*/
+
+
+       /* private void getBitmapFromURL(String src) {
+            try {
+                java.net.URL url = new java.net.URL(src);
+                HttpURLConnection connection = (HttpURLConnection) url
+                        .openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                img = BitmapFactory.decodeStream(input);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
+
+        protected void onPostExecute(Integer res) {
+// modify the UI Thread
+            //item1Button.setImageBitmap(img);
+            //ListAdapter adapter=new ListAdapter(AlcoholMenuActivity.this, R.layout.list_layout,R.id.txtid,listItems);
+            adapter=new ListAdapterTable(getApplicationContext(), R.layout.list_layout_orders2,R.id.txtname,listItems);
+            listV.setAdapter(adapter);
+
+        }
     }
 
   /*  @Override
