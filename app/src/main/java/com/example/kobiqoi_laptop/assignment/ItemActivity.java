@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,7 +69,7 @@ public class ItemActivity extends AppCompatActivity {
 
 
         helpbtn = (ImageButton) findViewById(R.id.helpbtn);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
         Bundle extras = getIntent().getExtras();
@@ -103,7 +104,7 @@ public class ItemActivity extends AppCompatActivity {
             String II = extras.getString("img_src");
             new RetriveImg().execute(II);
             //getBitmapFromURL(II);
-
+            String tbnum = extras.getString("tbnumber");
             //img.setImageBitmap(img3);
 
 
@@ -163,7 +164,7 @@ public class ItemActivity extends AppCompatActivity {
         //spinner = (Spinner) findViewById(R.id.spinner);
 
         db = new DBHandler3(this);
-
+        db.onUpgrade(db.getReadableDatabase(),1,2);
         addtoorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -203,6 +204,10 @@ public class ItemActivity extends AppCompatActivity {
                     }
 
                     String description2 = extras.getString("description");
+
+                    String tbnum = extras.getString("tbnumber");
+
+
                     //description.setText(description2);
 
                     // Order(String name, String extra, String amount, String note, String price, String cost, String tableid)
@@ -210,7 +215,7 @@ public class ItemActivity extends AppCompatActivity {
                    // db.addOrder(new Order(name3, description2, amount.getText().toString(), addnote2.getText().toString(),
                      //       price3, cost2, "0"));
 
-                    db.onUpgrade(db.getReadableDatabase(),1,2);
+
                 db.addOrder(new Order(name3, description2, amount.getText().toString(), addnote2.getText().toString(),
                                price3, cost2, "0"));
                     //db.addOrder(new Order("tasdfatt", "asdf", "fa", "ttasdft","asdf", "tasdftt", "t0sadf"));

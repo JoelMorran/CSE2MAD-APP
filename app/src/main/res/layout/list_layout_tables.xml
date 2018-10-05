@@ -14,7 +14,7 @@
 
     <TextView
 
-        android:id="@+id/txtname"
+        android:id="@+id/txtnumber"
 
         android:layout_width="wrap_content"
 

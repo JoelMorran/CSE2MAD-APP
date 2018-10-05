@@ -38,7 +38,7 @@ public class ListAdapterTable extends ArrayAdapter<Table> {
 
         View itemView = inflater.inflate(vg, parent, false);
 
-        TextView txtname = (TextView)itemView.findViewById(R.id.txtname);
+        TextView txtnumber = (TextView)itemView.findViewById(R.id.txtnumber);
 
         TextView txtsize=(TextView)itemView.findViewById(R.id.txtsize);
 
@@ -46,7 +46,7 @@ public class ListAdapterTable extends ArrayAdapter<Table> {
 
         try {
 
-            txtname.setText("Table " + list.get(position).getTablenumber());
+            txtnumber.setText("Table " + list.get(position).getTablenumber());
 
             txtsize.setText("Table Size = " + list.get(position).getTablesize());
 

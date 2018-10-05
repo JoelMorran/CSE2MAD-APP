@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -12,15 +14,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ListAdapterOrders extends ArrayAdapter<JSONObject> {
-
+public class ListAdapterOrders extends ArrayAdapter<Order> {
+    DBHandler3 db;
     int vg;
 
-    ArrayList<JSONObject> list;
+    ArrayList<Order> list;
 
     Context context;
 
-    public ListAdapterOrders(Context context, int vg, int id, ArrayList<JSONObject> list){
+    public ListAdapterOrders(Context context, int vg, int id, ArrayList<Order> list){
 
         super(context,vg, id,list);
 
@@ -32,43 +34,78 @@ public class ListAdapterOrders extends ArrayAdapter<JSONObject> {
 
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View itemView = inflater.inflate(vg, parent, false);
 
-        TextView txtId=(TextView)itemView.findViewById(R.id.txtid);
-
         TextView txtName=(TextView)itemView.findViewById(R.id.txtname);
 
-        TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
+        TextView txtPrice=(TextView)itemView.findViewById(R.id.txtprice);
+
+      final TextView amount=(TextView)itemView.findViewById(R.id.amount);
+
+        ImageButton addbtn=(ImageButton) itemView.findViewById(R.id.addbtn);
+
+        ImageButton minus=(ImageButton) itemView.findViewById(R.id.minus);
+
+        Button remove = (Button) itemView.findViewById(R.id.remove);
+
+
+        //TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
 
         try {
 
-            txtId.setText(list.get(position).getString("name"));
+            txtName.setText(list.get(position).getName());
 
-            if(list.get(position).getString("glutenfree").equals("true")) {
-                //list.get(position).getString("glutenfree").equals("true");
-                txtName.setText("GF");
-            }
-            else
-            {
-                txtName.setText("Not GF");
-            }
-            //txtName.setText(list.get(position).getString("glutenfree"));
+            txtPrice.setText(list.get(position).getPrice());
 
-            txtSex.setText(list.get(position).getString("price"));
+            amount.setText(list.get(position).getAmount());
 
 
-
-        } catch (JSONException e) {
+        } catch (Exception e) {
 
             e.printStackTrace();
 
         }
 
+        addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+
+                String one = String.valueOf(amount.getText());
+                int one2 = Integer.parseInt(one);
+                ++one2;
+                one = String.valueOf(one2);
+                amount.setText(one);
+
+            }
+        });
+
+        minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                String one = String.valueOf(amount.getText());
+                int one2 = Integer.parseInt(one);
+                if(one2 >= 2) {
+                    --one2;
+                }
+                one = String.valueOf(one2);
+                amount.setText(one);
+
+            }
+        });
+
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              db.deleteOrder(list.get(position));
+            }
+        });
 
         return itemView;
 

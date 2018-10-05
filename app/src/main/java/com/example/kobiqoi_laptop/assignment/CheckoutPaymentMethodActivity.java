@@ -7,15 +7,19 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class CheckoutPaymentMethodActivity extends AppCompatActivity {
+
+    private Button placeorder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_payment_method);
 
-        //signIn = (Button) findViewById(R.id.signIn);
+        placeorder = (Button) findViewById(R.id.placeorder);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
@@ -28,16 +32,31 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+       placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
+         /*       if()
+                {
+                Intent myIntent = new Intent(CheckoutPaymentMethodActivity.this, PayPalActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                CheckoutPaymentMethodActivity.this.startActivity(myIntent);
+            }
+            else if()
+                {
+                    Intent myIntent = new Intent(CheckoutPaymentMethodActivity.this, CreditCardDetailsActivity.class);
+
+                    CheckoutPaymentMethodActivity.this.startActivity(myIntent);
+                }
+                else
+                {
+                   // Intent myIntent = new Intent(CheckoutPaymentMethodActivity.this, LoginPageActivity.class);
+
+                   // CheckoutPaymentMethodActivity.this.startActivity(myIntent);
+                }*/
             }
         });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        /*signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);

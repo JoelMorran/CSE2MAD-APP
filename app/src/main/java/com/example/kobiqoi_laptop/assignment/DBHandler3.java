@@ -82,8 +82,8 @@ public class DBHandler3 extends SQLiteOpenHelper {
         }
 
         // Getting All Contacts
-        public List<Order> getAllOrders() {
-            List<Order> orderList = new ArrayList<Order>();
+        public ArrayList<Order> getAllOrders() {
+            ArrayList<Order> orderList = new ArrayList<Order>();
             // Select All Query
             String selectQuery = "SELECT * FROM " + TABLE_ORDERS;
             SQLiteDatabase db = this.getWritableDatabase();

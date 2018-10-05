@@ -7,13 +7,26 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class YourCartActivity extends AppCompatActivity {
     private Spinner spinner;
+
+    private ListView listV;
+
+    private ListAdapterOrders adapter;
+
+    private ArrayList<Order> listItems;
+
+    private Button emptycart;
+    private Button checkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +34,8 @@ public class YourCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_your_cart);
         spinner = (Spinner) findViewById(R.id.spinner3);
         updateSpinner();
+        emptycart = (Button) findViewById(R.id.emptycart);
+        checkout = (Button) findViewById(R.id.checkout);
 
         //signIn = (Button) findViewById(R.id.signIn);
         //signUp = (Button) findViewById(R.id.signUp);
@@ -35,24 +50,33 @@ public class YourCartActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+
+
+        listV=(ListView)findViewById(R.id.listv);
+        DBHandler3 db = new DBHandler3(getApplicationContext());
+
+        listItems =  db.getAllOrders();
+
+
+        adapter=new ListAdapterOrders(getApplicationContext(), R.layout.list_layout_orders2,R.id.txtname,listItems);
+        listV.setAdapter(adapter);
+
+        //listV.setOnItemClickListener(this);
+    emptycart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
             }
         });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
+                Intent myIntent = new Intent(YourCartActivity.this, CheckoutActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                YourCartActivity.this.startActivity(myIntent);
             }
-        });*/
-
+        });
     }
 
     @Override

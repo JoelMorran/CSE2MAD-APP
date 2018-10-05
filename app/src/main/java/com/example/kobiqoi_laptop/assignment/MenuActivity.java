@@ -46,53 +46,58 @@ public class MenuActivity extends AppCompatActivity {
         //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
+        //Bundle extras = getIntent().getExtras();
+       // if(extras != null) {
 
-       drinks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(MenuActivity.this, DrinksMenuActivity.class);
-
-                MenuActivity.this.startActivity(myIntent);
-            }
-        });
-
-        food.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(MenuActivity.this, FoodMenuActivity.class);
-
-                MenuActivity.this.startActivity(myIntent);
-            }
-        });
-
-        specials.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(MenuActivity.this, SpecialsMenuActivity.class);
-
-                MenuActivity.this.startActivity(myIntent);
-            }
-        });
-
-        kids.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(MenuActivity.this, KidsMenuActivity.class);
-
-                MenuActivity.this.startActivity(myIntent);
-            }
-        });
-
-        helpbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //Log.d("","help");
-                sendBroadcast();
-            }
-        });
+           // final String tbnum = extras.getString("tbnumber");
 
 
+            drinks.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(MenuActivity.this, DrinksMenuActivity.class);
+         //           myIntent.putExtra("tbnumber", tbnum);
+                    MenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            food.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(MenuActivity.this, FoodMenuActivity.class);
+        //            myIntent.putExtra("tbnumber", tbnum);
+                    MenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            specials.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(MenuActivity.this, SpecialsMenuActivity.class);
+        //            myIntent.putExtra("tbnumber", tbnum);
+                    MenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            kids.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(MenuActivity.this, KidsMenuActivity.class);
+        //            myIntent.putExtra("tbnumber", tbnum);
+                    MenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            helpbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //Log.d("","help");
+                    sendBroadcast();
+                }
+            });
+
+     //   }
 
 
     }

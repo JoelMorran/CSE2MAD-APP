@@ -7,16 +7,25 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class CheckoutActivity extends AppCompatActivity {
+
+    private Button placeorder;
+    private ImageButton helpbtn;
+    String tableid = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
-        //signIn = (Button) findViewById(R.id.signIn);
-        //signUp = (Button) findViewById(R.id.signUp);
+
+        helpbtn  = (ImageButton) findViewById(R.id.helpbtn);
+        placeorder  = (Button) findViewById(R.id.placeorder);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
@@ -28,15 +37,15 @@ public class CheckoutActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+        placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
+                Intent myIntent = new Intent(CheckoutActivity.this, CheckoutPaymentMethodActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                CheckoutActivity.this.startActivity(myIntent);
             }
         });
-
+        /*
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +54,15 @@ public class CheckoutActivity extends AppCompatActivity {
                 SignInSignUpActivity.this.startActivity(myIntent);
             }
         });*/
+
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Log.d("","help");
+                sendBroadcast();
+            }
+        });
 
     }
 
@@ -105,5 +123,14 @@ public class CheckoutActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private void sendBroadcast() {
+        Intent intent = new Intent();
+        intent.setAction("com.example.kobiqoi_laptop.assignment");
+        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("tableid", "Table " + tableid + " needs assistance \n"  );
+        Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
+        sendBroadcast(intent);
     }
 }

@@ -54,14 +54,14 @@
             android:textSize="36sp" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/paydebit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="PAY WITH DEBIT CARD"
             android:textSize="36sp" />
 
         <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/paycash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="PAY WITH CASH"

@@ -34,14 +34,24 @@ public class LetsEat2Activity extends AppCompatActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         //getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
+
+
+
        LetsEat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+              //  Bundle extras = getIntent().getExtras();
+                //if(extras != null) {
+
+                  //  String tbnum = extras.getString("tbnumber");
+
+
 
                 Intent myIntent = new Intent(LetsEat2Activity.this, MenuActivity.class);
-
+             //   myIntent.putExtra("tbnumber", tbnum);
                 LetsEat2Activity.this.startActivity(myIntent);
             }
+           // }
         });
 
         /*signUp.setOnClickListener(new View.OnClickListener() {

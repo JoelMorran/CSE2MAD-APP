@@ -67,7 +67,7 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
             }
         });*/
 
-        listV=(ListView)findViewById(R.id.listv);
+
 
                 // JSONArray jsonArray; //=getJSonData("jsondata.json");
 
@@ -80,7 +80,7 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
 
 
         //* *EDIT* *
-
+        listV=(ListView)findViewById(R.id.listv);
         DBHandler2 db = new DBHandler2(getApplicationContext());
 
         listItems =  db.getAllTables();
@@ -103,15 +103,19 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
         //intent.putExtra("position", position);
         // Or / And
         //intent.putExtra("id", id);
-
+        Intent intenttb = new Intent();
+        intenttb.setClass(this, ItemActivity.class);
         //JSONArray arr = jsonObj.getJSONArray("mains");
        String id3 = String.valueOf(id);
         int id2 = Integer.parseInt(id3);
+        String t = listItems.get(position).getTablenumber();
 
         try
         {
             startLockTask();
-            intent.putExtra("tbnumber", listItems.get(position).getTablenumber());
+
+            intenttb.putExtra("tbnumber", listItems.get(position).getTablenumber());
+            //intent.putExtra("tbnumber", listItems.get(position).getTablenumber());
             /*sendarr = jsonObj.getJSONArray("alcohol");
             String name3 = sendarr.getJSONObject(id2).get("name").toString();
 
@@ -137,6 +141,7 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
             // return new Integer(-1);
         }
         startActivity(intent);
+        //startActivity(intenttb);
 
 
     }
