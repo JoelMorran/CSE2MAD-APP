@@ -133,7 +133,10 @@ public class DessertMenuActivity extends AppCompatActivity implements AdapterVie
 
     private Exception exception;
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
 
+            tbnum = extras.getString("tbnumber");
         Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
         // Then you start a new Activity via Intent
         //v.get
@@ -147,8 +150,7 @@ public class DessertMenuActivity extends AppCompatActivity implements AdapterVie
         String id3 = String.valueOf(id);
         int id2 = Integer.parseInt(id3);
 
-        try
-        {
+        try {
             sendarr = jsonObj.getJSONArray("dessert");
             String name3 = sendarr.getJSONObject(id2).get("name").toString();
             intent.putExtra("name", name3);
@@ -168,9 +170,7 @@ public class DessertMenuActivity extends AppCompatActivity implements AdapterVie
             intent.putExtra("img_src", img3);
             intent.putExtra("tbnumber", tbnum);
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.exception = e;
             // return new Integer(-1);
         }
@@ -214,7 +214,7 @@ public class DessertMenuActivity extends AppCompatActivity implements AdapterVie
 
 
         startActivity(intent);
-
+    }
 
     }
 
