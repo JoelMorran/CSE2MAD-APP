@@ -103,8 +103,8 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
         //intent.putExtra("position", position);
         // Or / And
         //intent.putExtra("id", id);
-        Intent intenttb = new Intent();
-        intenttb.setClass(this, ItemActivity.class);
+        //Intent intenttb = new Intent();
+        //intenttb.setClass(this, ItemActivity.class);
         //JSONArray arr = jsonObj.getJSONArray("mains");
        String id3 = String.valueOf(id);
         int id2 = Integer.parseInt(id3);
@@ -114,7 +114,7 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
         {
             startLockTask();
 
-            intenttb.putExtra("tbnumber", listItems.get(position).getTablenumber());
+            intent.putExtra("tbnumber", listItems.get(position).getTablenumber());
             //intent.putExtra("tbnumber", listItems.get(position).getTablenumber());
             /*sendarr = jsonObj.getJSONArray("alcohol");
             String name3 = sendarr.getJSONObject(id2).get("name").toString();

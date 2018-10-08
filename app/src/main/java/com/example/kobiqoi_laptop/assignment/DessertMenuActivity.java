@@ -47,6 +47,7 @@ public class DessertMenuActivity extends AppCompatActivity implements AdapterVie
     private String description2;
     private ImageButton helpbtn;
     private String tableid = "0";
+    private String tbnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,6 +166,7 @@ public class DessertMenuActivity extends AppCompatActivity implements AdapterVie
             String img3 = sendarr.getJSONObject(0).get("img_src").toString();
             //getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
             intent.putExtra("img_src", img3);
+            intent.putExtra("tbnumber", tbnum);
 
         }
         catch (Exception e)

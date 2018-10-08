@@ -32,7 +32,7 @@ public class DBHandler3 extends SQLiteOpenHelper {
             String CREATE_ORDERS_TABLE = "CREATE TABLE " + TABLE_ORDERS + "("
                     + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                     + KEY_EXTRA + " TEXT," + KEY_AMOUNT + " TEXT," + KEY_NOTE + " TEXT," + KEY_PRICE + " TEXT,"
-                    + KEY_COST + " TEXT," + KEY_TABLEID + " TEXT" + ");";
+                    + KEY_COST + " TEXT," + KEY_TABLEID + " TEXT" + ")";
             db.execSQL(CREATE_ORDERS_TABLE);
         }
 
@@ -125,12 +125,18 @@ public class DBHandler3 extends SQLiteOpenHelper {
         }
 
         // Deleting single student
-        public void deleteOrder(Order order) {
+        public void allDeleteOrder() {
             SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABLE_ORDERS, KEY_ID + " = ?",
-                    new String[]{String.valueOf(order.getID())});
+            db.delete(TABLE_ORDERS, null, null);
             db.close();
         }
+
+    public void deleteOrder(Order order) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_ORDERS, KEY_ID + " = ?",
+                new String[]{String.valueOf(order.getID())});
+        db.close();
+    }
 
         // Getting student Count
         public int getOrdersCount() {

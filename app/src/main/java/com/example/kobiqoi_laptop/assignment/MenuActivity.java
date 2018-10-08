@@ -20,6 +20,7 @@ public class MenuActivity extends AppCompatActivity {
     private Button kids;
     private ImageButton helpbtn;
     private String tableid = "0";
+    private String tbnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +47,17 @@ public class MenuActivity extends AppCompatActivity {
         //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
-        //Bundle extras = getIntent().getExtras();
-       // if(extras != null) {
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
 
-           // final String tbnum = extras.getString("tbnumber");
+            tbnum = extras.getString("tbnumber");
 
 
             drinks.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent myIntent = new Intent(MenuActivity.this, DrinksMenuActivity.class);
-         //           myIntent.putExtra("tbnumber", tbnum);
+                   myIntent.putExtra("tbnumber", tbnum);
                     MenuActivity.this.startActivity(myIntent);
                 }
             });
@@ -65,7 +66,7 @@ public class MenuActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent myIntent = new Intent(MenuActivity.this, FoodMenuActivity.class);
-        //            myIntent.putExtra("tbnumber", tbnum);
+                   myIntent.putExtra("tbnumber", tbnum);
                     MenuActivity.this.startActivity(myIntent);
                 }
             });
@@ -74,7 +75,7 @@ public class MenuActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent myIntent = new Intent(MenuActivity.this, SpecialsMenuActivity.class);
-        //            myIntent.putExtra("tbnumber", tbnum);
+                   myIntent.putExtra("tbnumber", tbnum);
                     MenuActivity.this.startActivity(myIntent);
                 }
             });
@@ -83,7 +84,7 @@ public class MenuActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent myIntent = new Intent(MenuActivity.this, KidsMenuActivity.class);
-        //            myIntent.putExtra("tbnumber", tbnum);
+                   myIntent.putExtra("tbnumber", tbnum);
                     MenuActivity.this.startActivity(myIntent);
                 }
             });
@@ -97,7 +98,7 @@ public class MenuActivity extends AppCompatActivity {
                 }
             });
 
-     //   }
+        }
 
 
     }

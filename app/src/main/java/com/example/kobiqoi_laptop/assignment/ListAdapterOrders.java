@@ -1,6 +1,7 @@
 package com.example.kobiqoi_laptop.assignment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ListAdapterOrders extends ArrayAdapter<Order> {
+public class ListAdapterOrders extends ArrayAdapter<Order>  {
     DBHandler3 db;
+
     int vg;
 
     ArrayList<Order> list;
@@ -54,7 +56,7 @@ public class ListAdapterOrders extends ArrayAdapter<Order> {
 
 
         //TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
-
+        db = new DBHandler3(context);
         try {
 
             txtName.setText(list.get(position).getName());
@@ -103,7 +105,12 @@ public class ListAdapterOrders extends ArrayAdapter<Order> {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              db.deleteOrder(list.get(position));
+                int t = list.get(position).getID();
+               //int z = list.get(position);
+              db.deleteOrder(db.getOrder(t));
+                //Intent myIntent = new Intent(context, YourCartActivity.class);
+                //startActivity(myIntent);
+                ListAdapterOrders.this.notifyDataSetChanged();
             }
         });
 

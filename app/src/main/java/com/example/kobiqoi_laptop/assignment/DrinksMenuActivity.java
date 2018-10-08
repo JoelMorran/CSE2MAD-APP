@@ -55,6 +55,7 @@ public class DrinksMenuActivity extends AppCompatActivity{
     private Exception exception;
     private ImageButton helpbtn;
     private String tableid = "0";
+    private String tbnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,97 +93,101 @@ public class DrinksMenuActivity extends AppCompatActivity{
 
         //listV.setOnItemClickListener(this);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+
+            tbnum = extras.getString("tbnumber");
+
+            alcohol.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(DrinksMenuActivity.this, AlcoholMenuActivity.class);
+
+                    myIntent.putExtra("tbnumber", tbnum);
+                    DrinksMenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            softdrinks.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(DrinksMenuActivity.this, SoftDrinksMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    DrinksMenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            teacoffee.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(DrinksMenuActivity.this, TeaCoffeeActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    DrinksMenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            other.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(DrinksMenuActivity.this, OtherDrinksMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    DrinksMenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            water.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Intent intent = new Intent(DrinksMenuActivity.this, ItemActivity.class);
+
+                    //Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
+                    // Then you start a new Activity via Intent
+                    //v.get
+                    Intent intent = new Intent();
+
+                    intent.setClass(DrinksMenuActivity.this, ItemActivity.class);
+                    //intent.putExtra("position", position);
+                    // Or / And
+                    //intent.putExtra("id", id);
+
+                    //JSONArray arr = jsonObj.getJSONArray("mains");
+
+                    // String id3 = String.valueOf(id);
+                    // int id2 = Integer.parseInt(id3);
+
+                    try {
+                        sendarr = jsonObj.getJSONArray("water");
+                        String name3 = sendarr.getJSONObject(0).get("name").toString();
+                        intent.putExtra("name", name3);
+
+                        String price3 = sendarr.getJSONObject(0).get("price").toString();
+                        intent.putExtra("price", price3);
+
+                        String glutenfree3 = sendarr.getJSONObject(0).get("glutenfree").toString();
+                        intent.putExtra("glutenfree", glutenfree3);
+
+                        String description3 = sendarr.getJSONObject(0).get("description").toString();
+                        intent.putExtra("description", description3);
 
 
-        alcohol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(DrinksMenuActivity.this, AlcoholMenuActivity.class);
+                        String img3 = sendarr.getJSONObject(0).get("img_src").toString();
+                        //getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
+                        intent.putExtra("img_src", img3);
 
+                        intent.putExtra("tbnumber", tbnum);
 
-                DrinksMenuActivity.this.startActivity(myIntent);
-            }
-        });
+                    } catch (Exception e) {
+                        //Exception exception; how cant it find exception?????????????
+                        // this.exception = e; ????????????????????????????????????????????????????????????????????????????????
+                        // return new Integer(-1);
+                    }
 
-        softdrinks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(DrinksMenuActivity.this, SoftDrinksMenuActivity.class);
-
-                DrinksMenuActivity.this.startActivity(myIntent);
-            }
-        });
-
-        teacoffee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(DrinksMenuActivity.this, TeaCoffeeActivity.class);
-
-                DrinksMenuActivity.this.startActivity(myIntent);
-            }
-        });
-
-        other.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(DrinksMenuActivity.this, OtherDrinksMenuActivity.class);
-
-                DrinksMenuActivity.this.startActivity(myIntent);
-            }
-        });
-
-        water.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Intent intent = new Intent(DrinksMenuActivity.this, ItemActivity.class);
-
-                //Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
-                // Then you start a new Activity via Intent
-                //v.get
-                Intent intent = new Intent();
-
-               intent.setClass(DrinksMenuActivity.this, ItemActivity.class);
-                //intent.putExtra("position", position);
-                // Or / And
-                //intent.putExtra("id", id);
-
-                //JSONArray arr = jsonObj.getJSONArray("mains");
-
-               // String id3 = String.valueOf(id);
-               // int id2 = Integer.parseInt(id3);
-
-               try
-                {
-                    sendarr = jsonObj.getJSONArray("water");
-                    String name3 = sendarr.getJSONObject(0).get("name").toString();
-                    intent.putExtra("name", name3);
-
-                    String price3 = sendarr.getJSONObject(0).get("price").toString();
-                    intent.putExtra("price", price3);
-
-                    String glutenfree3 = sendarr.getJSONObject(0).get("glutenfree").toString();
-                    intent.putExtra("glutenfree", glutenfree3);
-
-                    String description3 = sendarr.getJSONObject(0).get("description").toString();
-                    intent.putExtra("description", description3);
-
-
-                    String img3 = sendarr.getJSONObject(0).get("img_src").toString();
-                    //getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
-                    intent.putExtra("img_src", img3);
+                    startActivity(intent);
 
                 }
-                catch (Exception e)
-                {
-                    //Exception exception; how cant it find exception?????????????
-                   // this.exception = e; ????????????????????????????????????????????????????????????????????????????????
-                    // return new Integer(-1);
-                }
+            });
 
-                startActivity(intent);
-
-            }
-        });
+        }
 
         helpbtn.setOnClickListener(new View.OnClickListener() {
             @Override

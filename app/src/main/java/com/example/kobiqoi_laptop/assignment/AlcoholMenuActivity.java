@@ -48,6 +48,7 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
     private String description2;
     private ImageButton helpbtn;
     private String tableid = "0";
+    private String tbnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,45 +135,49 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
     private Exception exception;
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 
-        Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
-        // Then you start a new Activity via Intent
-        //v.get
-        Intent intent = new Intent();
-        intent.setClass(this, ItemActivity.class);
-        //intent.putExtra("position", position);
-        // Or / And
-        //intent.putExtra("id", id);
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
 
-        //JSONArray arr = jsonObj.getJSONArray("mains");
-        String id3 = String.valueOf(id);
-        int id2 = Integer.parseInt(id3);
+            tbnum = extras.getString("tbnumber");
 
-        try
-        {
-            sendarr = jsonObj.getJSONArray("alcohol");
-            String name3 = sendarr.getJSONObject(id2).get("name").toString();
-            intent.putExtra("name", name3);
+            Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
+            // Then you start a new Activity via Intent
+            //v.get
+            Intent intent = new Intent();
+            intent.setClass(this, ItemActivity.class);
+            //intent.putExtra("position", position);
+            // Or / And
+            //intent.putExtra("id", id);
 
-            String price3 = sendarr.getJSONObject(id2).get("price").toString();
-            intent.putExtra("price", price3);
+            //JSONArray arr = jsonObj.getJSONArray("mains");
+            String id3 = String.valueOf(id);
+            int id2 = Integer.parseInt(id3);
 
-            String glutenfree3 = sendarr.getJSONObject(id2).get("glutenfree").toString();
-            intent.putExtra("glutenfree", glutenfree3);
+            try {
+                sendarr = jsonObj.getJSONArray("alcohol");
+                String name3 = sendarr.getJSONObject(id2).get("name").toString();
+                intent.putExtra("name", name3);
 
-            String description3 = sendarr.getJSONObject(id2).get("description").toString();
-            intent.putExtra("description", description3);
+                String price3 = sendarr.getJSONObject(id2).get("price").toString();
+                intent.putExtra("price", price3);
+
+                String glutenfree3 = sendarr.getJSONObject(id2).get("glutenfree").toString();
+                intent.putExtra("glutenfree", glutenfree3);
+
+                String description3 = sendarr.getJSONObject(id2).get("description").toString();
+                intent.putExtra("description", description3);
 
 
-            String img3 = sendarr.getJSONObject(id2).get("img_src").toString();
-            //getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
-            intent.putExtra("img_src", img3);
+                String img3 = sendarr.getJSONObject(id2).get("img_src").toString();
+                //getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
+                intent.putExtra("img_src", img3);
+                intent.putExtra("tbnumber", tbnum);
 
-        }
-        catch (Exception e)
-        {
-            this.exception = e;
-            // return new Integer(-1);
-        }
+
+            } catch (Exception e) {
+                this.exception = e;
+                // return new Integer(-1);
+            }
 
       /*
         String urls = "http://homepage.cs.latrobe.edu.au/jamorran/menu.json";
@@ -212,9 +217,9 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
        }*/
 
 
-        startActivity(intent);
+            startActivity(intent);
 
-
+        }
     }
 
 

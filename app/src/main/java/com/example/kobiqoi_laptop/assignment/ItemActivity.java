@@ -48,6 +48,7 @@ public class ItemActivity extends AppCompatActivity {
     private ImageView imgbtn;
     private ImageButton helpbtn;
     private String tableid = "0";
+    private String tbnum;
 
 
     @Override
@@ -164,7 +165,7 @@ public class ItemActivity extends AppCompatActivity {
         //spinner = (Spinner) findViewById(R.id.spinner);
 
         db = new DBHandler3(this);
-        db.onUpgrade(db.getReadableDatabase(),1,2);
+        //db.onUpgrade(db.getReadableDatabase(),1,2); /////////////////////////////////////////////////////////
         addtoorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -205,7 +206,7 @@ public class ItemActivity extends AppCompatActivity {
 
                     String description2 = extras.getString("description");
 
-                    String tbnum = extras.getString("tbnumber");
+                    tbnum = extras.getString("tbnumber");
 
 
                     //description.setText(description2);
@@ -217,7 +218,9 @@ public class ItemActivity extends AppCompatActivity {
 
 
                 db.addOrder(new Order(name3, description2, amount.getText().toString(), addnote2.getText().toString(),
-                               price3, cost2, "0"));
+                               price3, cost2, tbnum));
+                    //db.addOrder(new Order("GH", "GHFDGFJG", "HFHJ", "JJHHF",
+                     //       "HJGHFG", "KGJFGH", "0"));
                     //db.addOrder(new Order("tasdfatt", "asdf", "fa", "ttasdft","asdf", "tasdftt", "t0sadf"));
                     //db.addOrder(new Order("ttasdft", "tasdftt", "tasdftt", "tasdftt","tasdftt", "ttasdft", "dsft0"));
                    // db.addOrder(new Order("asdfttt", "ttsdft", "tasdftt", "ttsdaft","tsdftt", "ttsdaft", "t0"));
@@ -227,6 +230,7 @@ public class ItemActivity extends AppCompatActivity {
             }
                    // updateSpinner();
                     Intent myIntent = new Intent(ItemActivity.this, YourCartActivity.class);
+               // myIntent.putExtra("tbnumber", tbnum);
                     ItemActivity.this.startActivity(myIntent);
 
 

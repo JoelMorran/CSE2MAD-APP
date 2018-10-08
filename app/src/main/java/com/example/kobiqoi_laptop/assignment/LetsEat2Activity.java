@@ -15,6 +15,7 @@ import android.widget.Button;
 public class LetsEat2Activity extends AppCompatActivity {
 
     private Button LetsEat;
+    private String tbnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +41,18 @@ public class LetsEat2Activity extends AppCompatActivity {
        LetsEat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  Bundle extras = getIntent().getExtras();
-                //if(extras != null) {
+                Bundle extras = getIntent().getExtras();
+                if(extras != null) {
 
-                  //  String tbnum = extras.getString("tbnumber");
+                    String tbnum = extras.getString("tbnumber");
 
 
 
                 Intent myIntent = new Intent(LetsEat2Activity.this, MenuActivity.class);
-             //   myIntent.putExtra("tbnumber", tbnum);
+               myIntent.putExtra("tbnumber", tbnum);
                 LetsEat2Activity.this.startActivity(myIntent);
             }
-           // }
+            }
         });
 
         /*signUp.setOnClickListener(new View.OnClickListener() {

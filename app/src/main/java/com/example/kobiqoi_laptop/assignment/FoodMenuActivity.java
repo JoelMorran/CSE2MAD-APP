@@ -20,6 +20,7 @@ public class FoodMenuActivity extends AppCompatActivity {
     private Button other;
     private ImageButton helpbtn;
     private String tableid = "0";
+    private String tbnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,43 +45,48 @@ public class FoodMenuActivity extends AppCompatActivity {
         //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
 
-        entree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(FoodMenuActivity.this, EntreeMenuActivity.class);
+            tbnum = extras.getString("tbnumber");
 
-                FoodMenuActivity.this.startActivity(myIntent);
-            }
-        });
 
-        mains.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(FoodMenuActivity.this, MainsMenuActivity.class);
+            entree.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(FoodMenuActivity.this, EntreeMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    FoodMenuActivity.this.startActivity(myIntent);
+                }
+            });
 
-                FoodMenuActivity.this.startActivity(myIntent);
-            }
-        });
+            mains.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(FoodMenuActivity.this, MainsMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    FoodMenuActivity.this.startActivity(myIntent);
+                }
+            });
 
-        dessert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(FoodMenuActivity.this, DessertMenuActivity.class);
+            dessert.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(FoodMenuActivity.this, DessertMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    FoodMenuActivity.this.startActivity(myIntent);
+                }
+            });
 
-                FoodMenuActivity.this.startActivity(myIntent);
-            }
-        });
-
-        other.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(FoodMenuActivity.this, OtherDrinksMenuActivity.class);
-
-                FoodMenuActivity.this.startActivity(myIntent);
-            }
-        });
-
+            other.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(FoodMenuActivity.this, OtherDrinksMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    FoodMenuActivity.this.startActivity(myIntent);
+                }
+            });
+        }
 
         helpbtn.setOnClickListener(new View.OnClickListener() {
             @Override
