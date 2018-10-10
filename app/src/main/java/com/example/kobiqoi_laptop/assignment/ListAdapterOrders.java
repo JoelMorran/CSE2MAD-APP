@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import com.example.kobiqoi_laptop.assignment.YourCartActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,9 +17,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ListAdapterOrders extends ArrayAdapter<Order>  {
+
     DBHandler3 db;
 
     int vg;
+
+    YourCartActivity y = new YourCartActivity();
 
     ArrayList<Order> list;
 
@@ -107,16 +111,24 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
             public void onClick(View view) {
                 int t = list.get(position).getID();
                //int z = list.get(position);
-              db.deleteOrder(db.getOrder(t));
+                db.deleteOrder(db.getOrder(t));
+
+
+
+
                 //Intent myIntent = new Intent(context, YourCartActivity.class);
                 //startActivity(myIntent);
-                ListAdapterOrders.this.notifyDataSetChanged();
+                //ListAdapterOrders.this.notifyDataSetChanged();
+
             }
         });
 
         return itemView;
 
     }
+
+
+
 
 }
 

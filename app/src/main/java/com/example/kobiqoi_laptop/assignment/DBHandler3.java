@@ -131,11 +131,13 @@ public class DBHandler3 extends SQLiteOpenHelper {
             db.close();
         }
 
-    public void deleteOrder(Order order) {
+    public int deleteOrder(Order order) {
+
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_ORDERS, KEY_ID + " = ?",
+        int result =   db.delete(TABLE_ORDERS, KEY_ID + " = ?",
                 new String[]{String.valueOf(order.getID())});
         db.close();
+       return result;
     }
 
         // Getting student Count

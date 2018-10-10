@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public class YourCartActivity extends AppCompatActivity {
     private Spinner spinner;
 
-    private ListView listV;
+    ListView listV;
 
     private ListAdapterOrders adapter;
 
@@ -27,6 +28,10 @@ public class YourCartActivity extends AppCompatActivity {
 
     private Button emptycart;
     private Button checkout;
+    DBHandler3 db;
+    private TextView items;
+    private TextView subtotal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,8 @@ public class YourCartActivity extends AppCompatActivity {
         updateSpinner();
         emptycart = (Button) findViewById(R.id.emptycart);
         checkout = (Button) findViewById(R.id.checkout);
-
+        items = (TextView) findViewById(R.id.items);
+        subtotal = (TextView) findViewById(R.id.subtotal);
         //signIn = (Button) findViewById(R.id.signIn);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
@@ -53,13 +59,33 @@ public class YourCartActivity extends AppCompatActivity {
 
 
         listV=(ListView)findViewById(R.id.listv);
-        DBHandler3 db = new DBHandler3(getApplicationContext());
+        db = new DBHandler3(getApplicationContext());
 
         listItems =  db.getAllOrders();
 
 
         adapter=new ListAdapterOrders(getApplicationContext(), R.layout.list_layout_orders2,R.id.txtname,listItems);
         listV.setAdapter(adapter);
+
+        ArrayList<Order> orders = db.getAllOrders();
+
+        double total = 0;
+        double t = 0;
+        int count = 0;
+
+        for (Order cn : orders)
+        {
+            ++count;
+            Double tt = Double.parseDouble(cn.getPrice());
+            t = tt;
+            total = t + total;
+
+        }
+        String s = String.valueOf(total);
+        String ss = String.valueOf(count);
+        items.setText(ss);
+        subtotal.setText(s);
+
 
         //listV.setOnItemClickListener(this);
     emptycart.setOnClickListener(new View.OnClickListener() {
@@ -156,5 +182,7 @@ public class YourCartActivity extends AppCompatActivity {
         //createlog();
 
     }
+
+
 
 }

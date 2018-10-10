@@ -74,4 +74,25 @@
         android:layout_marginBottom="76dp"
         app:layout_constraintBottom_toTopOf="@+id/emptycart" />
 
+    <TextView
+        android:id="@+id/items"
+        android:layout_width="198dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="32dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/emptycart"
+        app:layout_constraintEnd_toStartOf="@+id/subtotal"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/subtotal"
+        android:layout_width="198dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="54dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/checkout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/items" />
+
 </android.support.constraint.ConstraintLayout>

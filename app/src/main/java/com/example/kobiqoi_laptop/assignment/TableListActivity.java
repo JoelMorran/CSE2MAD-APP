@@ -1,5 +1,6 @@
 package com.example.kobiqoi_laptop.assignment;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -112,6 +113,7 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
 
         try
         {
+
             startLockTask();
 
             intent.putExtra("tbnumber", listItems.get(position).getTablenumber());
@@ -145,6 +147,12 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
 
 
     }
+
+  /* @Override
+    public void startLockTask()
+    {
+
+    }*/
     DBHandler2 db;
 
     class RetrieveTable extends AsyncTask<String, Void, Integer> {
