@@ -9,8 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class CheckoutPaymentMethodActivity extends AppCompatActivity {
 
@@ -19,6 +22,8 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
     private RadioButton paycreditcard;
     private RadioButton paydebit;
     private RadioButton paycash;
+    DBHandler3 db;
+    private ImageButton helpbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,8 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
         paycreditcard = (RadioButton) findViewById(R.id.paycreditcard);
         paydebit = (RadioButton) findViewById(R.id.paydebit);
         paycash = (RadioButton) findViewById(R.id.paycash);
-        //signUp = (Button) findViewById(R.id.signUp);
+
+        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
@@ -76,7 +82,7 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
                     CheckoutPaymentMethodActivity.this.startActivity(myIntent);
                 }
                 else if(paycash.isChecked()) {
-
+                   sendBroadcast();
 
                }
                else{
@@ -85,14 +91,14 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
             }
         });
 
-        /*signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View view) {
 
-                SignInSignUpActivity.this.startActivity(myIntent);
-            }
-        });*/
+                                       //Log.d("","help");
+                                       sendBroadcast();
+                                   }
+                               });
 
     }
 
@@ -154,5 +160,24 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private void sendBroadcast() {
+        db = new DBHandler3(getApplicationContext());
+        ArrayList<Order> orders = db.getAllOrders();
+        String s = "";
+        for (Order cn : orders)
+        {
+
+            s = (cn.getTableid());
+
+
+        }
+        Intent intent = new Intent();
+        intent.setAction("com.example.kobiqoi_laptop.assignment");
+        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("tableid", "Table " + s + " needs assistance \n"  );
+        Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
+        sendBroadcast(intent);
     }
 }

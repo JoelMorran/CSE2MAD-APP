@@ -19,7 +19,7 @@
         app:titleTextColor="@android:color/white"
         tools:ignore="ResourceCycle"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="907dp" />
+        tools:layout_editor_absoluteY="0dp" />
 
     <ListView
         android:id="@+id/listv"
@@ -94,5 +94,14 @@
         app:layout_constraintBottom_toTopOf="@+id/checkout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/items" />
+
+    <ImageButton
+        android:id="@+id/helpbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff5722"
+        android:src="@drawable/ic_record_voice_over_white_48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="792dp" />
 
 </android.support.constraint.ConstraintLayout>

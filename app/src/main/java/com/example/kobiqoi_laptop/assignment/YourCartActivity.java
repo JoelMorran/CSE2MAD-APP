@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class YourCartActivity extends AppCompatActivity {
     DBHandler3 db;
     private TextView items;
     private TextView subtotal;
+    private ImageButton helpbtn;
 
 
     @Override
@@ -44,7 +46,8 @@ public class YourCartActivity extends AppCompatActivity {
         checkout = (Button) findViewById(R.id.checkout);
         items = (TextView) findViewById(R.id.items);
         subtotal = (TextView) findViewById(R.id.subtotal);
-        //signIn = (Button) findViewById(R.id.signIn);
+
+        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
@@ -197,6 +200,7 @@ public class YourCartActivity extends AppCompatActivity {
 
 
     private void sendBroadcast() {
+        db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
         String s = "";
         for (Order cn : orders)

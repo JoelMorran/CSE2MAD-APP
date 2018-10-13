@@ -96,11 +96,11 @@
             android:textColorHint="@android:color/black" />
 
         <Button
-            android:id="@+id/createAccount"
+            android:id="@+id/paynow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ff5722"
-            android:text="Create Account"
+            android:text="Pay Now"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="20sp" />

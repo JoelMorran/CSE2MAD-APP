@@ -7,13 +7,39 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class CreditCardDetailsActivity extends AppCompatActivity {
+
+    private Button paynow;
+    private EditText nameoncard;
+    private EditText cardnumber;
+    private EditText expiry;
+    private EditText cvc;
+    DBHandler3 db;
+    private ImageButton helpbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credit_card_details);
+        paynow = (Button) findViewById(R.id.paynow);
+        nameoncard = (EditText) findViewById(R.id.nameoncard);
+        cardnumber = (EditText) findViewById(R.id.cardnumber);
+        expiry = (EditText) findViewById(R.id.expiry);
+        cvc = (EditText) findViewById(R.id.cvc);
+
+        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
 
         //signIn = (Button) findViewById(R.id.signIn);
         //signUp = (Button) findViewById(R.id.signUp);
@@ -35,16 +61,290 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
 
                 SignInSignUpActivity.this.startActivity(myIntent);
             }
-        });
+        });*/
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        paynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
+                if(cardnumber.getText().toString().length() >= 14 && cardnumber.getText().toString().length() <= 19 &&
+                        expiry.getText().toString().length() == 5 && nameoncard.getText().toString().length() >= 1
+                        && cvc.getText().toString().length() >= 3 && cvc.getText().toString().length() <= 4)
+                {
+                    //String check = tablesize.getText().toString();
+                    //int check2 = Integer.parseInt(check);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+
+
+                    Intent myIntent = new Intent(CreditCardDetailsActivity.this, Checkout2Activity.class);
+
+                    CreditCardDetailsActivity.this.startActivity(myIntent);
+
+                    cardnumber.getText().clear();
+                    expiry.getText().clear();
+                    cvc.getText().clear();
+                    nameoncard.getText().clear();
+
+                    nameoncard.setFocusable(true);
+                    nameoncard.requestFocus();
+
+                }
+                else
+                {  // if first box error  focus  & message
+                    Animation shake = AnimationUtils.loadAnimation(CreditCardDetailsActivity.this, R.anim.shake);
+                    if(!(nameoncard.getText().toString().length() >= 1))
+                    {  // if both error focus 1st and message both
+                        if(!(nameoncard.getText().toString().length() >= 1 &&  cardnumber.getText().toString().length() >= 1))
+                        {
+                            if(!(expiry.getText().toString().length() == 5)) {
+                                if(!(cvc.getText().toString().length() >= 3 && cvc.getText().toString().length() <= 4)){
+                                    //logic checked check
+                                    nameoncard.startAnimation(shake);
+                                    nameoncard.setFocusable(true);
+                                    nameoncard.requestFocus();
+                                    nameoncard.getText().clear();
+                                    nameoncard.setError("Please enter a valid name on card > 0");
+
+                                        cardnumber.startAnimation(shake);
+                                        cardnumber.getText().clear();
+                                        cardnumber.setError("Please enter a valid card number between 14 and 19 digits");
+
+                                      expiry.startAnimation(shake);
+                                        expiry.getText().clear();
+                                        expiry.setError("Please enter a valid expiry");
+
+                                    cvc.startAnimation(shake);
+                                    cvc.getText().clear();
+                                    cvc.setError("Please enter a vaild cvc between 3 and 4 digits");
+                                }
+                                else
+                                {
+                                    //logic checked check
+                                    nameoncard.startAnimation(shake);
+                                    nameoncard.setFocusable(true);
+                                    nameoncard.requestFocus();
+                                    nameoncard.getText().clear();
+                                    nameoncard.setError("Please enter a valid name on card > 0");
+
+                                    cardnumber.startAnimation(shake);
+                                    cardnumber.getText().clear();
+                                    cardnumber.setError("Please enter a valid card number between 14 and 19 digits");
+
+                                    expiry.startAnimation(shake);
+                                    expiry.getText().clear();
+                                    expiry.setError("Please enter a valid expiry");
+                                }
+                            }
+                            else if(!(cvc.getText().toString().length() >= 3 && cvc.getText().toString().length() <= 4 )){
+                                //logic checked check
+                                nameoncard.startAnimation(shake);
+                                nameoncard.setFocusable(true);
+                                nameoncard.requestFocus();
+                                nameoncard.getText().clear();
+                                nameoncard.setError("Please enter a valid name on card > 0");
+
+                                cardnumber.startAnimation(shake);
+                                cardnumber.getText().clear();
+                                cardnumber.setError("Please enter a valid card number between 14 and 19 digits");
+
+                                cvc.startAnimation(shake);
+                                cvc.getText().clear();
+                                cvc.setError("Please enter a vaild cvc between 3 and 4 digits");
+
+                            }
+                            else{
+                                //logic checked check
+                                nameoncard.startAnimation(shake);
+                                nameoncard.setFocusable(true);
+                                nameoncard.requestFocus();
+                                nameoncard.getText().clear();
+                                nameoncard.setError("Please enter a valid name on card > 0");
+
+                                cardnumber.startAnimation(shake);
+                                cardnumber.getText().clear();
+                                cardnumber.setError("Please enter a valid card number between 14 and 19 digits");
+
+
+                            }
+                        }
+
+                        //first error only focus and message
+                        else if(!(expiry.getText().toString().length() == 5))
+                        {
+
+                            if(!(cvc.getText().toString().length() >= 3 && cvc.getText().toString().length() <= 4 )){
+                                //logic checked check
+                                nameoncard.startAnimation(shake);
+                                nameoncard.setFocusable(true);
+                                nameoncard.requestFocus();
+                                nameoncard.getText().clear();
+                                nameoncard.setError("Please enter a valid name on card > 0");
+
+                                expiry.startAnimation(shake);
+                                expiry.getText().clear();
+                                expiry.setError("Please enter a valid expiry");
+
+                                cvc.startAnimation(shake);
+                                cvc.getText().clear();
+                                cvc.setError("Please enter a vaild cvc between 3 and 4 digits");
+                            }
+                            else
+                            {
+                                //logic checked check
+                                nameoncard.startAnimation(shake);
+                                nameoncard.setFocusable(true);
+                                nameoncard.requestFocus();
+                                nameoncard.getText().clear();
+                                nameoncard.setError("Please enter a valid name on card > 0");
+
+                                expiry.startAnimation(shake);
+                                expiry.getText().clear();
+                                expiry.setError("Please enter a valid expiry");
+
+                            }
+
+                        }
+                        else if(!(cvc.getText().toString().length() >= 3 && cvc.getText().toString().length() <= 4 ))
+                        {
+                            //logic checked check
+                            nameoncard.startAnimation(shake);
+                            nameoncard.setFocusable(true);
+                            nameoncard.requestFocus();
+                            nameoncard.getText().clear();
+                            nameoncard.setError("Please enter a valid name on card > 0");
+
+                            cvc.startAnimation(shake);
+                            cvc.getText().clear();
+                            cvc.setError("Please enter a vaild cvc between 3 and 4 digits");
+
+                        }
+                        else
+                        {
+                            //logic checked check
+                            nameoncard.startAnimation(shake);
+                            nameoncard.setFocusable(true);
+                            nameoncard.requestFocus();
+                            nameoncard.getText().clear();
+                            nameoncard.setError("Please enter a valid name on card > 0");
+                        }
+
+                    } // second only focus and message
+
+                    else if(!( cardnumber.getText().toString().length() >= 14 && cardnumber.getText().toString().length() <= 19 ))
+                    {
+                        if(!(expiry.getText().toString().length() == 5)) {
+                            if(!(cvc.getText().toString().length() >= 3 && cvc.getText().toString().length() <= 4 )){
+                                //logic checked check
+
+
+                                    cardnumber.startAnimation(shake);
+                                    cardnumber.setFocusable(true);
+                                    cardnumber.requestFocus();
+                                    cardnumber.getText().clear();
+                                cardnumber.setError("Please enter a valid card number between 14 and 19 digits");
+
+
+                                expiry.startAnimation(shake);
+                                expiry.getText().clear();
+                                expiry.setError("Please enter a valid expiry");
+
+
+                                cvc.startAnimation(shake);
+                                cvc.getText().clear();
+                                cvc.setError("Please enter a vaild cvc between 3 and 4 digits");
+                            }
+                            else{
+                                //logic checked check
+
+                                cardnumber.startAnimation(shake);
+                                cardnumber.setFocusable(true);
+                                cardnumber.requestFocus();
+                                cardnumber.getText().clear();
+                                cardnumber.setError("Please enter a valid card number between 14 and 19 digits");
+
+                                expiry.startAnimation(shake);
+                                expiry.getText().clear();
+                                expiry.setError("Please enter a valid expiry");
+
+
+
+                            }
+                        }
+                        else if(!(cvc.getText().toString().length() >= 3 && cvc.getText().toString().length() <= 4 )){
+                            //logic checked check
+
+                            cardnumber.startAnimation(shake);
+                            cardnumber.setFocusable(true);
+                            cardnumber.requestFocus();
+                            cardnumber.getText().clear();
+                            cardnumber.setError("Please enter a valid card number between 14 and 19 digits");
+
+
+                            cvc.startAnimation(shake);
+                            cvc.getText().clear();
+                            cvc.setError("Please enter a vaild cvc between 3 and 4 digits");
+                        }
+                        else{
+                            //logic checked check
+
+                            cardnumber.startAnimation(shake);
+                            cardnumber.setFocusable(true);
+                            cardnumber.requestFocus();
+                            cardnumber.getText().clear();
+                            cardnumber.setError("Please enter a valid card number between 14 and 19 digits");
+
+                        }
+                    }
+                    else if(!(expiry.getText().toString().length() == 5)) {
+                        if(!(cvc.getText().toString().length() >= 3 && cvc.getText().toString().length() <= 4 )){
+                            //logic checked check
+
+                                expiry.startAnimation(shake);
+                                expiry.setFocusable(true);
+                                expiry.requestFocus();
+                                expiry.getText().clear();
+                            expiry.setError("Please enter a valid expiry");
+
+
+                            cvc.startAnimation(shake);
+                            cvc.getText().clear();
+                            cvc.setError("Please enter a vaild cvc between 3 and 4 digits");
+                        }
+                        else
+                        {
+                            //logic checked check
+
+                                expiry.startAnimation(shake);
+                                expiry.setFocusable(true);
+                                expiry.requestFocus();
+                                expiry.getText().clear();
+                            expiry.setError("Please enter a valid expiry");
+
+                        }
+                    }
+                    else
+                    {
+                        //logic checked check
+                        cvc.startAnimation(shake);
+                        cvc.setFocusable(true);
+                        cvc.requestFocus();
+                        cvc.getText().clear();
+                        cvc.setError("Please enter a vaild cvc between 3 and 4 digits");
+                    }
+
+
+                }
+
             }
-        });*/
+        });
+
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Log.d("","help");
+                sendBroadcast();
+            }
+        });
 
     }
 
@@ -106,5 +406,25 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+
+    private void sendBroadcast() {
+        db = new DBHandler3(getApplicationContext());
+        ArrayList<Order> orders = db.getAllOrders();
+        String s = "";
+        for (Order cn : orders)
+        {
+
+            s = (cn.getTableid());
+
+
+        }
+        Intent intent = new Intent();
+        intent.setAction("com.example.kobiqoi_laptop.assignment");
+        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("tableid", "Table " + s + " needs assistance \n"  );
+        Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
+        sendBroadcast(intent);
     }
 }

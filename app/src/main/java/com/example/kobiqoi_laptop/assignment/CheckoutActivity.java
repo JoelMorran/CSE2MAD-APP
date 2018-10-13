@@ -54,7 +54,8 @@ public class CheckoutActivity extends AppCompatActivity {
         total2 = (TextView) findViewById(R.id.total2);
         gst = (TextView) findViewById(R.id.GST);
         placeorder = (Button) findViewById(R.id.placeorder);
-        //signIn = (Button) findViewById(R.id.signIn);
+
+        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
@@ -190,6 +191,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
     private void sendBroadcast() {
+        db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
         String s = "";
         for (Order cn : orders)
