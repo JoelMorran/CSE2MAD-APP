@@ -9,10 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class CheckoutPaymentMethodActivity extends AppCompatActivity {
 
     private Button placeorder;
+    private RadioButton paypaypal;
+    private RadioButton paycreditcard;
+    private RadioButton paydebit;
+    private RadioButton paycash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +26,10 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout_payment_method);
 
         placeorder = (Button) findViewById(R.id.placeorder);
+        paypaypal = (RadioButton) findViewById(R.id.paypaypal);
+        paycreditcard = (RadioButton) findViewById(R.id.paycreditcard);
+        paydebit = (RadioButton) findViewById(R.id.paydebit);
+        paycash = (RadioButton) findViewById(R.id.paycash);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
@@ -35,24 +45,43 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
        placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-         /*       if()
+                /*if(paypaypal.getCheckedRadioButtonId()==-1)
+                {
+                    Toast.makeText(getApplicationContext(), "Please select Gender", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    // get selected radio button from radioGroup
+                    int selectedId = gender.getCheckedRadioButtonId();
+                    // find the radiobutton by returned id
+                    selectedRadioButton = (RadioButton)findViewById(selectedId);
+                    Toast.makeText(getApplicationContext(), selectedRadioButton.getText().toString()+" is selected", Toast.LENGTH_SHORT).show();
+                }*/
+               if(paypaypal.isChecked())
                 {
                 Intent myIntent = new Intent(CheckoutPaymentMethodActivity.this, PayPalActivity.class);
 
                 CheckoutPaymentMethodActivity.this.startActivity(myIntent);
             }
-            else if()
+            else if(paycreditcard.isChecked())
                 {
                     Intent myIntent = new Intent(CheckoutPaymentMethodActivity.this, CreditCardDetailsActivity.class);
 
                     CheckoutPaymentMethodActivity.this.startActivity(myIntent);
                 }
-                else
+                else if(paydebit.isChecked())
                 {
-                   // Intent myIntent = new Intent(CheckoutPaymentMethodActivity.this, LoginPageActivity.class);
+                    Intent myIntent = new Intent(CheckoutPaymentMethodActivity.this, CreditCardDetailsActivity.class);
 
-                   // CheckoutPaymentMethodActivity.this.startActivity(myIntent);
-                }*/
+                    CheckoutPaymentMethodActivity.this.startActivity(myIntent);
+                }
+                else if(paycash.isChecked()) {
+
+
+               }
+               else{
+                   Toast.makeText(getApplicationContext(), "Please select Payment option", Toast.LENGTH_SHORT).show();
+               }
             }
         });
 

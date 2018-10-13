@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +104,17 @@ public class YourCartActivity extends AppCompatActivity {
                 YourCartActivity.this.startActivity(myIntent);
             }
         });
+
+
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Log.d("","help");
+                sendBroadcast();
+            }
+        });
+
     }
 
     @Override
@@ -181,6 +193,25 @@ public class YourCartActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
         //createlog();
 
+    }
+
+
+    private void sendBroadcast() {
+        ArrayList<Order> orders = db.getAllOrders();
+        String s = "";
+        for (Order cn : orders)
+        {
+
+            s = (cn.getTableid());
+
+
+        }
+        Intent intent = new Intent();
+        intent.setAction("com.example.kobiqoi_laptop.assignment");
+        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("tableid", "Table " + s + " needs assistance \n"  );
+        Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
+        sendBroadcast(intent);
     }
 
 

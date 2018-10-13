@@ -39,33 +39,40 @@
         app:layout_constraintVertical_bias="0.639"
         tools:layout_editor_absoluteX="0dp">
 
-        <RadioButton
-            android:id="@+id/paypaypal"
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PAY WITH PAYPAL"
-            android:textSize="36sp" />
+            android:layout_height="match_parent" >
 
-        <RadioButton
-            android:id="@+id/paycreditcard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PAY WITH CREDIT CARD"
-            android:textSize="36sp" />
+            <RadioButton
+                android:id="@+id/paypaypal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PAY WITH PAYPAL"
+                android:textSize="36sp" />
 
-        <RadioButton
-            android:id="@+id/paydebit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PAY WITH DEBIT CARD"
-            android:textSize="36sp" />
+            <RadioButton
+                android:id="@+id/paycreditcard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PAY WITH CREDIT CARD"
+                android:textSize="36sp" />
 
-        <RadioButton
-            android:id="@+id/paycash"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PAY WITH CASH"
-            android:textSize="36sp" />
+            <RadioButton
+                android:id="@+id/paydebit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PAY WITH DEBIT CARD"
+                android:textSize="36sp" />
+
+            <RadioButton
+                android:id="@+id/paycash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PAY WITH CASH"
+                android:textSize="36sp" />
+
+        </RadioGroup>
+
     </LinearLayout>
 
     <Button
@@ -74,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:background="#ff5722"
-        android:text="PLACE ORDER"
+        android:text="PAY"
         android:textColor="@android:color/white"
         android:textSize="46sp"
         app:layout_constraintBottom_toTopOf="@+id/helpbtn"
