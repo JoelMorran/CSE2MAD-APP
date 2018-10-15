@@ -4,6 +4,161 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Checkout2Activity">
+    android:background="#FFB833"
+    tools:context=".OrderHistoryActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/mytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff5722"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
+            android:id="@+id/FoodPlace"
+            android:layout_width="784dp"
+            android:layout_height="wrap_content"
+            android:text="Food Place"
+            android:textAlignment="center"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123 Latrobe Street, Victoria, Australia"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/orderitemlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order Item List"
+            android:textSize="20sp" />
+
+        <ListView
+            android:id="@+id/listV"
+            android:layout_width="784dp"
+            android:layout_height="225dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="1215dp">
+
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/items"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/GST"
+                app:layout_constraintEnd_toStartOf="@+id/subtotal"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/subtotal"
+                android:layout_width="568dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/GST"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/GST"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="textEnd"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/total2"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/total2"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="textEnd"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/placeorder" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:background="#ff5722"
+            android:text="ORDER CONFIRMATION"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="70sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:text="Order ID: #2"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:background="#ff5722"
+            android:text="ORDER STATUS"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="70sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:text="ORDER IN PROGRESS"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="70sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/helpbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff5722"
+        android:src="@drawable/ic_record_voice_over_white_48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="792dp" />
 
 </android.support.constraint.ConstraintLayout>

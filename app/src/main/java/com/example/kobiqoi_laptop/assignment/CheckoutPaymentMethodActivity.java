@@ -82,7 +82,12 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
                     CheckoutPaymentMethodActivity.this.startActivity(myIntent);
                 }
                 else if(paycash.isChecked()) {
+
                    sendBroadcast();
+
+                   Intent myIntent = new Intent(CheckoutPaymentMethodActivity.this, Checkout2Activity.class);
+
+                   CheckoutPaymentMethodActivity.this.startActivity(myIntent);
 
                }
                else{

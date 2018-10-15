@@ -1,21 +1,66 @@
 package com.example.kobiqoi_laptop.assignment;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class Checkout3Activity extends AppCompatActivity {
+
+    private Button finish;
+    private ImageButton helpbtn;
+
+
+    ListView listV;
+
+    private ListAdapterCheckout adapter;
+
+    private ArrayList<Order> listItems;
+
+    private Button emptycart;
+    private Button checkout;
+    DBHandler3 db;
+    private TextView items;
+    private TextView subtotal;
+    private TextView total2;
+    private TextView gst;
+
+
+    private int progressStatus = 0;
+
+    private Handler handler = new Handler();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout3);
 
-        //signIn = (Button) findViewById(R.id.signIn);
+
+
+        checkout = (Button) findViewById(R.id.checkout);
+        items = (TextView) findViewById(R.id.items);
+        subtotal = (TextView) findViewById(R.id.subtotal);
+        total2 = (TextView) findViewById(R.id.total2);
+        gst = (TextView) findViewById(R.id.GST);
+        finish = (Button) findViewById(R.id.finish);
+
+        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
@@ -28,25 +73,101 @@ public class Checkout3Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+
+        listV = (ListView) findViewById(R.id.listV);
+        db = new DBHandler3(getApplicationContext());
+
+        listItems = db.getAllOrders();
+
+
+        adapter = new ListAdapterCheckout(getApplicationContext(), R.layout.list_layout_checkout, R.id.txtname, listItems);
+        listV.setAdapter(adapter);
+
+        ArrayList<Order> orders = db.getAllOrders();
+
+        double total = 0;
+        double t = 0;
+        int count = 0;
+
+        for (Order cn : orders) {
+            ++count;
+            Double tt = Double.parseDouble(cn.getPrice());
+            t = tt;
+            total = t + total;
+
+        }
+        double gsts = 10 * (total / 100);
+        double subt = total - (10 * (total / 100));
+        double x = total;
+        String s = String.valueOf(x);
+        String k = String.valueOf(x);
+        String ss = String.valueOf(count);
+        String sss = String.valueOf(subt);
+        String ssss = String.valueOf(gsts);
+        items.setText("Quantity: " + ss);
+        subtotal.setText("Subtotal: " + sss);
+
+        gst.setText("GST: " + ssss);
+        total2.setText("Total: " + k);
+
+        /*placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
+                Intent myIntent = new Intent(CheckoutActivity.this, CheckoutPaymentMethodActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
-            }
-        });
-
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
-
-                SignInSignUpActivity.this.startActivity(myIntent);
+                CheckoutActivity.this.startActivity(myIntent);
             }
         });*/
 
+
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Log.d("","help");
+                sendBroadcast();
+            }
+        });
+
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                        go();
+
+            }
+        });
+
+
+        //progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        // Start long running operation in a background thread
+        new Thread(new Runnable() {
+            public void run() {
+                while (progressStatus < 60) {
+                    progressStatus += 1;
+                    // Update the progress bar and display the
+                    //current value in the text view
+                    handler.post(new Runnable() {
+                        public void run() {
+                            //progressBar.setProgress(progressStatus);
+
+                        }
+                    });
+                    try {
+                        // Sleep for 200 milliseconds.
+                        Thread.sleep(15000); ///900000
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                go();
+            }
+        }).start();
+
+
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -101,11 +222,36 @@ public class Checkout3Activity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
 
+
+    private void sendBroadcast() {
+        db = new DBHandler3(getApplicationContext());
+        ArrayList<Order> orders = db.getAllOrders();
+        String s = "";
+        for (Order cn : orders)
+        {
+
+            s = (cn.getTableid());
+
+
+        }
+        Intent intent = new Intent();
+        intent.setAction("com.example.kobiqoi_laptop.assignment");
+        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("tableid", "Table " + s + " needs assistance \n"  );
+        Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
+        sendBroadcast(intent);
+    }
+    private void go() {
+        Intent myIntent = new Intent(Checkout3Activity.this, LetsEat2Activity.class);
+
+        Checkout3Activity.this.startActivity(myIntent);
+    }
 
 }
