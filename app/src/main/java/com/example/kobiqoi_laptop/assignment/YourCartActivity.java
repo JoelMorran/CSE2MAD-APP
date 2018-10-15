@@ -1,6 +1,8 @@
 package com.example.kobiqoi_laptop.assignment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -8,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,14 +37,16 @@ public class YourCartActivity extends AppCompatActivity {
     private TextView items;
     private TextView subtotal;
     private ImageButton helpbtn;
+    int progressStatus = 0;
 
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
         spinner = (Spinner) findViewById(R.id.spinner3);
-        updateSpinner();
+
         emptycart = (Button) findViewById(R.id.emptycart);
         checkout = (Button) findViewById(R.id.checkout);
         items = (TextView) findViewById(R.id.items);
@@ -85,8 +90,8 @@ public class YourCartActivity extends AppCompatActivity {
             total = t + total;
 
         }
-        String s = String.valueOf(total);
-        String ss = String.valueOf(count);
+      String s = String.valueOf(total);
+         String ss = String.valueOf(count);
         items.setText(ss);
         subtotal.setText(s);
 
@@ -95,6 +100,22 @@ public class YourCartActivity extends AppCompatActivity {
     emptycart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                db.allDeleteOrder();
+               // adapter.notifyDataSetChanged();
+               // adapter.notifyDataSetInvalidated();
+                //listV.invalidateViews();
+                //Intent myIntent = new Intent(YourCartActivity.this, YourCartActivity.class);
+
+               // YourCartActivity.this.startActivity(myIntent);
+
+                //listV.destroyDrawingCache();
+                //listV.setVisibility(ListView.INVISIBLE);
+                //listV.setVisibility(ListView.VISIBLE);
+
+                listItems =  db.getAllOrders();
+                adapter=new ListAdapterOrders(getApplicationContext(), R.layout.list_layout_orders2,R.id.txtname,listItems);
+                listV.setAdapter(adapter);
 
             }
         });
@@ -118,7 +139,79 @@ public class YourCartActivity extends AppCompatActivity {
             }
         });
 
-    }
+        new Thread(new Runnable() {
+            public void run() {
+                while (progressStatus < 1023) {
+                    progressStatus += 1;
+                    // Update the progress bar and display the
+                    //current value in the text view
+                    handler.post(new Runnable() {
+                        public void run() {
+                           // progressBar.setProgress(progressStatus);
+
+                            ArrayList<Order> orders = db.getAllOrders();
+
+                            double total = 0;
+                            double t = 0;
+                            int count = 0;
+
+                            for (Order cn : orders) {
+                                ++count;
+                                Double tt = Double.parseDouble(cn.getPrice());
+                                t = tt;
+                                total = t + total;
+
+                            }
+                            String s = String.valueOf(total);
+                            String ss = String.valueOf(count);
+                            items.setText(ss);
+                            subtotal.setText(s);
+
+                        }
+                    });
+                    try {
+                        // Sleep for 200 milliseconds.
+                        Thread.sleep(800); ///900000
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //go();
+            }
+        }).start();
+
+        //listV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       //     @Override
+      //      public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+/*
+                listV.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ArrayList<Order> orders = db.getAllOrders();
+
+                        double total = 0;
+                        double t = 0;
+                        int count = 0;
+
+                        for (Order cn : orders) {
+                            ++count;
+                            Double tt = Double.parseDouble(cn.getPrice());
+                            t = tt;
+                            total = t + total;
+
+                        }
+                        String s = String.valueOf(total);
+                        String ss = String.valueOf(count);
+                        items.setText(ss);
+                        subtotal.setText(s);
+                    }
+                });*/
+
+
+            }
+        //});
+
+   // }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListAdapterOrders extends ArrayAdapter<Order>  {
 
@@ -28,6 +29,7 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
 
     Context context;
 
+
     public ListAdapterOrders(Context context, int vg, int id, ArrayList<Order> list){
 
         super(context,vg, id,list);
@@ -37,6 +39,8 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
         this.vg=vg;
 
         this.list=list;
+
+
 
     }
 
@@ -113,12 +117,17 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
                //int z = list.get(position);
                 db.deleteOrder(db.getOrder(t));
 
+               // ListAdapterOrders.
+
+               /// list.get(position).remove(view);
 
 
+                ListAdapterOrders.this.remove(list.get(position));
 
                 //Intent myIntent = new Intent(context, YourCartActivity.class);
                 //startActivity(myIntent);
                 //ListAdapterOrders.this.notifyDataSetChanged();
+                //ListAdapterOrders.this.invalidateViews();
 
             }
         });
@@ -126,6 +135,9 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
         return itemView;
 
     }
+
+
+
 
 
 
