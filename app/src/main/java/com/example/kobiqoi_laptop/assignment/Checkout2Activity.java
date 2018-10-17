@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import org.json.JSONException;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import android.content.Context;
+
+
+
 
 public class Checkout2Activity extends AppCompatActivity {
 
@@ -43,6 +62,16 @@ public class Checkout2Activity extends AppCompatActivity {
     private int progressStatus = 0;
 
     private Handler handler = new Handler();
+    String TAG = "Checkout2Activity";
+
+    private Context parent;
+    private FileInputStream fileIn;
+    private FileOutputStream fileOut;
+    private ObjectInputStream objectIn;
+    private ObjectOutputStream objectOut;
+    private Object outputObject;
+    private String filePath;
+
 
 
 
@@ -142,6 +171,7 @@ public class Checkout2Activity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         public void run() {
                             progressBar.setProgress(progressStatus);
+                            Log.d (TAG, "happy time");
 
                         }
                     });
@@ -155,6 +185,55 @@ public class Checkout2Activity extends AppCompatActivity {
                 go();
             }
         }).start();
+
+        int count3 = 0;
+        String count2 = "1";
+        readObject("test.json");
+        for(){
+
+        }
+
+        JSONObject Obj = new JSONObject();
+        JSONArray orderArr = new JSONArray();
+        try{
+
+            for(Order or : orders){
+                JSONObject item = new JSONObject();
+                item.put("id", or.getID());
+                item.put("name", or.getName());
+                item.put("extra", or.getExtra());
+                item.put("amount", or.getAmount());
+                item.put("note", or.getNote());
+                item.put("price", or.getPrice());
+                item.put("cost", or.getCost());
+                item.put("tableid", or.getTableid());
+                orderArr.put(item);
+
+            }
+
+        Obj.put(count2, orderArr);
+
+
+        }
+        catch (JSONException e)
+        {
+            Log.e(TAG, "JSONException: " + e.getMessage());
+
+        }
+
+        try{
+            Log.d(TAG, Obj.toString(4));
+            if(Obj != null) {
+                writeObject(Obj, "test.json");
+
+
+                readObject("test.json");
+                Log.e(TAG,"is nto null");
+            }
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
 
 
 
@@ -245,5 +324,59 @@ public class Checkout2Activity extends AppCompatActivity {
 
                 Checkout2Activity.this.startActivity(myIntent);
     }
+
+
+
+
+
+
+
+
+        public Object readObject(String fileName){
+            try {
+                filePath = this.getFilesDir().getAbsolutePath() + "/" + fileName;
+                fileIn = new FileInputStream(filePath);
+                objectIn = new ObjectInputStream(fileIn);
+                outputObject = objectIn.readObject();
+                Log.d (TAG, outputObject.toString() + "I R FILE");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                if (objectIn != null) {
+                    try {
+                        objectIn.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return outputObject;
+        }
+
+        public void writeObject(Object inputObject, String fileName){
+            try {
+                filePath = this.getFilesDir().getAbsolutePath() + "/" + fileName;
+                fileOut = new FileOutputStream(filePath);
+                objectOut = new ObjectOutputStream(fileOut);
+                objectOut.writeObject(inputObject);
+                fileOut.getFD().sync();
+                Log.d (TAG, inputObject.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (objectOut != null) {
+                    try {
+                        objectOut.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
 
 }
