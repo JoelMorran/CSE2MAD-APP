@@ -83,7 +83,7 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int t = list.get(position).getID();
 
                 String one = String.valueOf(amount.getText());
                 int one2 = Integer.parseInt(one);
@@ -91,13 +91,16 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
                 one = String.valueOf(one2);
                 amount.setText(one);
 
+                db.getOrder(t).setAmount(one);
+                db.updateOrder(db.getOrder(t));
+
             }
         });
 
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int t = list.get(position).getID();
 
                 String one = String.valueOf(amount.getText());
                 int one2 = Integer.parseInt(one);
@@ -107,6 +110,8 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
                 one = String.valueOf(one2);
                 amount.setText(one);
 
+                db.getOrder(t).setAmount(one);
+                db.updateOrder(db.getOrder(t));
             }
         });
 

@@ -1,6 +1,7 @@
 package com.example.kobiqoi_laptop.assignment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,11 +19,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+//import json-simple.JSONObject;
 
 import org.json.JSONException;
 
@@ -60,6 +64,8 @@ public class Checkout2Activity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private int progressStatus = 0;
+
+    String masterstring;
 
     private Handler handler = new Handler();
     String TAG = "Checkout2Activity";
@@ -189,10 +195,12 @@ public class Checkout2Activity extends AppCompatActivity {
         int count3 = 0;
         String count2 = "1";
         readObject("test.json");
-        for(){
+        String count4 = "2";
 
-        }
+        /*for(){
 
+        }*/
+        JSONArray master = new JSONArray();
         JSONObject Obj = new JSONObject();
         JSONArray orderArr = new JSONArray();
         try{
@@ -213,6 +221,29 @@ public class Checkout2Activity extends AppCompatActivity {
 
         Obj.put(count2, orderArr);
 
+            master.put(Obj);
+
+
+            /*for(Order or : orders){
+                JSONObject item2 = new JSONObject();
+                item2.put("id", or.getID());
+                item2.put("name", or.getName());
+                item2.put("extra", or.getExtra());
+                item2.put("amount", or.getAmount());
+                item2.put("note", or.getNote());
+                item2.put("price", or.getPrice());
+                item2.put("cost", or.getCost());
+                item2.put("tableid", or.getTableid());
+                orderArr.put(item2);
+
+            }
+
+            Obj.put(count4, orderArr);
+
+            Log.d(TAG, orderArr.toString(4));*/
+
+
+
 
         }
         catch (JSONException e)
@@ -222,9 +253,10 @@ public class Checkout2Activity extends AppCompatActivity {
         }
 
         try{
-            Log.d(TAG, Obj.toString(4));
-            if(Obj != null) {
-                writeObject(Obj, "test.json");
+            Log.d(TAG, master.toString(4));
+            if(master != null) {
+                masterstring = master.toString();
+                writeObject(masterstring, "iamhere.json");
 
 
                 readObject("test.json");
@@ -357,8 +389,19 @@ public class Checkout2Activity extends AppCompatActivity {
             return outputObject;
         }
 
-        public void writeObject(Object inputObject, String fileName){
+        public void writeObject(Object inputObject, String fileName)  {
             try {
+                SharedPreferences prefs = this.getSharedPreferences(
+                        "com.example.kobiqoi_laptop.assignment", Context.MODE_PRIVATE);
+
+
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString(getString(R.string.master), masterstring);
+                editor.commit();
+
+
+                String readit =prefs.getString("MASTER", "");
+
                 filePath = this.getFilesDir().getAbsolutePath() + "/" + fileName;
                 fileOut = new FileOutputStream(filePath);
                 objectOut = new ObjectOutputStream(fileOut);
@@ -370,6 +413,7 @@ public class Checkout2Activity extends AppCompatActivity {
             } finally {
                 if (objectOut != null) {
                     try {
+
                         objectOut.close();
                     } catch (IOException e) {
                         e.printStackTrace();
