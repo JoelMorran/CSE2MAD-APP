@@ -21,6 +21,8 @@ public class MenuActivity extends AppCompatActivity {
     private ImageButton helpbtn;
     private String tableid = "0";
     private String tbnum;
+    private String tbnum2 = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +50,11 @@ public class MenuActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
         Bundle extras = getIntent().getExtras();
+
         if(extras != null) {
 
             tbnum = extras.getString("tbnumber");
-
+            tbnum2 = extras.getString("tbnumber");
 
             drinks.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -100,6 +103,57 @@ public class MenuActivity extends AppCompatActivity {
 
         }
 
+/*        if(!(tbnum2.equals("")))
+        {
+            tbnum = tbnum2;
+
+
+            drinks.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(MenuActivity.this, DrinksMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    MenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            food.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(MenuActivity.this, FoodMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    MenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            specials.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(MenuActivity.this, SpecialsMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    MenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            kids.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(MenuActivity.this, KidsMenuActivity.class);
+                    myIntent.putExtra("tbnumber", tbnum);
+                    MenuActivity.this.startActivity(myIntent);
+                }
+            });
+
+            helpbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //Log.d("","help");
+                    sendBroadcast();
+                }
+            });
+        }*/
+
 
     }
 
@@ -135,6 +189,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menubuttons, menu);
@@ -157,7 +213,7 @@ public class MenuActivity extends AppCompatActivity {
     private void sendBroadcast() {
         Intent intent = new Intent();
         intent.setAction("com.example.kobiqoi_laptop.assignment");
-        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("Life_form", "Table " + tableid + " needs assistance \n");
         intent.putExtra("tableid", "Table " + tableid + " needs assistance \n"  );
         Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
         sendBroadcast(intent);

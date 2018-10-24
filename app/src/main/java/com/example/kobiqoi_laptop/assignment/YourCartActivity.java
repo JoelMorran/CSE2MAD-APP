@@ -41,11 +41,14 @@ public class YourCartActivity extends AppCompatActivity {
 
     private Handler handler = new Handler();
 
+
+    private String xz;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
-        spinner = (Spinner) findViewById(R.id.spinner3);
+       // spinner = (Spinner) findViewById(R.id.spinner3);
 
         emptycart = (Button) findViewById(R.id.emptycart);
         checkout = (Button) findViewById(R.id.checkout);
@@ -85,11 +88,13 @@ public class YourCartActivity extends AppCompatActivity {
         for (Order cn : orders)
         {
             ++count;
-            Double tt = Double.parseDouble(cn.getPrice());
-            t = tt;
+            double tt = Double.parseDouble(cn.getPrice());
+            double ttt = Double.parseDouble(cn.getAmount());
+            t = tt * ttt;
             total = t + total;
 
         }
+
       String s = String.valueOf(total);
          String ss = String.valueOf(count);
         items.setText(ss);
@@ -157,8 +162,9 @@ public class YourCartActivity extends AppCompatActivity {
 
                             for (Order cn : orders) {
                                 ++count;
-                                Double tt = Double.parseDouble(cn.getPrice());
-                                t = tt;
+                                double tt = Double.parseDouble(cn.getPrice());
+                                double ttt = Double.parseDouble(cn.getAmount());
+                                t = tt * ttt;
                                 total = t + total;
 
                             }
@@ -239,7 +245,8 @@ public class YourCartActivity extends AppCompatActivity {
                 // as a favorite...
                 // sendBroadcast();
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
-
+                tbid();
+                myIntent3.putExtra("tbnumber", xz);
                 this.startActivity(myIntent3);
                 return true;
 
@@ -250,6 +257,24 @@ public class YourCartActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void tbid() {
+        DBHandler3 db;
+        db = new DBHandler3(getApplicationContext());
+        ArrayList<Order> orders = db.getAllOrders();
+
+        for (Order cn : orders)
+        {
+
+            xz = (cn.getTableid());
+
+
+        }
+
+
+
+
     }
 
 
@@ -305,7 +330,7 @@ public class YourCartActivity extends AppCompatActivity {
         }
         Intent intent = new Intent();
         intent.setAction("com.example.kobiqoi_laptop.assignment");
-        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("Life_form", "Table " + s + " needs assistance \n");
         intent.putExtra("tableid", "Table " + s + " needs assistance \n"  );
         Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
         sendBroadcast(intent);

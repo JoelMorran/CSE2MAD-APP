@@ -40,12 +40,15 @@ public class CheckoutActivity extends AppCompatActivity {
     private TextView gst;
 
 
+    private String xz;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
-        spinner = (Spinner) findViewById(R.id.spinner3);
+       // spinner = (Spinner) findViewById(R.id.spinner3);
 
 
         checkout = (Button) findViewById(R.id.checkout);
@@ -155,7 +158,8 @@ public class CheckoutActivity extends AppCompatActivity {
                 // as a favorite...
                 // sendBroadcast();
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
-
+                tbid();
+                myIntent3.putExtra("tbnumber", xz);
                 this.startActivity(myIntent3);
                 return true;
 
@@ -166,6 +170,24 @@ public class CheckoutActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void tbid() {
+        DBHandler3 db;
+        db = new DBHandler3(getApplicationContext());
+        ArrayList<Order> orders = db.getAllOrders();
+
+        for (Order cn : orders)
+        {
+
+            xz = (cn.getTableid());
+
+
+        }
+
+
+
+
     }
 
 
@@ -203,7 +225,7 @@ public class CheckoutActivity extends AppCompatActivity {
         }
         Intent intent = new Intent();
         intent.setAction("com.example.kobiqoi_laptop.assignment");
-        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("Life_form", "Table " + s + " needs assistance \n" );
         intent.putExtra("tableid", "Table " + s + " needs assistance \n"  );
         Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
         sendBroadcast(intent);

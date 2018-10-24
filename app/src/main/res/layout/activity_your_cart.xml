@@ -15,7 +15,7 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="Create New Account"
+        app:title="Cart"
         app:titleTextColor="@android:color/white"
         tools:ignore="ResourceCycle"
         tools:layout_editor_absoluteX="0dp"
@@ -66,13 +66,6 @@
         app:layout_constraintStart_toEndOf="@+id/emptycart"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
-
-    <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginBottom="76dp"
-        app:layout_constraintBottom_toTopOf="@+id/emptycart" />
 
     <TextView
         android:id="@+id/items"

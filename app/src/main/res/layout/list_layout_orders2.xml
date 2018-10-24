@@ -29,7 +29,7 @@
         android:layout_width="99dp"
         android:layout_height="30dp"
         android:layout_weight="1"
-        android:background="#FF5722"
+        android:background="#FFB833"
         android:text="remove" />
 
     <TextView
@@ -42,15 +42,15 @@
 
         android:layout_weight="1"
 
-        />
+        android:textAlignment="center" />
 
-    <ImageButton
+    <Button
         android:id="@+id/addbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="31dp"
+        android:layout_width="99dp"
+        android:layout_height="30dp"
         android:layout_weight="1"
-
-        app:srcCompat="@drawable/ic_add_cust_48dp" />
+        android:background="#FFB833"
+        android:text="Add" />
 
     <TextView
         android:id="@+id/amount"
@@ -60,12 +60,12 @@
         android:text="TextView"
         android:textAlignment="center" />
 
-    <ImageButton
+    <Button
         android:id="@+id/minus"
-        android:layout_width="wrap_content"
+        android:layout_width="99dp"
         android:layout_height="30dp"
         android:layout_weight="1"
-
-        app:srcCompat="@drawable/ic_remove_cust_48dp" />
+        android:background="#FFB833"
+        android:text="Minus" />
 
 </LinearLayout>

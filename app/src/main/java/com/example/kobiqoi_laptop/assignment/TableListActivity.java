@@ -26,14 +26,14 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
    // private JSONObject jsonObj;
 
 
-    private Button hack;
+   // private Button hack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table_list);
 
-        hack = (Button) findViewById(R.id.hack);
+        //hack = (Button) findViewById(R.id.hack);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
@@ -48,7 +48,7 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
 
        // new RetrieveTable().execute();
 
-       hack.setOnClickListener(new View.OnClickListener() {
+      /* hack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(TableListActivity.this, LetsEat2Activity.class);
@@ -57,7 +57,7 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
                 startLockTask();
                 //setLockTaskPackages();
             }
-        });
+        });*/
 
         /*signUp.setOnClickListener(new View.OnClickListener() {
             @Override

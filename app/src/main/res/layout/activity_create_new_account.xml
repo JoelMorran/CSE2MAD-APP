@@ -105,16 +105,5 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/populateDb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

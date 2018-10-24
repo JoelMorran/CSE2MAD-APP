@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -26,9 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//import json-simple.JSONObject;
 
-import org.json.JSONException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,8 +35,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.content.Context;
+
+
+
 
 
 
@@ -77,7 +81,11 @@ public class Checkout2Activity extends AppCompatActivity {
     private ObjectOutputStream objectOut;
     private Object outputObject;
     private String filePath;
+    private Button finish;
 
+    private int dbDelCheck = 0;
+    private String tx;
+    private TextView tableid;
 
 
 
@@ -85,7 +93,7 @@ public class Checkout2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout2);
-        spinner = (Spinner) findViewById(R.id.spinner3);
+        //spinner = (Spinner) findViewById(R.id.spinner3);
 
 
         checkout = (Button) findViewById(R.id.checkout);
@@ -93,13 +101,17 @@ public class Checkout2Activity extends AppCompatActivity {
         subtotal = (TextView) findViewById(R.id.subtotal);
         total2 = (TextView) findViewById(R.id.total2);
         gst = (TextView) findViewById(R.id.GST);
-        //placeorder = (Button) findViewById(R.id.placeorder);
 
-        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
+
+
+
+       // tableid = (TextView) findViewById(R.id.tableid);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
+        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
+        finish = (Button) findViewById(R.id.finish);
         // Get a support ActionBar corresponding to this toolbar
         // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
 
@@ -145,14 +157,7 @@ public class Checkout2Activity extends AppCompatActivity {
         gst.setText("GST: " + ssss);
         total2.setText("Total: " + k);
 
-        /*placeorder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(CheckoutActivity.this, CheckoutPaymentMethodActivity.class);
 
-                CheckoutActivity.this.startActivity(myIntent);
-            }
-        });*/
 
 
         helpbtn.setOnClickListener(new View.OnClickListener() {
@@ -189,20 +194,32 @@ public class Checkout2Activity extends AppCompatActivity {
                     }
                 }
                 go();
+                if(dbDelCheck != 1)
+                {
+                    db.allDeleteOrder();
+                }
             }
         }).start();
 
         int count3 = 0;
         String count2 = "1";
-        readObject("test.json");
+        //readObject("test.json");
         String count4 = "2";
 
-        /*for(){
+
+
+       // SharedPreferences prefs = this.getSharedPreferences(
+         //       "com.example.kobiqoi_laptop.assignment", Context.MODE_PRIVATE);
+       // String readit = prefs.getString("MASTER", "");
+
+        /*for(readit){
 
         }*/
+        Date currentTime = Calendar.getInstance().getTime();
+
         JSONArray master = new JSONArray();
-        JSONObject Obj = new JSONObject();
-        JSONArray orderArr = new JSONArray();
+        final JSONObject Obj = new JSONObject();
+        final JSONArray orderArr = new JSONArray();
         try{
 
             for(Order or : orders){
@@ -215,35 +232,15 @@ public class Checkout2Activity extends AppCompatActivity {
                 item.put("price", or.getPrice());
                 item.put("cost", or.getCost());
                 item.put("tableid", or.getTableid());
+                item.put("date", currentTime.toString());
+                tx = or.getTableid();
                 orderArr.put(item);
 
             }
 
         Obj.put(count2, orderArr);
 
-            master.put(Obj);
-
-
-            /*for(Order or : orders){
-                JSONObject item2 = new JSONObject();
-                item2.put("id", or.getID());
-                item2.put("name", or.getName());
-                item2.put("extra", or.getExtra());
-                item2.put("amount", or.getAmount());
-                item2.put("note", or.getNote());
-                item2.put("price", or.getPrice());
-                item2.put("cost", or.getCost());
-                item2.put("tableid", or.getTableid());
-                orderArr.put(item2);
-
-            }
-
-            Obj.put(count4, orderArr);
-
-            Log.d(TAG, orderArr.toString(4));*/
-
-
-
+           master.put(Obj);
 
         }
         catch (JSONException e)
@@ -251,6 +248,59 @@ public class Checkout2Activity extends AppCompatActivity {
             Log.e(TAG, "JSONException: " + e.getMessage());
 
         }
+
+
+
+           try{
+                Log.d(TAG, orderArr.toString(4));
+                if(master != null) {
+                    masterstring = orderArr.toString();
+                   writeObject(masterstring, count2 + ".json");
+
+                    //writeToFile(masterstring, getApplicationContext());
+
+
+                    //readObject("iamhere.json");
+                    Log.e(TAG,"is nto null");
+                }
+            }
+            catch (JSONException e){
+                e.printStackTrace();
+            }
+
+/*
+            JSONArray master = new JSONArray();
+            JSONObject Obj = new JSONObject();
+            JSONArray orderArr = new JSONArray();
+            try{
+
+                for(Order or : orders){
+                    JSONObject item = new JSONObject();
+                    item.put("id", or.getID());
+                    item.put("name", or.getName());
+                    item.put("extra", or.getExtra());
+                    item.put("amount", or.getAmount());
+                    item.put("note", or.getNote());
+                    item.put("price", or.getPrice());
+                    item.put("cost", or.getCost());
+                    item.put("tableid", or.getTableid());
+
+                    orderArr.put(item);
+
+                }
+
+                Obj.put(count2, orderArr);
+
+                master.put(Obj);
+
+            }
+            catch (JSONException e)
+            {
+                Log.e(TAG, "JSONException: " + e.getMessage());
+
+            }
+
+
 
         try{
             Log.d(TAG, master.toString(4));
@@ -265,11 +315,42 @@ public class Checkout2Activity extends AppCompatActivity {
         }
         catch (JSONException e){
             e.printStackTrace();
+        }*/
+        try {
+            tx = Obj.getString("tableid");
+
+
         }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(Checkout2Activity.this, LetsEat2Activity.class);
+
+tx.toString();
+                    myIntent.putExtra("tbnumber", tx);
+
+
+
+                db.allDeleteOrder();
+
+                dbDelCheck = 1;
+
+                Checkout2Activity.this.startActivity(myIntent);
+            }
+        });
 
 
 
     }
+
+
+
 
 
     @Override
@@ -298,6 +379,7 @@ public class Checkout2Activity extends AppCompatActivity {
                 // as a favorite...
                 // sendBroadcast();
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
+                    myIntent3.putExtra("tbnumber", tx);
 
                 this.startActivity(myIntent3);
                 return true;
@@ -346,7 +428,7 @@ public class Checkout2Activity extends AppCompatActivity {
         }
         Intent intent = new Intent();
         intent.setAction("com.example.kobiqoi_laptop.assignment");
-        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("Life_form", "Table " + s + " needs assistance \n");
         intent.putExtra("tableid", "Table " + s + " needs assistance \n"  );
         Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
         sendBroadcast(intent);
@@ -389,18 +471,23 @@ public class Checkout2Activity extends AppCompatActivity {
             return outputObject;
         }
 
+
         public void writeObject(Object inputObject, String fileName)  {
             try {
-                SharedPreferences prefs = this.getSharedPreferences(
+                /*SharedPreferences prefs = this.getSharedPreferences(
                         "com.example.kobiqoi_laptop.assignment", Context.MODE_PRIVATE);
+                String readit = prefs.getString("MASTER", "");
 
-
+                String readit3 =prefs.getString("MASTER", "name");
+      String test = readit.toString();
+                if(!(readit.equals(null))){
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(getString(R.string.master), masterstring);
+                editor.putString(getString(R.string.master), readit + " " + masterstring );
                 editor.commit();
+                }
 
+                String readit2 =prefs.getString("MASTER", "");*/
 
-                String readit =prefs.getString("MASTER", "");
 
                 filePath = this.getFilesDir().getAbsolutePath() + "/" + fileName;
                 fileOut = new FileOutputStream(filePath);
@@ -421,6 +508,23 @@ public class Checkout2Activity extends AppCompatActivity {
                 }
             }
         }
+
+    private void writeToFile(String data,Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("test3.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+
+
+
+
+
 
 
 }

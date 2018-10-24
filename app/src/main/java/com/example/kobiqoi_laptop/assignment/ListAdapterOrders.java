@@ -56,9 +56,9 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
 
       final TextView amount=(TextView)itemView.findViewById(R.id.amount);
 
-        ImageButton addbtn=(ImageButton) itemView.findViewById(R.id.addbtn);
+        Button addbtn=(Button) itemView.findViewById(R.id.addbtn);
 
-        ImageButton minus=(ImageButton) itemView.findViewById(R.id.minus);
+        Button minus=(Button) itemView.findViewById(R.id.minus);
 
         Button remove = (Button) itemView.findViewById(R.id.remove);
 
@@ -112,6 +112,8 @@ public class ListAdapterOrders extends ArrayAdapter<Order>  {
 
                 db.getOrder(t).setAmount(one);
                 db.updateOrder(db.getOrder(t));
+
+
             }
         });
 

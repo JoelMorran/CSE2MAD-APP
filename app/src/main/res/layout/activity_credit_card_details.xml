@@ -16,7 +16,7 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="Create New Account"
+        app:title="Credit Card Details"
         app:titleTextColor="@android:color/white"
         tools:ignore="ResourceCycle"
         tools:layout_editor_absoluteX="0dp"

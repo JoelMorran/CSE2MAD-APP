@@ -1,21 +1,100 @@
 package com.example.kobiqoi_laptop.assignment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 public class OrderHistoryActivity extends AppCompatActivity {
+
+    private Button placeorder;
+    private ImageButton helpbtn;
+    private Spinner spinner;
+
+    ListView listV;
+
+    private ListAdapterOrderHistory adapter;
+
+    //private ArrayList<Order> listItems;
+
+    private ArrayList<JSONObject> listItems;
+    private JSONArray sendarr;
+    private JSONObject jsonObj;
+
+    private Button emptycart;
+    private Button checkout;
+    DBHandler3 db;
+    private TextView items;
+    private TextView subtotal;
+    private TextView total2;
+    private TextView gst;
+    private ProgressBar progressBar;
+
+    private int progressStatus = 0;
+
+    String masterstring;
+
+    private Handler handler = new Handler();
+    String TAG = "Checkout2Activity";
+
+
+    private FileInputStream fileIn;
+    private FileOutputStream fileOut;
+    private ObjectInputStream objectIn;
+    private ObjectOutputStream objectOut;
+    private Object outputObject;
+    private String filePath;
+
+    private String xz;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
+       // spinner = (Spinner) findViewById(R.id.spinner3);
 
-        //signIn = (Button) findViewById(R.id.signIn);
+
+        checkout = (Button) findViewById(R.id.checkout);
+        items = (TextView) findViewById(R.id.items);
+        subtotal = (TextView) findViewById(R.id.subtotal);
+        total2 = (TextView) findViewById(R.id.total2);
+        gst = (TextView) findViewById(R.id.GST);
+        //placeorder = (Button) findViewById(R.id.placeorder);
+
+        helpbtn = (ImageButton) findViewById(R.id.helpbtn);
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
@@ -28,23 +107,208 @@ public class OrderHistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
+
+        listV = (ListView) findViewById(R.id.listV);
+        db = new DBHandler3(getApplicationContext());
+
+
+
+
+
+        /*ArrayList<Order> orders = db.getAllOrders();
+
+        double total = 0;
+        double t = 0;
+        int count = 0;
+
+        for (Order cn : orders) {
+            ++count;
+            Double tt = Double.parseDouble(cn.getPrice());
+            t = tt;
+            total = t + total;
+
+        }
+        double gsts = 10 * (total / 100);
+        double subt = total - (10 * (total / 100));
+        double x = total;
+        String s = String.valueOf(x);
+        String k = String.valueOf(x);
+        String ss = String.valueOf(count);
+        String sss = String.valueOf(subt);
+        String ssss = String.valueOf(gsts);
+        items.setText("Quantity: " + ss);
+        subtotal.setText("Subtotal: " + sss);
+
+        gst.setText("GST: " + ssss);
+        total2.setText("Total: " + k);*/
+
+        /*placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
+                Intent myIntent = new Intent(CheckoutActivity.this, CheckoutPaymentMethodActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                CheckoutActivity.this.startActivity(myIntent);
+            }
+        });*/
+
+
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Log.d("","help");
+                sendBroadcast();
             }
         });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+        /*progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        // Start long running operation in a background thread
+        new Thread(new Runnable() {
+            public void run() {
+                while (progressStatus < 60) {
+                    progressStatus += 1;
+                    // Update the progress bar and display the
+                    //current value in the text view
+                    handler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setProgress(progressStatus);
+                            Log.d (TAG, "happy time");
+
+                        }
+                    });
+                    try {
+                        // Sleep for 200 milliseconds.
+                        Thread.sleep(15000); ///900000
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                go();
             }
-        });*/
+        }).start();*/
+
+        /*int count3 = 0;
+        String count2 = "1";
+        //readObject("test.json");
+        String count4 = "2";
+
+        JSONArray master = new JSONArray();
+        JSONObject Obj = new JSONObject();
+        JSONArray orderArr = new JSONArray();
+        try{
+
+            for(Order or : orders){
+                JSONObject item = new JSONObject();
+                item.put("id", or.getID());
+                item.put("name", or.getName());
+                item.put("extra", or.getExtra());
+                item.put("amount", or.getAmount());
+                item.put("note", or.getNote());
+                item.put("price", or.getPrice());
+                item.put("cost", or.getCost());
+                item.put("tableid", or.getTableid());
+                orderArr.put(item);
+
+            }
+
+            Obj.put(count2, orderArr);
+
+            master.put(Obj);
+
+        }
+        catch (JSONException e)
+        {
+            Log.e(TAG, "JSONException: " + e.getMessage());
+
+        }
+
+
+
+        try{
+            Log.d(TAG, master.toString(4));
+            if(master != null) {
+                masterstring = master.toString();
+                writeObject(masterstring, "iamhere.json");
+
+                //writeToFile(masterstring, getApplicationContext());
+
+
+
+                Log.e(TAG,"is nto null");
+            }
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }*/
+
+
+        ;
+        try {
+
+           /*BufferedReader reader = new BufferedReader(new FileReader("/data/user/0/com.example.kobiqoi_laptop.assignment/files/iamhere.json"));
+            StringBuffer buffer = new StringBuffer();
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line);
+            }
+            jsonObj = new JSONObject(buffer.toString());
+            JSONArray arr = jsonObj.getJSONArray("mains");
+            sendarr = jsonObj.getJSONArray("mains");*/
+            String tt = readObject("1.json").toString();
+
+          /* String str = tt;
+
+            String[] strs = str.split("(?<=\\})(?=\\{)");
+            for (String s : strs) {
+                System.out.println(s);
+            }*/
+
+
+            //JSONArray arr2 = new JSONArray(tt);
+
+            //jsonObj = new JSONObject(tt);
+            //JSONArray arr = jsonObj.getJSONArray(tt);
+           //sendarr = jsonObj.getJSONArray("1");
+            JSONArray arr = new JSONArray(tt);
+
+            listItems=getArrayListFromJSONArray(arr);
+        }
+        catch( JSONException e)
+        {
+            e.printStackTrace();
+        }
+       /* catch (IOException e)
+        {
+            e.printStackTrace();
+        }*/
+
+
+        adapter = new ListAdapterOrderHistory(getApplicationContext(), R.layout.list_layout_order_history, R.id.id2, listItems);
+        listV.setAdapter(adapter);
+
+    }
+
+    private ArrayList<JSONObject> getArrayListFromJSONArray(JSONArray jsonArray){
+
+        ArrayList<JSONObject> aList=new ArrayList<JSONObject>();
+
+        try {
+
+            if (jsonArray != null) {
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    aList.add(jsonArray.getJSONObject(i));
+
+                }
+
+            }
+
+        }catch (JSONException je){je.printStackTrace();}
+
+        return  aList;
 
     }
 
@@ -74,7 +338,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 // as a favorite...
                 // sendBroadcast();
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
-
+                tbid();
+                myIntent3.putExtra("tbnumber", xz);
                 this.startActivity(myIntent3);
                 return true;
 
@@ -86,6 +351,25 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         }
     }
+
+    private void tbid() {
+        DBHandler3 db;
+        db = new DBHandler3(getApplicationContext());
+        ArrayList<Order> orders = db.getAllOrders();
+
+        for (Order cn : orders)
+        {
+
+            xz = (cn.getTableid());
+
+
+        }
+
+
+
+
+    }
+
 
 
     @Override
@@ -107,4 +391,112 @@ public class OrderHistoryActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+
+    private void sendBroadcast() {
+        db = new DBHandler3(getApplicationContext());
+        ArrayList<Order> orders = db.getAllOrders();
+        String s = "";
+        for (Order cn : orders)
+        {
+
+            s = (cn.getTableid());
+
+
+        }
+        Intent intent = new Intent();
+        intent.setAction("com.example.kobiqoi_laptop.assignment");
+        intent.putExtra("Life_form", "Table " + s + " needs assistance \n");
+        intent.putExtra("tableid", "Table " + s + " needs assistance \n"  );
+        Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
+        sendBroadcast(intent);
+    }
+   /* private void go() {
+        Intent myIntent = new Intent(Checkout2Activity.this, Checkout3Activity.class);
+
+        Checkout2Activity.this.startActivity(myIntent);
+    }*/
+
+
+
+
+
+
+
+
+    public Object readObject(String fileName){
+        try {
+            filePath = this.getFilesDir().getAbsolutePath() + "/" + fileName;
+            fileIn = new FileInputStream(filePath);
+            objectIn = new ObjectInputStream(fileIn);
+            outputObject = objectIn.readObject();
+            Log.d (TAG, outputObject.toString() + "I R FILE");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (objectIn != null) {
+                try {
+                    objectIn.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return outputObject;
+    }
+
+
+    public void writeObject(Object inputObject, String fileName)  {
+        try {
+                /*SharedPreferences prefs = this.getSharedPreferences(
+                        "com.example.kobiqoi_laptop.assignment", Context.MODE_PRIVATE);
+                String readit = prefs.getString("MASTER", "");
+
+                String readit3 =prefs.getString("MASTER", "name");
+      String test = readit.toString();
+                if(!(readit.equals(null))){
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString(getString(R.string.master), readit + " " + masterstring );
+                editor.commit();
+                }
+
+                String readit2 =prefs.getString("MASTER", "");*/
+
+
+            filePath = this.getFilesDir().getAbsolutePath() + "/" + fileName;
+            fileOut = new FileOutputStream(filePath);
+            objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(inputObject);
+            fileOut.getFD().sync();
+            Log.d (TAG, inputObject.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (objectOut != null) {
+                try {
+
+                    objectOut.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void writeToFile(String data,Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("test3.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+
 }

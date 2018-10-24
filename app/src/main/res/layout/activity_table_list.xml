@@ -14,7 +14,9 @@
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Table List"
+        app:titleTextColor="@android:color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,16 +25,11 @@
         android:orientation="vertical"
         android:paddingTop="50dp">
 
-        <Button
-            android:id="@+id/hack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
         <ListView
             android:id="@+id/listv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="18dp"
             android:background="#FFB833">
 
         </ListView>

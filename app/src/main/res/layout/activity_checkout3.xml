@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:background="#ff5722"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+        app:title="Checkout"
+        app:titleTextColor="@android:color/white" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -114,18 +116,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:text="Order ID: #2"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="50sp" />
-
-        <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="95dp"
+            android:layout_marginTop="20dp"
             android:background="#ff5722"
             android:text="ORDER STATUS"
             android:textAlignment="center"
@@ -149,7 +143,7 @@
             android:id="@+id/finish"
             android:layout_width="match_parent"
             android:layout_height="95dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="#ff5722"
             android:text="FINISH"
             android:textColor="@android:color/white"

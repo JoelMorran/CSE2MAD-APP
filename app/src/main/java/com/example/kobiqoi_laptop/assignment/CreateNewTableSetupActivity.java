@@ -37,12 +37,12 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
         createtable = (Button) findViewById(R.id.createtable);
         tablenumber = (EditText) findViewById(R.id.tablenumber);
         tablesize = (EditText) findViewById(R.id.tablesize);
-        spinner = (Spinner) findViewById(R.id.spinner);
+        //spinner = (Spinner) findViewById(R.id.spinner);
 
         //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
-        updateSpinner();
+        //updateSpinner();
         // Get a support ActionBar corresponding to this toolbar
         // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
 
@@ -124,7 +124,7 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
 
                     tablenumber.getText().clear();
                     tablesize.getText().clear();
-                    updateSpinner();
+                    //updateSpinner();
                     createlog();
                     tablenumber.setFocusable(true);
                     tablenumber.requestFocus();
@@ -182,14 +182,14 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
 
 }
 
-    private void updateSpinner() {
+  /*  private void updateSpinner() {
         DBHandler2 db = new DBHandler2(getApplicationContext());
         List<Table> tables = db.getAllTables();
         ArrayAdapter<Table> adapter = new ArrayAdapter<Table>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, tables);
         spinner.setAdapter(adapter);
         createlog();
 
-    }
+    }*/
 
     private void createlog()
     {

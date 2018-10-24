@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class FoodMenuActivity extends AppCompatActivity {
 
     private Button entree;
@@ -21,6 +23,9 @@ public class FoodMenuActivity extends AppCompatActivity {
     private ImageButton helpbtn;
     private String tableid = "0";
     private String tbnum;
+
+
+    private String xz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +130,8 @@ public class FoodMenuActivity extends AppCompatActivity {
                 // as a favorite...
                 // sendBroadcast();
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
-
+                tbid();
+                myIntent3.putExtra("tbnumber", xz);
                 this.startActivity(myIntent3);
                 return true;
 
@@ -137,6 +143,27 @@ public class FoodMenuActivity extends AppCompatActivity {
 
         }
     }
+
+    private void tbid() {
+        DBHandler3 db;
+        db = new DBHandler3(getApplicationContext());
+        ArrayList<Order> orders = db.getAllOrders();
+
+        for (Order cn : orders)
+        {
+
+            xz = (cn.getTableid());
+
+
+        }
+
+
+
+
+    }
+
+
+
 
 
     @Override
@@ -162,7 +189,7 @@ public class FoodMenuActivity extends AppCompatActivity {
     private void sendBroadcast() {
         Intent intent = new Intent();
         intent.setAction("com.example.kobiqoi_laptop.assignment");
-        intent.putExtra("Life_form", "_DROID_");
+        intent.putExtra("Life_form", "Table " + tableid + " needs assistance \n");
         intent.putExtra("tableid", "Table " + tableid + " needs assistance \n"  );
         Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
         sendBroadcast(intent);

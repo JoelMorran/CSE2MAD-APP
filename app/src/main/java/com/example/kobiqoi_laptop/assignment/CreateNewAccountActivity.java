@@ -74,10 +74,10 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         });*/
 
 
-        spinner = (Spinner) findViewById(R.id.spinner);
-        populateDb = (Button) findViewById(R.id.populateDb);
+        //spinner = (Spinner) findViewById(R.id.spinner);
+        //populateDb = (Button) findViewById(R.id.populateDb);
 
-        updateSpinner();
+        //updateSpinner();
 
 
         db = new DBHandler(this);
@@ -132,7 +132,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
                     email.getText().clear();
                     password.getText().clear();
                     name.getText().clear();
-                    updateSpinner();
+                    //updateSpinner();
                     createlog();
                     name.setFocusable(true);
                     name.requestFocus();
@@ -510,7 +510,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
                 db.addAccount(new Account("Alex", "Alex1", "test1@hotmail.com.au", "password2"));
                 db.addAccount(new Account("Sameer", "Sameerwashere", "test1@outlook.com", "password3"));
                 db.addAccount(new Account("Shaz", "Shazisaspaz", "test1@outlook.com.au", "password4"));
-                updateSpinner();
+                //updateSpinner();
                 createlog();
             }
         });
@@ -525,14 +525,14 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         return matcher.matches();
     }
 
-    private void updateSpinner() {
+   /* private void updateSpinner() {
         DBHandler db = new DBHandler(getApplicationContext());
         List<Account> accounts = db.getAllAccounts();
         ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
         spinner.setAdapter(adapter);
         //createlog();
 
-    }
+    }*/
 
     private void createlog()
     {

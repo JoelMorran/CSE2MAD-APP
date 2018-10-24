@@ -16,6 +16,8 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Create Table Setup"
+        app:titleTextColor="@android:color/white"
         tools:layout_editor_absoluteX="150dp"
         tools:layout_editor_absoluteY="300dp" />
 
@@ -72,10 +74,6 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
 
