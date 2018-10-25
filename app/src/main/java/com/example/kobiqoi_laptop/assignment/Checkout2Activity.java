@@ -205,6 +205,7 @@ public class Checkout2Activity extends AppCompatActivity {
                     db.close();
 
                 }
+                Toast.makeText(getApplicationContext(), "Your order is ready", Toast.LENGTH_LONG).show();
             }
         }).start();
 
