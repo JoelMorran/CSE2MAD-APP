@@ -77,6 +77,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
     private String xz;
 
+    private String tbnum;
+
 
 
 
@@ -319,7 +321,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 // User chose the "Settings" item, show the app settings UI...
                 //sendBroadcast();
                 Intent myIntent = new Intent(this, OrderHistoryActivity.class);
-
+                myIntent.putExtra("tbnumber", xz);
                 this.startActivity(myIntent);
 
                 return true;
@@ -338,7 +340,14 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 // as a favorite...
                 // sendBroadcast();
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
-                tbid();
+            //    tbid();
+                Bundle extras = getIntent().getExtras();
+
+                if(extras != null) {
+
+                    xz = extras.getString("tbnumber");
+                }
+
                 myIntent3.putExtra("tbnumber", xz);
                 this.startActivity(myIntent3);
                 return true;

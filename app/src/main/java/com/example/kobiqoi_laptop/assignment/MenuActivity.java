@@ -164,7 +164,7 @@ public class MenuActivity extends AppCompatActivity {
                 // User chose the "Settings" item, show the app settings UI...
                 //sendBroadcast();
                 Intent myIntent = new Intent(this, OrderHistoryActivity.class);
-
+                myIntent.putExtra("tbnumber", tbnum);
                 this.startActivity(myIntent);
 
                 return true;
@@ -174,7 +174,7 @@ public class MenuActivity extends AppCompatActivity {
                 // as a favorite...
                 // sendBroadcast();
                 Intent myIntent2 = new Intent(this, YourCartActivity.class);
-
+                myIntent2.putExtra("tbnumber", tbnum);
                 this.startActivity(myIntent2);
                 return true;
 
@@ -213,8 +213,8 @@ public class MenuActivity extends AppCompatActivity {
     private void sendBroadcast() {
         Intent intent = new Intent();
         intent.setAction("com.example.kobiqoi_laptop.assignment");
-        intent.putExtra("Life_form", "Table " + tableid + " needs assistance \n");
-        intent.putExtra("tableid", "Table " + tableid + " needs assistance \n"  );
+        intent.putExtra("Life_form", "Table " + tbnum + " needs assistance \n");
+        intent.putExtra("tableid", "Table " + tbnum + " needs assistance \n"  );
         Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
         sendBroadcast(intent);
     }

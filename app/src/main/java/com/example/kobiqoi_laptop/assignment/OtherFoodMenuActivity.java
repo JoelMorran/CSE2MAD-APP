@@ -406,10 +406,15 @@ public class OtherFoodMenuActivity extends AppCompatActivity implements AdapterV
     }
 
     private void sendBroadcast() {
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+
+            tbnum = extras.getString("tbnumber");
+        }
         Intent intent = new Intent();
         intent.setAction("com.example.kobiqoi_laptop.assignment");
-        intent.putExtra("Life_form", "Table " + tableid + " needs assistance \n");
-        intent.putExtra("tableid", "Table " + tableid + " needs assistance \n"  );
+        intent.putExtra("Life_form", "Table " + tbnum + " needs assistance \n");
+        intent.putExtra("tableid", "Table " + tbnum + " needs assistance \n"  );
         Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
         sendBroadcast(intent);
     }

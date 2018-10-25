@@ -17,11 +17,15 @@ public class LetsEat2Activity extends AppCompatActivity {
     private Button LetsEat;
     private String tbnum;
     private Button backdoor;
+    DBHandler3 db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lets_eat2);
+        db = new DBHandler3(getApplicationContext());
+        db.allDeleteOrder();
+        db.close();
 
         LetsEat = (Button) findViewById(R.id.LetsEat);
         backdoor = (Button) findViewById(R.id.backdoor);

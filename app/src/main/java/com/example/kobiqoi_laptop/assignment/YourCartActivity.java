@@ -67,7 +67,12 @@ public class YourCartActivity extends AppCompatActivity {
         //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
+        Bundle extras = getIntent().getExtras();
 
+        if(extras != null) {
+
+            xz = extras.getString("tbnumber");
+        }
 
 
         listV=(ListView)findViewById(R.id.listv);
@@ -256,7 +261,7 @@ public class YourCartActivity extends AppCompatActivity {
                 // as a favorite...
                 // sendBroadcast();
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
-                tbid();
+               // tbid();
                 myIntent3.putExtra("tbnumber", xz);
                 this.startActivity(myIntent3);
                 return true;
