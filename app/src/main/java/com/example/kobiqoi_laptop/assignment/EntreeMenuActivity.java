@@ -269,6 +269,8 @@ public class EntreeMenuActivity extends AppCompatActivity implements AdapterView
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
 
+        db.close();
+
         for (Order cn : orders)
         {
 

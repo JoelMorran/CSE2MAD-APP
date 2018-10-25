@@ -93,6 +93,8 @@ public class CreateNewAccountActivity extends AppCompatActivity {
 
                 List<Account> accounts = db.getAllAccounts();
 
+                db.close();
+
                 for (Account cn : accounts)
                 {
                     if(username.getText().toString().equals(cn.getUsername()) )
@@ -124,6 +126,8 @@ public class CreateNewAccountActivity extends AppCompatActivity {
 
                     db.addAccount(new Account(name.getText().toString(), username.getText().toString(),
                             email.getText().toString(), password.getText().toString()));
+
+                    db.close();
 
                     Intent myIntent = new Intent(CreateNewAccountActivity.this, LoginPageActivity.class);
                     CreateNewAccountActivity.this.startActivity(myIntent);
@@ -500,7 +504,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         });
 
 
-        populateDb.setOnClickListener(new View.OnClickListener() {
+/*        populateDb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DBHandler db = new DBHandler(getApplicationContext());
@@ -512,8 +516,10 @@ public class CreateNewAccountActivity extends AppCompatActivity {
                 db.addAccount(new Account("Shaz", "Shazisaspaz", "test1@outlook.com.au", "password4"));
                 //updateSpinner();
                 createlog();
+
+                db.close();
             }
-        });
+        });*/
 
 
     }
@@ -546,6 +552,8 @@ public class CreateNewAccountActivity extends AppCompatActivity {
             // Writing Contacts to log
             Log.d("Name: ", log);
         }
+
+        db.close();
     }
 
     /*@Override

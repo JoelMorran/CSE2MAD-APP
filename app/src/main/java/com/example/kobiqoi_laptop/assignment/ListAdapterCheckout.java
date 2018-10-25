@@ -56,6 +56,8 @@ public class ListAdapterCheckout extends ArrayAdapter<Order> {
 
         //TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
         db = new DBHandler3(context);
+
+        db.close();
         try {
 
             txtName.setText(list.get(position).getName());

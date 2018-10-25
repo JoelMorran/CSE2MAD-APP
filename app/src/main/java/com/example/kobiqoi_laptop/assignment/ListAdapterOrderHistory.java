@@ -77,12 +77,12 @@ public class ListAdapterOrderHistory extends ArrayAdapter<JSONObject> {
 
 
 
-            id2.setText(list.get(position).getString("id"));
+            id2.setText("Table ID: " + list.get(position).getString("id"));
             name.setText(list.get(position).getString("name"));
             extra.setText(list.get(position).getString("extra"));
-            amount.setText(list.get(position).getString("amount"));
+            amount.setText("Amount: " + list.get(position).getString("amount"));
             if(!(list.get(position).getString("note").equals(""))){
-                note.setText(list.get(position).getString("note"));
+                note.setText("Note: " + list.get(position).getString("note"));
             }
             else
             {
@@ -94,11 +94,11 @@ public class ListAdapterOrderHistory extends ArrayAdapter<JSONObject> {
             double y = Double.valueOf(list.get(position).getString("price"));
 
             String z = Double.toString((x * y));
-            cost.setText(z);
+            cost.setText("Cost: " + z);
 
-            tableid.setText(list.get(position).getString("tableid"));
+            tableid.setText("Table Number: " + list.get(position).getString("tableid"));
 
-            price.setText(list.get(position).getString("price"));
+            price.setText("Price: " + list.get(position).getString("price"));
 
             date.setText(list.get(position).getString("date"));
 

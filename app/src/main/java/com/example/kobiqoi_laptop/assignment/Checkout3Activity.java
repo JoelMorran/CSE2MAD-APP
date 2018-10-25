@@ -111,12 +111,14 @@ public class Checkout3Activity extends AppCompatActivity {
         db = new DBHandler3(getApplicationContext());
 
         listItems = db.getAllOrders();
+        db.close();
 
 
         adapter = new ListAdapterCheckout(getApplicationContext(), R.layout.list_layout_checkout, R.id.txtname, listItems);
         listV.setAdapter(adapter);
 
         ArrayList<Order> orders = db.getAllOrders();
+        db.close();
 
         double total = 0;
         double t = 0;
@@ -146,6 +148,7 @@ public class Checkout3Activity extends AppCompatActivity {
 
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> ordersxz = db.getAllOrders();
+        db.close();
         String xz = "";
         for (Order cn : ordersxz) {
 
@@ -333,6 +336,7 @@ public class Checkout3Activity extends AppCompatActivity {
                 myIntent.putExtra("tbnumber", tx);
 
                 db.allDeleteOrder();
+                db.close();
 
                 dbDelCheck = 1;
 
@@ -413,6 +417,7 @@ public class Checkout3Activity extends AppCompatActivity {
     private void sendBroadcast() {
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
+        db.close();
         String s = "";
         for (Order cn : orders)
         {

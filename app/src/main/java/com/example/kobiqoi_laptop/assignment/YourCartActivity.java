@@ -75,11 +75,15 @@ public class YourCartActivity extends AppCompatActivity {
 
         listItems =  db.getAllOrders();
 
+        db.close();
+
 
         adapter=new ListAdapterOrders(getApplicationContext(), R.layout.list_layout_orders2,R.id.txtname,listItems);
         listV.setAdapter(adapter);
 
         ArrayList<Order> orders = db.getAllOrders();
+
+        db.close();
 
         double total = 0;
         double t = 0;
@@ -105,6 +109,7 @@ public class YourCartActivity extends AppCompatActivity {
     emptycart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tbid();
 
                 db.allDeleteOrder();
                // adapter.notifyDataSetChanged();
@@ -122,6 +127,7 @@ public class YourCartActivity extends AppCompatActivity {
                 adapter=new ListAdapterOrders(getApplicationContext(), R.layout.list_layout_orders2,R.id.txtname,listItems);
                 listV.setAdapter(adapter);
 
+                db.close();
             }
         });
 
@@ -156,6 +162,8 @@ public class YourCartActivity extends AppCompatActivity {
 
                             ArrayList<Order> orders = db.getAllOrders();
 
+                            db.close();
+                            int tot = 0;
                             double total = 0;
                             double t = 0;
                             int count = 0;
@@ -167,9 +175,12 @@ public class YourCartActivity extends AppCompatActivity {
                                 t = tt * ttt;
                                 total = t + total;
 
+                                int tot2 = Integer.parseInt(cn.getAmount());
+                                tot = tot + tot2;
+
                             }
                             String s = String.valueOf(total);
-                            String ss = String.valueOf(count);
+                            String ss = String.valueOf(tot);
                             items.setText(ss);
                             subtotal.setText(s);
 
@@ -264,6 +275,7 @@ public class YourCartActivity extends AppCompatActivity {
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
 
+        db.close();
         for (Order cn : orders)
         {
 
@@ -298,7 +310,7 @@ public class YourCartActivity extends AppCompatActivity {
         return true;
     }
 
-    private void updateSpinner() {
+   /* private void updateSpinner() {
         DBHandler3 db = new DBHandler3(getApplicationContext());
         List<Order> orders = db.getAllOrders();
         ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, orders);
@@ -314,12 +326,14 @@ public class YourCartActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
         //createlog();
 
-    }
+    }*/
 
 
     private void sendBroadcast() {
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
+
+        db.close();
         String s = "";
         for (Order cn : orders)
         {

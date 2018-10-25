@@ -95,6 +95,8 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
             DBHandler2 db = new DBHandler2(getApplicationContext());
             List<Table> tables = db.getAllTables();
 
+            db.close();
+
             for (Table cn : tables)
             {
                 if(tablenumber.getText().toString().equals(cn.getTablenumber()) ) // ==   gives error but says do it?
@@ -117,6 +119,8 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
                 //int check2 = Integer.parseInt(check);
 
                     db.addTable(new Table(tablenumber.getText().toString(), tablesize.getText().toString()));
+
+                db.close();
 
                     Intent myIntent = new Intent(CreateNewTableSetupActivity.this, TableListActivity.class);
                     CreateNewTableSetupActivity.this.startActivity(myIntent);
@@ -202,6 +206,8 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
             // Writing Contacts to log
             Log.d("Name: ", log);
         }
+
+        db.close();
     }
 
    /* @Override

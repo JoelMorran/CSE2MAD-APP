@@ -279,6 +279,8 @@ public class AlcoholMenuActivity extends AppCompatActivity implements AdapterVie
 
         }
 
+        db.close();
+
 
 
 

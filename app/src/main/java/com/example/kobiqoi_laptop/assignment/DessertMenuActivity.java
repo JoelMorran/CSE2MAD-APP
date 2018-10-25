@@ -267,6 +267,8 @@ public class DessertMenuActivity extends AppCompatActivity implements AdapterVie
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
 
+        db.close();
+
         for (Order cn : orders)
         {
 

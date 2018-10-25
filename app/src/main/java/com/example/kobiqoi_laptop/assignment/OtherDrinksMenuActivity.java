@@ -268,6 +268,8 @@ public class OtherDrinksMenuActivity extends AppCompatActivity implements Adapte
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
 
+        db.close();
+
         for (Order cn : orders)
         {
 

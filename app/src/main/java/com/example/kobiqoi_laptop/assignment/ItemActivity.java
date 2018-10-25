@@ -223,6 +223,8 @@ public class ItemActivity extends AppCompatActivity {
 
                 db.addOrder(new Order(name3, description2, amount.getText().toString(), addnote2.getText().toString(),
                                price3, cost2, tbnum));
+
+                    db.close();
                     //db.addOrder(new Order("GH", "GHFDGFJG", "HFHJ", "JJHHF",
                      //       "HJGHFG", "KGJFGH", "0"));
                     //db.addOrder(new Order("tasdfatt", "asdf", "fa", "ttasdft","asdf", "tasdftt", "t0sadf"));
@@ -307,6 +309,7 @@ public class ItemActivity extends AppCompatActivity {
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
 
+        db.close();
         for (Order cn : orders)
         {
 
@@ -387,14 +390,16 @@ public class ItemActivity extends AppCompatActivity {
         item1Button.setImageBitmap(img3);
     }*/
 
-    private void updateSpinner() {
+   /* private void updateSpinner() {
         DBHandler3 db = new DBHandler3(getApplicationContext());
         List<Order> orders = db.getAllOrders();
         ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, orders);
+
+        db.close();
         //spinner.setAdapter(adapter);
         //createlog();
 
-    }
+    }*/
 
     private void sendBroadcast() {
         Intent intent = new Intent();

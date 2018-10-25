@@ -126,11 +126,15 @@ public class Checkout2Activity extends AppCompatActivity {
 
         listItems = db.getAllOrders();
 
+        db.close();
+
 
         adapter = new ListAdapterCheckout(getApplicationContext(), R.layout.list_layout_checkout, R.id.txtname, listItems);
         listV.setAdapter(adapter);
 
         ArrayList<Order> orders = db.getAllOrders();
+
+        db.close();
 
         double total = 0;
         double t = 0;
@@ -197,6 +201,9 @@ public class Checkout2Activity extends AppCompatActivity {
                 if(dbDelCheck != 1)
                 {
                     db.allDeleteOrder();
+
+                    db.close();
+
                 }
             }
         }).start();
@@ -332,12 +339,15 @@ public class Checkout2Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(Checkout2Activity.this, LetsEat2Activity.class);
 
-tx.toString();
+                tx.toString();
                     myIntent.putExtra("tbnumber", tx);
 
 
 
                 db.allDeleteOrder();
+
+                db.close();
+
 
                 dbDelCheck = 1;
 
@@ -418,6 +428,8 @@ tx.toString();
     private void sendBroadcast() {
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
+
+        db.close();
         String s = "";
         for (Order cn : orders)
         {
@@ -426,6 +438,7 @@ tx.toString();
 
 
         }
+
         Intent intent = new Intent();
         intent.setAction("com.example.kobiqoi_laptop.assignment");
         intent.putExtra("Life_form", "Table " + s + " needs assistance \n");

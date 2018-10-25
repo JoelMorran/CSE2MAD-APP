@@ -395,6 +395,8 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
 
+        db.close();
+
         for (Order cn : orders)
         {
 
@@ -435,6 +437,8 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
     private void sendBroadcast() {
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
+
+        db.close();
         String s = "";
         for (Order cn : orders)
         {

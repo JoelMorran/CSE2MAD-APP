@@ -86,6 +86,8 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
 
         listItems =  db.getAllTables();
 
+        db.close();
+
 
         adapter=new ListAdapterTable(getApplicationContext(), R.layout.list_layout_tables,R.id.txtname,listItems);
         listV.setAdapter(adapter);
@@ -185,6 +187,8 @@ public class TableListActivity extends AppCompatActivity implements AdapterView.
                 DBHandler2 db = new DBHandler2(getApplicationContext());
 
                 List<Table> tables = db.getAllTables();
+
+                db.close();
 
                 //Object tablex(int id, String str);
 

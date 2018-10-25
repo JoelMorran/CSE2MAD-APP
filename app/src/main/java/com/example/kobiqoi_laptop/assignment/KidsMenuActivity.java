@@ -268,6 +268,8 @@ public class KidsMenuActivity extends AppCompatActivity implements AdapterView.O
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
 
+        db.close();
+
         for (Order cn : orders)
         {
 

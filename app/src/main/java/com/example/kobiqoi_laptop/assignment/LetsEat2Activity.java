@@ -16,6 +16,7 @@ public class LetsEat2Activity extends AppCompatActivity {
 
     private Button LetsEat;
     private String tbnum;
+    private Button backdoor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class LetsEat2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_lets_eat2);
 
         LetsEat = (Button) findViewById(R.id.LetsEat);
-        //signUp = (Button) findViewById(R.id.signUp);
+        backdoor = (Button) findViewById(R.id.backdoor);
        // Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         //setSupportActionBar(myToolbar);
 
@@ -55,14 +56,14 @@ public class LetsEat2Activity extends AppCompatActivity {
             }
         });
 
-        /*signUp.setOnClickListener(new View.OnClickListener() {
+        backdoor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
+                Intent myIntent = new Intent(LetsEat2Activity.this, LetsEatActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
+                LetsEat2Activity.this.startActivity(myIntent);
             }
-        });*/
+        });
 
     }
 

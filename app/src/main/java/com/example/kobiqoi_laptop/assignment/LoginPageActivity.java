@@ -96,8 +96,8 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
-        updateSpinner();
+        //spinner2 = (Spinner) findViewById(R.id.spinner2);
+        //updateSpinner();
         hack = (Button) findViewById(R.id.hack);
 
 
@@ -126,7 +126,7 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
 
 
         db = new DBHandler(this);
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        //spinner2 = (Spinner) findViewById(R.id.spinner2);
 
 
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +135,8 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
                 DBHandler db = new DBHandler(getApplicationContext());
                 List<Account> accounts = db.getAllAccounts();
                ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
+
+                db.close();
                 spinner2.setAdapter(adapter);
 
                 boolean isFoundUsername = false;
@@ -261,14 +263,16 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
         });
     }
 
-    private void updateSpinner() {
+    /*private void updateSpinner() {
         DBHandler db = new DBHandler(getApplicationContext());
         List<Account> accounts = db.getAllAccounts();
         ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
         spinner2.setAdapter(adapter);
+
+        db.close();
         //createlog();
 
-    }
+    }*/
 
    /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {

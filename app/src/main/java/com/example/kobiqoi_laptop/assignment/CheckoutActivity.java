@@ -77,21 +77,31 @@ public class CheckoutActivity extends AppCompatActivity {
 
         listItems = db.getAllOrders();
 
+        db.close();
+
 
         adapter = new ListAdapterCheckout(getApplicationContext(), R.layout.list_layout_checkout, R.id.txtname, listItems);
         listV.setAdapter(adapter);
 
         ArrayList<Order> orders = db.getAllOrders();
 
+        db.close();
+
         double total = 0;
         double t = 0;
+        int tot = 0;
         int count = 0;
 
         for (Order cn : orders) {
-            ++count;
-            Double tt = Double.parseDouble(cn.getPrice());
-            t = tt;
+            //++count;
+
+            double tt = Double.parseDouble(cn.getPrice());
+            double ttt = Double.parseDouble(cn.getAmount());
+            t = tt * ttt;
             total = t + total;
+            int tot2 = Integer.parseInt(cn.getAmount());
+             tot = tot + tot2;
+
 
         }
         double gsts = 10 * (total / 100);
@@ -99,7 +109,7 @@ public class CheckoutActivity extends AppCompatActivity {
         double x = total;
         String s = String.valueOf(x);
         String k = String.valueOf(x);
-        String ss = String.valueOf(count);
+        String ss = String.valueOf(tot);
         String sss = String.valueOf(subt);
         String ssss = String.valueOf(gsts);
         items.setText("Quantity: " + ss);
@@ -177,6 +187,8 @@ public class CheckoutActivity extends AppCompatActivity {
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
 
+        db.close();
+
         for (Order cn : orders)
         {
 
@@ -215,6 +227,8 @@ public class CheckoutActivity extends AppCompatActivity {
     private void sendBroadcast() {
         db = new DBHandler3(getApplicationContext());
         ArrayList<Order> orders = db.getAllOrders();
+
+        db.close();
         String s = "";
         for (Order cn : orders)
         {
