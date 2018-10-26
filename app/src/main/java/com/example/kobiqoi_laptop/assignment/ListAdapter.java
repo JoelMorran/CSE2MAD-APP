@@ -58,7 +58,7 @@ public class ListAdapter extends ArrayAdapter<JSONObject> {
             }
             //txtName.setText(list.get(position).getString("glutenfree"));
 
-            txtSex.setText(list.get(position).getString("$" + "price"));
+            txtSex.setText("$" + list.get(position).getString("price"));
 
 
 
