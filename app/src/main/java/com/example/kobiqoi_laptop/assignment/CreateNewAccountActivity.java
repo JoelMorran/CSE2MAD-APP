@@ -3,15 +3,14 @@ package com.example.kobiqoi_laptop.assignment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -30,7 +29,6 @@ public class CreateNewAccountActivity extends AppCompatActivity {
     private Button populateDb;
     private Spinner spinner;
     DBHandler db;
-    //View focusView = name;
 
 
     @Override
@@ -48,36 +46,8 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
-
-        // Enable the Up button
-        //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
-
-       /*createAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(CreateNewAccountActivity.this, LoginPageActivity.class);
-                CreateNewAccountActivity.this.startActivity(myIntent);
-            }
-        });*/
-
-        /*signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
-
-                SignInSignUpActivity.this.startActivity(myIntent);
-            }
-        });*/
-
-
-        //spinner = (Spinner) findViewById(R.id.spinner);
-        //populateDb = (Button) findViewById(R.id.populateDb);
-
-        //updateSpinner();
 
 
         db = new DBHandler(this);
@@ -113,16 +83,12 @@ public class CreateNewAccountActivity extends AppCompatActivity {
                     }
                 }
 
-                //String email2 = email.getText().toString();
 
-                //isEmailValid(email.getText().toString());
 
                 if(isEmailValid(email.getText().toString()) && !isFoundEmail && !isFoundUsername
                         &&  username.getText().toString().length() >= 1 && name.getText().toString().length() >= 1
                         && password.getText().toString().length() >= 1)
                 {
-                    //String check = tablesize.getText().toString();
-                    //int check2 = Integer.parseInt(check);
 
                     db.addAccount(new Account(name.getText().toString(), username.getText().toString(),
                             email.getText().toString(), password.getText().toString()));
@@ -504,22 +470,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         });
 
 
-/*        populateDb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DBHandler db = new DBHandler(getApplicationContext());
-                // Inserting students
-                Log.d("Insert: ", "Inserting ..");
-                db.addAccount(new Account("Mat", "Mat2", "test1@hotmail.com", "password1"));
-                db.addAccount(new Account("Alex", "Alex1", "test1@hotmail.com.au", "password2"));
-                db.addAccount(new Account("Sameer", "Sameerwashere", "test1@outlook.com", "password3"));
-                db.addAccount(new Account("Shaz", "Shazisaspaz", "test1@outlook.com.au", "password4"));
-                //updateSpinner();
-                createlog();
 
-                db.close();
-            }
-        });*/
 
 
     }
@@ -531,14 +482,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         return matcher.matches();
     }
 
-   /* private void updateSpinner() {
-        DBHandler db = new DBHandler(getApplicationContext());
-        List<Account> accounts = db.getAllAccounts();
-        ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
-        spinner.setAdapter(adapter);
-        //createlog();
 
-    }*/
 
     private void createlog()
     {
@@ -556,67 +500,12 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         db.close();
     }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_history:
-                // User chose the "Settings" item, show the app settings UI...
-                //sendBroadcast();
-                Intent myIntent = new Intent(this, OrderHistoryActivity.class);
-
-                this.startActivity(myIntent);
-
-                return true;
-
-            case R.id.action_cart:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
-                Intent myIntent2 = new Intent(this, YourCartActivity.class);
-
-                this.startActivity(myIntent2);
-                return true;
-
-            case R.id.action_menu:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
-                Intent myIntent3 = new Intent(this, MenuActivity.class);
-
-                this.startActivity(myIntent3);
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                //sendBroadcast();
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menubuttons, menu);
-
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =
-                (SearchView) searchItem.getActionView();*/
-
-        // Configure the search info and add any event listeners...
-
-    /*    return super.onCreateOptionsMenu(menu);
-    }*/
-
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
-
-
 
 
 

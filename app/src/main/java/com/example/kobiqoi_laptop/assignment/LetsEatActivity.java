@@ -21,7 +21,7 @@ public class LetsEatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(LetsEatActivity.this, SignInSignUpActivity.class);
-               // myIntent.putExtra("contact_num", contact_number);
+
                 LetsEatActivity.this.startActivity(myIntent);
                 }
         });

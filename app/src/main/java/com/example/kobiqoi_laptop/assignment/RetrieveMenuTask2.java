@@ -18,13 +18,13 @@ import java.util.ArrayList;
 class RetrieveMenuTask2 extends AsyncTask<String, Void, Integer> {
     private Exception exception;
     private Bitmap img;
-   // private JSONArray arr;
+
     private ListAdapter adapter;
     private ArrayList<JSONObject> listItems;
     @Override
     protected Integer doInBackground(String... urlStrs) {
         try {
-// get the menu
+
             java.net.URL url = new java.net.URL(urlStrs[0]);
             HttpURLConnection connection = (HttpURLConnection) url
                     .openConnection();
@@ -46,7 +46,7 @@ class RetrieveMenuTask2 extends AsyncTask<String, Void, Integer> {
              listItems=getArrayListFromJSONArray(arr);
 
 
-            //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString());
+
 
             return new Integer(0);
         } catch (Exception e) {
@@ -90,11 +90,9 @@ class RetrieveMenuTask2 extends AsyncTask<String, Void, Integer> {
         }
     }
     protected void onPostExecute(Integer res) {
-    // modify the UI Thread
-        //item1Button.setImageBitmap(img);
-      //ListAdapter adapter=new ListAdapter(AlcoholMenuActivity.this, R.layout.list_layout,R.id.txtid,listItems);
+
         adapter=new ListAdapter(null, R.layout.list_layout,R.id.txtid,listItems);
-        //listV.setAdapter(adapter);
+
 
     }
 }

@@ -3,7 +3,7 @@ package com.example.kobiqoi_laptop.assignment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -20,13 +20,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.v7.widget.SearchView;
+
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
+
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -38,7 +37,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,20 +84,13 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
 
-        // Enable the Up button
-        //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-        //spinner2 = (Spinner) findViewById(R.id.spinner2);
-        //updateSpinner();
-       // hack = (Button) findViewById(R.id.hack);
 
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -126,7 +118,7 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
 
 
         db = new DBHandler(this);
-        //spinner2 = (Spinner) findViewById(R.id.spinner2);
+
 
 
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +129,7 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
                ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
 
                 db.close();
-//                spinner2.setAdapter(adapter);
+
 
                 boolean isFoundUsername = false;
                 boolean isFoundEmail = false;
@@ -208,124 +200,14 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
                     mPasswordView.setError("Please enter a valid password");
                 }
 
-                //DBHandler db = new DBHandler(getApplicationContext());
-                // Reading all students
-               /* Log.d("Reading: ", "Reading all accounts..");
-                boolean isFound = false;
 
-                for (Account cn : accounts) {
-                    String log = "Id: "+cn.getID()+" ,Name: " + cn.getName() + " ,Username: " + cn.getUsername()
-                            + " ,Email: " + cn.getEmail()+ " ,Password: " + cn.getPassword();
-                    // Writing Contacts to log
-                    Log.d("Name: ", log);
-                    if(mEmailView.getText().toString().equals(cn.getName()) ) // ==   gives error but says do it?
-                    {
-                        Intent myIntent = new Intent(LoginPageActivity.this, TableSetupActivity.class);
-                        LoginPageActivity.this.startActivity(myIntent);
-                        isFound = true;
-                        break;
-                    }
-                }
-
-                if(isFound == false) {
-                    Context context = getApplicationContext();
-                    CharSequence text = "Login Failed!";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-
-
-               // Intent myIntent = new Intent(CreateNewAccountActivity.this, LoginPageActivity.class);
-              //  CreateNewAccountActivity.this.startActivity(myIntent);
-
-                updateSpinner();
-                mEmailView.setFocusable(true);
-                mEmailView.requestFocus();
-                /*username.getText().clear();
-                email.getText().clear();
-                password.getText().clear();
-                name.getText().clear();*/
-
-                //createlog();*/
             }
         });
 
 
-       /* hack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(LoginPageActivity.this, TableSetupActivity.class);
 
-                LoginPageActivity.this.startActivity(myIntent);
-            }
-        });*/
     }
 
-    /*private void updateSpinner() {
-        DBHandler db = new DBHandler(getApplicationContext());
-        List<Account> accounts = db.getAllAccounts();
-        ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
-        spinner2.setAdapter(adapter);
-
-        db.close();
-        //createlog();
-
-    }*/
-
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_history:
-                // User chose the "Settings" item, show the app settings UI...
-                //sendBroadcast();
-                Intent myIntent = new Intent(this, OrderHistoryActivity.class);
-
-                this.startActivity(myIntent);
-
-                return true;
-
-            case R.id.action_cart:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
-                Intent myIntent2 = new Intent(this, YourCartActivity.class);
-
-                this.startActivity(myIntent2);
-                return true;
-
-            case R.id.action_menu:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
-                Intent myIntent3 = new Intent(this, MenuActivity.class);
-
-                this.startActivity(myIntent3);
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                //sendBroadcast();
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menubuttons, menu);
-
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =
-                (SearchView) searchItem.getActionView();*/
-
-        // Configure the search info and add any event listeners...
-
-    /*    return super.onCreateOptionsMenu(menu);
-    }*/
 
 
     @Override

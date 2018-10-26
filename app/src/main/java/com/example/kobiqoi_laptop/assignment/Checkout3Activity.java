@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -81,7 +81,7 @@ public class Checkout3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout3);
-       //spinner = (Spinner) findViewById(R.id.spinner3);
+
 
 
         checkout = (Button) findViewById(R.id.checkout);
@@ -93,16 +93,10 @@ public class Checkout3Activity extends AppCompatActivity {
         finish = (Button) findViewById(R.id.finish);
 
         helpbtn = (ImageButton) findViewById(R.id.helpbtn);
-        //tableid = (TextView) findViewById(R.id.tableid);
-        //signUp = (Button) findViewById(R.id.signUp);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
-
-        // Enable the Up button
-        //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
@@ -173,51 +167,12 @@ public class Checkout3Activity extends AppCompatActivity {
         });
 
 
-       /* progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        // Start long running operation in a background thread
-        new Thread(new Runnable() {
-            public void run() {
-                while (progressStatus < 60) {
-                    progressStatus += 1;
-                    // Update the progress bar and display the
-                    //current value in the text view
-                    handler.post(new Runnable() {
-                        public void run() {
-                            progressBar.setProgress(progressStatus);
-                            Log.d (TAG, "happy time");
-
-                        }
-                    });
-                    try {
-                        // Sleep for 200 milliseconds.
-                        Thread.sleep(15000); ///900000
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                go();
-                if(dbDelCheck != 1)
-                {
-                    db.allDeleteOrder();
-                }
-            }
-        }).start();*/
-
         int count3 = 0;
         String count2 = "1";
-        //readObject("test.json");
+
         String count4 = "2";
 
 
-
-        // SharedPreferences prefs = this.getSharedPreferences(
-        //       "com.example.kobiqoi_laptop.assignment", Context.MODE_PRIVATE);
-        // String readit = prefs.getString("MASTER", "");
-
-        /*for(readit){
-
-        }*/
         Date currentTime = Calendar.getInstance().getTime();
 
         JSONArray master = new JSONArray();
@@ -259,10 +214,6 @@ public class Checkout3Activity extends AppCompatActivity {
                 masterstring = orderArr.toString();
                 writeObject(masterstring, count2 + ".json");
 
-                //writeToFile(masterstring, getApplicationContext());
-
-
-                //readObject("iamhere.json");
                 Log.e(TAG,"is nto null");
             }
         }
@@ -270,53 +221,7 @@ public class Checkout3Activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-/*
-            JSONArray master = new JSONArray();
-            JSONObject Obj = new JSONObject();
-            JSONArray orderArr = new JSONArray();
-            try{
 
-                for(Order or : orders){
-                    JSONObject item = new JSONObject();
-                    item.put("id", or.getID());
-                    item.put("name", or.getName());
-                    item.put("extra", or.getExtra());
-                    item.put("amount", or.getAmount());
-                    item.put("note", or.getNote());
-                    item.put("price", or.getPrice());
-                    item.put("cost", or.getCost());
-                    item.put("tableid", or.getTableid());
-                    orderArr.put(item);
-
-                }
-
-                Obj.put(count2, orderArr);
-
-                master.put(Obj);
-
-            }
-            catch (JSONException e)
-            {
-                Log.e(TAG, "JSONException: " + e.getMessage());
-
-            }
-
-
-
-        try{
-            Log.d(TAG, master.toString(4));
-            if(master != null) {
-                masterstring = master.toString();
-                writeObject(masterstring, "iamhere.json");
-
-
-                readObject("test.json");
-                Log.e(TAG,"is nto null");
-            }
-        }
-        catch (JSONException e){
-            e.printStackTrace();
-        }*/
         try {
             tx = Obj.getString("tableid");
 
@@ -349,15 +254,11 @@ public class Checkout3Activity extends AppCompatActivity {
     }
 
 
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_history:
-                // User chose the "Settings" item, show the app settings UI...
-                //sendBroadcast();
+
                 Intent myIntent = new Intent(this, OrderHistoryActivity.class);
 
                 this.startActivity(myIntent);
@@ -365,18 +266,14 @@ public class Checkout3Activity extends AppCompatActivity {
                 return true;
 
             case R.id.action_cart:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent2 = new Intent(this, YourCartActivity.class);
 
                 this.startActivity(myIntent2);
                 return true;
 
             case R.id.action_menu:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
                 myIntent3.putExtra("tbnumber", tx);
 
@@ -384,9 +281,7 @@ public class Checkout3Activity extends AppCompatActivity {
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                //sendBroadcast();
+
                 return super.onOptionsItemSelected(item);
 
         }
@@ -397,11 +292,6 @@ public class Checkout3Activity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menubuttons, menu);
 
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =
-                (SearchView) searchItem.getActionView();*/
-
-        // Configure the search info and add any event listeners...
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -433,11 +323,7 @@ public class Checkout3Activity extends AppCompatActivity {
         Toast.makeText(this.getApplicationContext(),"HELOOOOOOOOOO", Toast.LENGTH_LONG);
         sendBroadcast(intent);
     }
-    /*private void go() {
-        Intent myIntent = new Intent(Checkout3Activity.this, Checkout3Activity.class);
 
-        Checkout2Activity.this.startActivity(myIntent);
-    }*/
 
 
 
@@ -473,19 +359,6 @@ public class Checkout3Activity extends AppCompatActivity {
 
     public void writeObject(Object inputObject, String fileName)  {
         try {
-                /*SharedPreferences prefs = this.getSharedPreferences(
-                        "com.example.kobiqoi_laptop.assignment", Context.MODE_PRIVATE);
-                String readit = prefs.getString("MASTER", "");
-
-                String readit3 =prefs.getString("MASTER", "name");
-      String test = readit.toString();
-                if(!(readit.equals(null))){
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(getString(R.string.master), readit + " " + masterstring );
-                editor.commit();
-                }
-
-                String readit2 =prefs.getString("MASTER", "");*/
 
 
             filePath = this.getFilesDir().getAbsolutePath() + "/" + fileName;
@@ -518,12 +391,6 @@ public class Checkout3Activity extends AppCompatActivity {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
-
-
-
-
-
-
 
 
 }

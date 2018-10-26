@@ -3,7 +3,7 @@ package com.example.kobiqoi_laptop.assignment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,8 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -43,27 +42,13 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
 
         helpbtn = (ImageButton) findViewById(R.id.helpbtn);
 
-        //signIn = (Button) findViewById(R.id.signIn);
-        //signUp = (Button) findViewById(R.id.signUp);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
 
-        // Enable the Up button
-        //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
-
-       /* signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
-
-                SignInSignUpActivity.this.startActivity(myIntent);
-            }
-        });*/
 
         paynow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +57,6 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
                         expiry.getText().toString().length() == 5 && nameoncard.getText().toString().length() >= 1
                         && cvc.getText().toString().length() >= 3 && cvc.getText().toString().length() <= 4)
                 {
-                    //String check = tablesize.getText().toString();
-                    //int check2 = Integer.parseInt(check);
 
 
 
@@ -343,7 +326,7 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //Log.d("","help");
+
                 sendBroadcast();
             }
         });
@@ -354,8 +337,7 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_history:
-                // User chose the "Settings" item, show the app settings UI...
-                //sendBroadcast();
+
                 Intent myIntent = new Intent(this, OrderHistoryActivity.class);
 
                 this.startActivity(myIntent);
@@ -363,18 +345,14 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_cart:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent2 = new Intent(this, YourCartActivity.class);
 
                 this.startActivity(myIntent2);
                 return true;
 
             case R.id.action_menu:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
                 tbid();
                 myIntent3.putExtra("tbnumber", xz);
@@ -382,9 +360,7 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                //sendBroadcast();
+
                 return super.onOptionsItemSelected(item);
 
         }
@@ -405,25 +381,14 @@ public class CreditCardDetailsActivity extends AppCompatActivity {
 
         }
 
-
-
-
     }
-
-
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menubuttons, menu);
 
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =
-                (SearchView) searchItem.getActionView();*/
-
-        // Configure the search info and add any event listeners...
-
-        return super.onCreateOptionsMenu(menu);
+            return super.onCreateOptionsMenu(menu);
     }
 
 

@@ -49,14 +49,14 @@ public class ListAdapter extends ArrayAdapter<JSONObject> {
             txtId.setText(list.get(position).getString("name"));
 
             if(list.get(position).getString("glutenfree").equals("true")) {
-                //list.get(position).getString("glutenfree").equals("true");
+
                 txtName.setText("GF");
             }
             else
             {
                 txtName.setText("Not GF");
             }
-            //txtName.setText(list.get(position).getString("glutenfree"));
+
 
             txtSex.setText("$" + list.get(position).getString("price"));
 

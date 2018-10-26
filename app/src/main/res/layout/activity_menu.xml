@@ -73,7 +73,7 @@
         android:background="#ff5722"
         android:src="@drawable/ic_record_voice_over_white_48dp"
         app:layout_constraintBottom_toBottomOf="parent" />
-        <!--app:srcCompat="@drawable/ic_record_voice_over_white_48dp"-->
+
 
 
 </android.support.constraint.ConstraintLayout>

@@ -3,7 +3,7 @@ package com.example.kobiqoi_laptop.assignment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,29 +42,13 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
-
-        // Enable the Up button
-        //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
        placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if(paypaypal.getCheckedRadioButtonId()==-1)
-                {
-                    Toast.makeText(getApplicationContext(), "Please select Gender", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    // get selected radio button from radioGroup
-                    int selectedId = gender.getCheckedRadioButtonId();
-                    // find the radiobutton by returned id
-                    selectedRadioButton = (RadioButton)findViewById(selectedId);
-                    Toast.makeText(getApplicationContext(), selectedRadioButton.getText().toString()+" is selected", Toast.LENGTH_SHORT).show();
-                }*/
+
                if(paypaypal.isChecked())
                 {
                     sendBroadcast();
@@ -103,7 +87,7 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
                                    @Override
                                    public void onClick(View view) {
 
-                                       //Log.d("","help");
+
                                        sendBroadcast();
                                    }
                                });
@@ -114,8 +98,7 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_history:
-                // User chose the "Settings" item, show the app settings UI...
-                //sendBroadcast();
+
                 Intent myIntent = new Intent(this, OrderHistoryActivity.class);
 
                 this.startActivity(myIntent);
@@ -123,18 +106,14 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_cart:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent2 = new Intent(this, YourCartActivity.class);
 
                 this.startActivity(myIntent2);
                 return true;
 
             case R.id.action_menu:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
                 tbid();
                 myIntent3.putExtra("tbnumber", xz);
@@ -142,9 +121,7 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                //sendBroadcast();
+
                 return super.onOptionsItemSelected(item);
 
         }
@@ -166,24 +143,12 @@ public class CheckoutPaymentMethodActivity extends AppCompatActivity {
 
         }
 
-
-
-
-
     }
-
-
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menubuttons, menu);
-
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =
-                (SearchView) searchItem.getActionView();*/
-
-        // Configure the search info and add any event listeners...
 
         return super.onCreateOptionsMenu(menu);
     }

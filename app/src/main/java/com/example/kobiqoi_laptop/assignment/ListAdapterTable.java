@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -42,7 +40,7 @@ public class ListAdapterTable extends ArrayAdapter<Table> {
 
         TextView txtsize=(TextView)itemView.findViewById(R.id.txtsize);
 
-        //TextView txtSex=(TextView)itemView.findViewById(R.id.txtsex);
+
 
         try {
 

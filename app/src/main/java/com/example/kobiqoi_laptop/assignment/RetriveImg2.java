@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
+
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -50,60 +50,21 @@ public class RetriveImg2 extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alcohol_menu);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-
-
-
-
-        //signIn = (Button) findViewById(R.id.signIn);
-        //signUp = (Button) findViewById(R.id.signUp);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
 
-        // Enable the Up button
-        //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
 
-                SignInSignUpActivity.this.startActivity(myIntent);
-            }
-        });
-
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
-
-                SignInSignUpActivity.this.startActivity(myIntent);
-            }
-        });*/
         new RetrieveMenuTask().execute("http://homepage.cs.latrobe.edu.au/jamorran/menu.json");
         listV=(ListView)findViewById(R.id.listv);
         name=(TextView)findViewById(R.id.name);
         price=(TextView)findViewById(R.id.price);
         description=(TextView)findViewById(R.id.description);
 
-
-        // JSONArray jsonArray; //=getJSonData("jsondata.json");
-
-        // ArrayList<JSONObject> listItems;     //getArrayListFromJSONArray(jsonArray);*/
-
-
-
-        // ListAdapter adapter=new ListAdapter(this,R.layout.list_layout,R.id.txtid,listItems);
-
-
-
-        //* *EDIT* *
 
 
         listV.setOnItemClickListener(this);
@@ -115,15 +76,14 @@ public class RetriveImg2 extends AppCompatActivity implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 
         Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
-        // Then you start a new Activity via Intent
-        //v.get
+
         Intent intent = new Intent();
         intent.setClass(this, ItemActivity.class);
         intent.putExtra("position", position);
-        // Or / And
+
         intent.putExtra("id", id);
 
-        //JSONArray arr = jsonObj.getJSONArray("mains");
+
         String id3 = String.valueOf(id);
         int id2 = Integer.parseInt(id3);
 
@@ -145,45 +105,8 @@ public class RetriveImg2 extends AppCompatActivity implements AdapterView.OnItem
         catch (Exception e)
         {
             this.exception = e;
-            // return new Integer(-1);
+
         }
-
-      /*
-        String urls = "http://homepage.cs.latrobe.edu.au/jamorran/menu.json";
-        String[] a = new String[10];
-        a[0] = urls;
-
-        try {
-                // get the menu
-            java.net.URL url = new java.net.URL(a[0]);
-            HttpURLConnection connection = (HttpURLConnection) url
-                    .openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream stream = connection.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-            StringBuffer buffer = new StringBuffer();
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line);
-            }
-            JSONObject jsonObj = new JSONObject(buffer.toString());
-            JSONArray arr = jsonObj.getJSONArray("mains");
-           // sendarr = jsonObj.getJSONArray("mains");
-            arr.getJSONObject(id2).get("img_src").toString();
-
-
-
-            //listItems=getArrayListFromJSONArray(arr);
-
-
-            //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString());
-
-          //return new Integer(0);
-        } catch (Exception e) {
-            this.exception = e;
-           // return new Integer(-1);
-       }*/
 
 
         startActivity(intent);
@@ -196,8 +119,7 @@ public class RetriveImg2 extends AppCompatActivity implements AdapterView.OnItem
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_history:
-                // User chose the "Settings" item, show the app settings UI...
-                //sendBroadcast();
+
                 Intent myIntent = new Intent(this, OrderHistoryActivity.class);
 
                 this.startActivity(myIntent);
@@ -205,27 +127,21 @@ public class RetriveImg2 extends AppCompatActivity implements AdapterView.OnItem
                 return true;
 
             case R.id.action_cart:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent2 = new Intent(this, YourCartActivity.class);
 
                 this.startActivity(myIntent2);
                 return true;
 
             case R.id.action_menu:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
 
                 this.startActivity(myIntent3);
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                //sendBroadcast();
+
                 return super.onOptionsItemSelected(item);
 
         }
@@ -236,11 +152,6 @@ public class RetriveImg2 extends AppCompatActivity implements AdapterView.OnItem
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menubuttons, menu);
 
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =
-                (SearchView) searchItem.getActionView();*/
-
-        // Configure the search info and add any event listeners...
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -255,13 +166,11 @@ public class RetriveImg2 extends AppCompatActivity implements AdapterView.OnItem
     class RetrieveMenuTask extends AsyncTask<String, Void, Integer> {
         private Exception exception;
         private Bitmap img;
-        // private JSONArray arr;
-        // private ListAdapter adapter;
-        //private ArrayList<JSONObject> listItems;
+
         @Override
         protected Integer doInBackground(String... urlStrs) {
             try {
-// get the menu
+
                 java.net.URL url = new java.net.URL(urlStrs[0]);
                 HttpURLConnection connection = (HttpURLConnection) url
                         .openConnection();
@@ -284,7 +193,6 @@ public class RetriveImg2 extends AppCompatActivity implements AdapterView.OnItem
                 listItems=getArrayListFromJSONArray(arr);
 
 
-                //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString());
 
                 return new Integer(0);
             } catch (Exception e) {
@@ -330,9 +238,7 @@ public class RetriveImg2 extends AppCompatActivity implements AdapterView.OnItem
             }
         }
         protected void onPostExecute(Integer res) {
-// modify the UI Thread
-            //item1Button.setImageBitmap(img);
-            //ListAdapter adapter=new ListAdapter(AlcoholMenuActivity.this, R.layout.list_layout,R.id.txtid,listItems);
+
             adapter=new ListAdapter(getApplicationContext(), R.layout.list_layout,R.id.txtid,listItems);
             listV.setAdapter(adapter);
 

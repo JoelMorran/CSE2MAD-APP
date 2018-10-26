@@ -1,22 +1,21 @@
 package com.example.kobiqoi_laptop.assignment;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -37,42 +36,14 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
         createtable = (Button) findViewById(R.id.createtable);
         tablenumber = (EditText) findViewById(R.id.tablenumber);
         tablesize = (EditText) findViewById(R.id.tablesize);
-        //spinner = (Spinner) findViewById(R.id.spinner);
 
-        //signUp = (Button) findViewById(R.id.signUp);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
-        //updateSpinner();
-        // Get a support ActionBar corresponding to this toolbar
-        // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
 
-        // Enable the Up button
-        //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
-       /* signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, LoginPageActivity.class);
-
-                SignInSignUpActivity.this.startActivity(myIntent);
-            }
-        });
-
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(SignInSignUpActivity.this, CreateNewAccountActivity.class);
-
-                SignInSignUpActivity.this.startActivity(myIntent);
-            }
-        });*/
-
-
-
-
-   // populateDb = (Button) findViewById(R.id.populateDb);
 
 
     db = new DBHandler2(this);
@@ -81,13 +52,7 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
         @Override
         public void onClick(View view)
         {
-            //Pattern.matches("[a-zA-Z]+", tablenumber.getText().toString()) == false
 
-            /*if(!Pattern.matches("[a-zA-Z]+", tablenumber.getText().toString())
-                    && tablenumber.getText().toString().length() <= 2 && tablesize.getText().toString().length() <= 2
-                    && tablesize.getText().toString().length() >= 1 && !Pattern.matches("[a-zA-Z]+", tablesize.getText().toString())
-                    && tablenumber.getText().toString().length() >= 1 && Integer.parseInt(tablesize.getText().toString()) <= 30
-                    && Integer.parseInt(tablesize.getText().toString()) >= 1)*/
 
 
             boolean isFound = false;
@@ -115,8 +80,7 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
                             && Integer.parseInt(tablesize.getText().toString()) <= 30
                             && Integer.parseInt(tablesize.getText().toString()) >= 1)
             {
-                //String check = tablesize.getText().toString();
-                //int check2 = Integer.parseInt(check);
+
 
                     db.addTable(new Table(tablenumber.getText().toString(), tablesize.getText().toString()));
 
@@ -128,7 +92,7 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
 
                     tablenumber.getText().clear();
                     tablesize.getText().clear();
-                    //updateSpinner();
+
                     createlog();
                     tablenumber.setFocusable(true);
                     tablenumber.requestFocus();
@@ -186,14 +150,6 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
 
 }
 
-  /*  private void updateSpinner() {
-        DBHandler2 db = new DBHandler2(getApplicationContext());
-        List<Table> tables = db.getAllTables();
-        ArrayAdapter<Table> adapter = new ArrayAdapter<Table>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, tables);
-        spinner.setAdapter(adapter);
-        createlog();
-
-    }*/
 
     private void createlog()
     {
@@ -210,58 +166,6 @@ public class CreateNewTableSetupActivity extends AppCompatActivity {
         db.close();
     }
 
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_history:
-                // User chose the "Settings" item, show the app settings UI...
-                //sendBroadcast();
-                Intent myIntent = new Intent(this, OrderHistoryActivity.class);
-
-                this.startActivity(myIntent);
-
-                return true;
-
-            case R.id.action_cart:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
-                Intent myIntent2 = new Intent(this, YourCartActivity.class);
-
-                this.startActivity(myIntent2);
-                return true;
-
-            case R.id.action_menu:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
-                Intent myIntent3 = new Intent(this, MenuActivity.class);
-
-                this.startActivity(myIntent3);
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                //sendBroadcast();
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menubuttons, menu);
-
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =
-                (SearchView) searchItem.getActionView();*/
-
-        // Configure the search info and add any event listeners...
-
-     /*   return super.onCreateOptionsMenu(menu);
-    }*/
 
 
     @Override

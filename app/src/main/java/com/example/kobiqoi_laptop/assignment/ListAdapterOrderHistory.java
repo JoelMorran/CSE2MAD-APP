@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -69,7 +69,7 @@ public class ListAdapterOrderHistory extends ArrayAdapter<JSONObject> {
             String t4 = (list.get(position).getString("amount").toString());
             String t5 = (list.get(position).getString("note").toString());
             String t6 = (list.get(position).getString("price").toString());
-           // String t7 = (list.get(position).getString("cost").toString());
+
             String t8 = (list.get(position).getString("tableid").toString());
             String t9 = (list.get(position).getString("date").toString());
 

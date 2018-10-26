@@ -6,16 +6,16 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,16 +38,15 @@ public class DrinksMenuActivity extends AppCompatActivity{
     private Button teacoffee;
     private Button other;
 
-    //private ListView listV;
+
     private TextView name;
     private TextView price;
     private TextView description;
-    //private ListAdapter adapter;
-    //private SimpleAdapter adapter2;
+
     private ArrayList<JSONObject> listItems;
     private JSONArray sendarr;
     private JSONObject jsonObj;
-    //private Bitmap img;
+
 
     private String name2;
     private String price2;
@@ -77,11 +76,7 @@ public class DrinksMenuActivity extends AppCompatActivity{
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        // ActionBar ab = getSupportActionBar();//this works with onSupportNavigateUp()
 
-        // Enable the Up button
-        //  ab.setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//this works with onSupportNavigateUp()
         getSupportActionBar().setDisplayShowHomeEnabled(true); //this works with onSupportNavigateUp()
 
@@ -89,14 +84,7 @@ public class DrinksMenuActivity extends AppCompatActivity{
         new DrinksMenuActivity.RetrieveMenuTask().execute("http://homepage.cs.latrobe.edu.au/jamorran/menu.json");
 
 
-        //listV = (ListView) findViewById(R.id.listv);
-        //name = (TextView) findViewById(R.id.name);
-        //price = (TextView) findViewById(R.id.price);
-       // description = (TextView) findViewById(R.id.description);
-
-        //listV.setOnItemClickListener(this);
-
-        Bundle extras = getIntent().getExtras();
+               Bundle extras = getIntent().getExtras();
         if(extras != null) {
 
             tbnum = extras.getString("tbnumber");
@@ -141,22 +129,11 @@ public class DrinksMenuActivity extends AppCompatActivity{
             water.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Intent intent = new Intent(DrinksMenuActivity.this, ItemActivity.class);
 
-                    //Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
-                    // Then you start a new Activity via Intent
-                    //v.get
                     Intent intent = new Intent();
 
                     intent.setClass(DrinksMenuActivity.this, ItemActivity.class);
-                    //intent.putExtra("position", position);
-                    // Or / And
-                    //intent.putExtra("id", id);
 
-                    //JSONArray arr = jsonObj.getJSONArray("mains");
-
-                    // String id3 = String.valueOf(id);
-                    // int id2 = Integer.parseInt(id3);
 
                     try {
                         sendarr = jsonObj.getJSONArray("water");
@@ -174,15 +151,13 @@ public class DrinksMenuActivity extends AppCompatActivity{
 
 
                         String img3 = sendarr.getJSONObject(0).get("img_src").toString();
-                        //getBitmapFromURL(sendarr.getJSONObject(0).get("img_src").toString());
+
                         intent.putExtra("img_src", img3);
 
                         intent.putExtra("tbnumber", tbnum);
 
                     } catch (Exception e) {
-                        //Exception exception; how cant it find exception?????????????
-                        // this.exception = e; ????????????????????????????????????????????????????????????????????????????????
-                        // return new Integer(-1);
+
                     }
 
                     startActivity(intent);
@@ -196,35 +171,18 @@ public class DrinksMenuActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                //Log.d("","help");
+
                 sendBroadcast();
             }
         });
     }
 
 
-
-           // public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-
-          //  }
-
-            //Intent myIntent = new Intent(DrinksMenuActivity.this, ItemActivity.class);
-
-               // DrinksMenuActivity.this.startActivity(myIntent);
-          //  }
-       //});
-
-
-
-
-    //}
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_history:
-                // User chose the "Settings" item, show the app settings UI...
-                //sendBroadcast();
+
                 Intent myIntent = new Intent(this, OrderHistoryActivity.class);
 
                 this.startActivity(myIntent);
@@ -232,18 +190,14 @@ public class DrinksMenuActivity extends AppCompatActivity{
                 return true;
 
             case R.id.action_cart:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent2 = new Intent(this, YourCartActivity.class);
 
                 this.startActivity(myIntent2);
                 return true;
 
             case R.id.action_menu:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                // sendBroadcast();
+
                 Intent myIntent3 = new Intent(this, MenuActivity.class);
                 tbid();
                 myIntent3.putExtra("tbnumber", xz);
@@ -251,9 +205,7 @@ public class DrinksMenuActivity extends AppCompatActivity{
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                //sendBroadcast();
+
                 return super.onOptionsItemSelected(item);
 
         }
@@ -274,23 +226,12 @@ public class DrinksMenuActivity extends AppCompatActivity{
 
         }
 
-
-
-
     }
-
-
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menubuttons, menu);
-
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =
-                (SearchView) searchItem.getActionView();*/
-
-        // Configure the search info and add any event listeners...
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -305,13 +246,11 @@ public class DrinksMenuActivity extends AppCompatActivity{
     class RetrieveMenuTask extends AsyncTask<String, Void, Integer> {
         private Exception exception;
         private Bitmap img;
-        // private JSONArray arr;
-        // private ListAdapter adapter;
-        //private ArrayList<JSONObject> listItems;
+
         @Override
         protected Integer doInBackground(String... urlStrs) {
             try {
-// get the menu
+
                 java.net.URL url = new java.net.URL(urlStrs[0]);
                 HttpURLConnection connection = (HttpURLConnection) url
                         .openConnection();
@@ -327,14 +266,10 @@ public class DrinksMenuActivity extends AppCompatActivity{
                 jsonObj = new JSONObject(buffer.toString());
                 JSONArray arr = jsonObj.getJSONArray("water");
                 sendarr = jsonObj.getJSONArray("water");
-                // arr.getJSONObject(0).get("img_src").toString();
-
 
 
                 listItems=getArrayListFromJSONArray(arr);
 
-
-                //getBitmapFromURL(arr.getJSONObject(0).get("img_src").toString()); LAAAAAAAAAAAGGGGGGGGGGGGGGGGGAGGGGGGGGGGGGGGGGGGGGGGGGGGGaGGGGAGAGAGAGAGAGAGAGAGAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGGGGGGGGAGAGAGAGAGGA
 
                 return new Integer(0);
             } catch (Exception e) {
@@ -380,14 +315,6 @@ public class DrinksMenuActivity extends AppCompatActivity{
             }
         }
 
-      /*  protected void onPostExecute(Integer res) {
-// modify the UI Thread
-            //item1Button.setImageBitmap(img);
-            //ListAdapter adapter=new ListAdapter(AlcoholMenuActivity.this, R.layout.list_layout,R.id.txtid,listItems);
-            adapter=new ListAdapter(getApplicationContext(), R.layout.list_layout,R.id.txtid,listItems);
-            listV.setAdapter(adapter);
-
-        }*/
     }
 
     private void sendBroadcast() {

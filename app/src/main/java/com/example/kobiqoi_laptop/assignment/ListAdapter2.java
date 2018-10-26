@@ -48,14 +48,7 @@ public class ListAdapter2 extends ArrayAdapter<JSONObject> {
 
             name.setText(list.get(position).getString("name"));
 
-            /*if(list.get(position).getString("glutenfree").equals("true")) {
-                //list.get(position).getString("glutenfree").equals("true");
-                txtName.setText("GF");
-            }
-            else
-            {
-                txtName.setText("Not GF");
-            }*/
+
             price.setText(list.get(position).getString("price"));
 
             description.setText(list.get(position).getString("description"));
