@@ -98,7 +98,7 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
         populateAutoComplete();
         //spinner2 = (Spinner) findViewById(R.id.spinner2);
         //updateSpinner();
-        hack = (Button) findViewById(R.id.hack);
+       // hack = (Button) findViewById(R.id.hack);
 
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -137,7 +137,7 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
                ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, accounts);
 
                 db.close();
-                spinner2.setAdapter(adapter);
+//                spinner2.setAdapter(adapter);
 
                 boolean isFoundUsername = false;
                 boolean isFoundEmail = false;
@@ -253,14 +253,14 @@ public class LoginPageActivity extends AppCompatActivity implements LoaderCallba
         });
 
 
-        hack.setOnClickListener(new View.OnClickListener() {
+       /* hack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(LoginPageActivity.this, TableSetupActivity.class);
 
                 LoginPageActivity.this.startActivity(myIntent);
             }
-        });
+        });*/
     }
 
     /*private void updateSpinner() {
